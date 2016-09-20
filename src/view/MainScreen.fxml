@@ -5,10 +5,10 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
-
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <top>
@@ -51,11 +51,11 @@
                   <Insets left="250.0" top="120.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="password" maxWidth="200.0" promptText="Enter password">
+            <PasswordField fx:id="password" maxWidth="200.0" promptText="Enter password">
                <VBox.margin>
                   <Insets left="250.0" top="10.0" />
                </VBox.margin>
-            </TextField>
+            </PasswordField>
             <Button fx:id="login" mnemonicParsing="false" text="Login">
                <VBox.margin>
                   <Insets left="250.0" top="10.0" />
