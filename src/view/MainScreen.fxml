@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -10,7 +11,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.101" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -56,11 +57,18 @@
                   <Insets left="250.0" top="10.0" />
                </VBox.margin>
             </PasswordField>
-            <Button fx:id="login" mnemonicParsing="false" text="Login">
+            <ButtonBar prefHeight="40.0" prefWidth="200.0">
+              <buttons>
+                  <Button fx:id="login" mnemonicParsing="false" text="Login" />
+                  <Button mnemonicParsing="false" text="Cancel" textFill="#eb0909" />
+              </buttons>
                <VBox.margin>
-                  <Insets left="250.0" top="10.0" />
+                  <Insets left="250.0" right="250.0" />
                </VBox.margin>
-            </Button>
+               <padding>
+                  <Insets right="20.0" />
+               </padding>
+            </ButtonBar>
          </children>
       </VBox>
    </center>
