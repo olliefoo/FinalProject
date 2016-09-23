@@ -1,27 +1,37 @@
 package controller;
 
+import fxapp.MainFXApplication;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import java.io.IOException;
 
 public class LogoutController {
 
+    private MainFXApplication mainApplication;
     @FXML
     private Button logout;
-    @FXML
-    private Stage dialogStage;
 
-    private boolean okClicked = false;
-
-    public boolean isClicked() { return okClicked;}
-
-    public void setDialogStage(Stage dialogStage) {this.dialogStage = dialogStage;}
+    public void setThirdApp(MainFXApplication mainFXApplication) {
+        mainApplication = mainFXApplication;
+    }
 
     @FXML
-    private void handleOKPressed() {
-        okClicked = true;
+    private void handleButtonAction(ActionEvent event) throws IOException {
+        Stage stage = mainApplication.getThirdStage();
+        Parent root = null;
+
+        if (event.getSource() == logout) {
+            stage = (Stage) logout.getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("../view/WelcomeScreen.fxml"));
+        }
+        // implement register handler in else statement here
+
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }
