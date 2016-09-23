@@ -15,7 +15,6 @@ import java.io.IOException;
 public class MainFXApplication extends Application {
 
     private Stage mainStage;
-    private Stage thirdStage;
     private Parent rootLayout;
 
     @Override
@@ -27,8 +26,6 @@ public class MainFXApplication extends Application {
     public Stage getMainStage() {
         return mainStage;
     }
-    public Stage getThirdStage() { return thirdStage;}
-
     private void showWelcomeScreen(Stage mainStage) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../view/WelcomeScreen.fxml"));
@@ -51,13 +48,13 @@ public class MainFXApplication extends Application {
         rootLayout = loader.load();
 
         LogoutController controller = loader.getController();
-        controller.setThirdApp(this);
+        controller.setMainApp(this);
         // Show the dialog and wait until the user closes it
 
         mainStage.setTitle("Testing logout page");
         Scene scene = new Scene(rootLayout);
-        thirdStage.setScene(scene);
-        thirdStage.show();
+        mainStage.setScene(scene);
+        mainStage.show();
 
     }
 

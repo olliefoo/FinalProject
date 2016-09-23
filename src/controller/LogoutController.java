@@ -16,13 +16,13 @@ public class LogoutController {
     @FXML
     private Button logout;
 
-    public void setThirdApp(MainFXApplication mainFXApplication) {
+    public void setMainApp(MainFXApplication mainFXApplication) {
         mainApplication = mainFXApplication;
     }
 
     @FXML
     private void handleButtonAction(ActionEvent event) throws IOException {
-        Stage stage = mainApplication.getThirdStage();
+        Stage stage = mainApplication.getMainStage();
         Parent root = null;
 
         if (event.getSource() == logout) {
