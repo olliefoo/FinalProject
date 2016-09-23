@@ -16,7 +16,7 @@ public class LoginController {
     private PasswordField password;
 
     @FXML
-    private Button login;
+    private Button loginButton;
 
     private Stage dialogStage;
 
