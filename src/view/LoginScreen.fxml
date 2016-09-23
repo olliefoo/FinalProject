@@ -49,7 +49,9 @@
             <ButtonBar prefHeight="40.0" prefWidth="200.0">
               <buttons>
                   <Button fx:id="login" mnemonicParsing="false" onAction="#handleLoginPressed" text="Login" />
-                  <Button mnemonicParsing="false" text="Cancel" textFill="#eb0909" />
+                  <Button fx:id="cancel" mnemonicParsing="false"
+                          onAction="#handleCancelPressed" text="Cancel"
+                          textFill="#eb0909" />
               </buttons>
                <VBox.margin>
                   <Insets left="250.0" right="250.0" />

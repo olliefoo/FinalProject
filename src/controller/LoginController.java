@@ -22,6 +22,9 @@ public class LoginController {
     @FXML
     private Button login;
 
+    @FXML
+    private Button cancel;
+
     private Stage dialogStage;
 
     private boolean isInputValid() {
@@ -62,6 +65,15 @@ public class LoginController {
             stage.setScene(new Scene(root));
             stage.show();
         }
+    }
+
+    @FXML
+    private void handleCancelPressed() throws IOException {
+            Stage stage = (Stage) cancel.getScene().getWindow();
+            Parent root = FXMLLoader.load(getClass().getResource
+                    ("../view/WelcomeScreen.fxml"));
+            stage.setScene(new Scene(root));
+            stage.show();
     }
 
 
