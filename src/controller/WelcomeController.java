@@ -30,7 +30,7 @@ public class WelcomeController {
     }
 
     @FXML
-    private void handleButtonAction() throws IOException {
+    private void handleLogin1pressed() throws IOException {
             Stage stage = (Stage) loginButton.getScene().getWindow();
             Parent root = FXMLLoader.load(getClass().getResource("../view/LoginScreen.fxml"));
             stage.setScene(new Scene(root));
