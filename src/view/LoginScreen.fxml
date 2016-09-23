@@ -48,7 +48,7 @@
             </PasswordField>
             <ButtonBar prefHeight="40.0" prefWidth="200.0">
               <buttons>
-                  <Button fx:id="login" mnemonicParsing="false" text="Login" />
+                  <Button fx:id="login" mnemonicParsing="false" onAction="#handleLoginPressed" text="Login" />
                   <Button mnemonicParsing="false" text="Cancel" textFill="#eb0909" />
               </buttons>
                <VBox.margin>
