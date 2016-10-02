@@ -43,4 +43,12 @@ public class Database {
         return null;
     }
 
+    public static void updateUser(User user) {
+        for(User u : list) {
+            if (u.getUsername().equals(user.getUsername())) {
+                u = user;
+            }
+        }
+    }
+
 }
