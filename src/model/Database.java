@@ -8,6 +8,8 @@ import java.util.ArrayList;
 public class Database {
     private static ArrayList<User> list;
 
+    private static String loggedIn = "";
+
     public Database() {
         list = new ArrayList<>(5);
     }
@@ -34,7 +36,7 @@ public class Database {
         return false;
     }
 
-    public User getUser(String username) {
+    public static User getUser(String username) {
         for (User u : list) {
             if (username.equals(u.getUsername())) {
                 return u;
@@ -49,6 +51,14 @@ public class Database {
                 u = user;
             }
         }
+    }
+
+    public static String getLoggedIn() {
+        return loggedIn;
+    }
+
+    public static void setLoggedIn(String in) {
+        loggedIn = in;
     }
 
 }
