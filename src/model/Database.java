@@ -34,4 +34,13 @@ public class Database {
         return false;
     }
 
+    public static User getUser(String username) {
+        for (User u : list) {
+            if (username.equals(u.getUsername())) {
+                return u;
+            }
+        }
+        return null;
+    }
+
 }
