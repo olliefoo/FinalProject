@@ -36,12 +36,12 @@
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="username" maxWidth="200.0" promptText="Enter username">
+            <TextField fx:id="usernameField" maxWidth="200.0" promptText="Enter username">
                <VBox.margin>
                   <Insets left="250.0" top="120.0" />
                </VBox.margin>
             </TextField>
-            <PasswordField fx:id="password" maxWidth="200.0" promptText="Enter password">
+            <PasswordField fx:id="passwordField" maxWidth="200.0" promptText="Enter password">
                <VBox.margin>
                   <Insets left="250.0" top="10.0" />
                </VBox.margin>

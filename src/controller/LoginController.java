@@ -1,5 +1,6 @@
 package controller;
 
+import fxapp.MainFXApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,14 +11,15 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.io.IOException;
+import model.User;
 
 public class LoginController {
 
     @FXML
-    private TextField username;
+    private TextField usernameField;
 
     @FXML
-    private PasswordField password;
+    private PasswordField passwordField;
 
     @FXML
     private Button login;
@@ -30,12 +32,13 @@ public class LoginController {
     private boolean isInputValid() {
         String errorMessage = "";
 
-        if (username.getText() == null || username.getText().length() == 0
-                || !username.getText().equals("user")) {
-            errorMessage += "Username does not exist.\n";
-        }
-        if (password.getText() == null || password.getText().length() == 0
-                || !password.getText().equals("pass")) {
+        String username = usernameField.getText();
+
+        User currentUser = MainFXApplication.userList.getUser(username);
+        String password = passwordField.getText();
+
+        if (password == null || password.length() == 0
+                || !(password.equals(currentUser.getPassword()))) {
             errorMessage += "Wrong password. Try again.\n";
         }
 
