@@ -34,14 +34,18 @@ public class LoginController {
 
         String username = usernameField.getText();
 
-        User currentUser = MainFXApplication.userList.getUser(username);
-        String password = passwordField.getText();
+        if (username == null || username.length() == 0
+                || !MainFXApplication.userList.containsUsername(username)) {
+            errorMessage += "Username does not exit\n";
+        } else {
+            User currentUser = MainFXApplication.userList.getUser(username);
+            String password = passwordField.getText();
 
-        if (password == null || password.length() == 0
-                || !(password.equals(currentUser.getPassword()))) {
-            errorMessage += "Wrong password. Try again.\n";
+            if (password == null || password.length() == 0
+                    || !(password.equals(currentUser.getPassword()))) {
+                errorMessage += "Wrong password. Try again.\n";
+            }
         }
-
 
         //no error message means success / good input
         if (errorMessage.length() == 0) {
