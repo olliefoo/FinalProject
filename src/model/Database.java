@@ -16,7 +16,7 @@ public class Database {
         list.add(u);
     }
 
-    public static boolean containsUsername(String s) {
+    public boolean containsUsername(String s) {
         for (User u : list) {
             if (s.equals(u.getUsername())) {
                 return true;
@@ -25,7 +25,7 @@ public class Database {
         return false;
     }
 
-    public static boolean containsEmail(String s) {
+    public boolean containsEmail(String s) {
         for (User u : list) {
             if (s.equals(u.getEmail())) {
                 return true;
@@ -34,7 +34,7 @@ public class Database {
         return false;
     }
 
-    public static User getUser(String username) {
+    public User getUser(String username) {
         for (User u : list) {
             if (username.equals(u.getUsername())) {
                 return u;

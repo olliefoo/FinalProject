@@ -82,8 +82,8 @@
             </TextField>
             <ButtonBar prefHeight="40.0" prefWidth="182.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="6">
               <buttons>
-                <Button fx:id="registerButton" mnemonicParsing="false" prefHeight="31.0" prefWidth="262.0" text="Register" translateX="-15.0" />
-                  <Button fx:id="cancelButton" layoutX="135.0" layoutY="15.0" mnemonicParsing="false" text="Cancel" textFill="#e40505" translateX="-15.0" />
+                <Button fx:id="registerButton" mnemonicParsing="false" onAction="#handleRegistrationPressed" prefHeight="31.0" prefWidth="262.0" text="Register" translateX="-15.0" />
+                  <Button fx:id="cancelButton" layoutX="135.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleCancelPressed" text="Cancel" textFill="#e40505" translateX="-15.0" />
               </buttons>
                <GridPane.margin>
                   <Insets right="20.0" />
