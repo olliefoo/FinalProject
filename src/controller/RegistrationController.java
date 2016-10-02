@@ -1,5 +1,6 @@
 package controller;
 
+import fxapp.MainFXApplication;
 import model.User;
 import model.Database;
 import javafx.fxml.FXML;
@@ -51,10 +52,10 @@ public class RegistrationController {
         if (!(password2Field.getText().equals(password1Field.getText()))) {
             errorMessage += "Verification must match the original password.";
         }
-        if (Database.containsEmail(emailField.getText())) {
+        if (MainFXApplication.userList.containsEmail(emailField.getText())) {
             errorMessage += "email is already being used.";
         }
-        if (Database.containsUsername(emailField.getText())) {
+        if (MainFXApplication.userList.containsUsername(usernameField.getText())) {
             errorMessage += "username is already being used.";
         }
 
@@ -78,10 +79,10 @@ public class RegistrationController {
     }
 
     @FXML
-    private void handleLoginPressed() throws IOException {
+    private void handleRegistrationPressed() throws IOException {
         if (isInputValid()) {
             User newUser = new User(usernameField.getText(), password1Field.getText(), emailField.getText());
-            Database.add(newUser);
+            MainFXApplication.userList.add(newUser);
             Stage stage = (Stage) registerButton.getScene().getWindow();
             Parent root = FXMLLoader.load(getClass().getResource("../view/WelcomeScreen.fxml"));
             stage.setScene(new Scene(root));

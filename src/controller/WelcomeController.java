@@ -35,6 +35,14 @@ public class WelcomeController {
             stage.setScene(new Scene(root));
             stage.show();
     }
+
+    @FXML
+    private void handleRegistrationpressed() throws IOException {
+        Stage stage = (Stage) registerButton.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("../view/RegistrationScreen.fxml"));
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
  /*   private void handleButtonAction(ActionEvent event) throws IOException {
         Stage stage = mainApplication.getMainStage();
         Parent root = null;

@@ -1,5 +1,6 @@
 package fxapp;
 
+import model.Database;
 import controller.WelcomeController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +11,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class MainFXApplication extends Application {
-
+    public static Database userList = new Database();
     private Stage mainStage;
     private Parent rootLayout;
 
