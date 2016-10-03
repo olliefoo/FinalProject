@@ -9,13 +9,13 @@ public enum UserType {
     M ("MANAGER"),
     A ("ADMIN");
 
-    private final String standing;
+    private final String type;
 
-    UserType (String standing) {this.standing = standing;}
+    UserType (String standing) {this.type = standing;}
     public String getStanding() {
-        return standing;
+        return type;
     }
     public String toString() {
-        return standing;
+        return type;
     }
 }
