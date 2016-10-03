@@ -33,12 +33,8 @@ public class User {
     }
 
     public void setName(String fn, String ln) {
-        if (!firstname.equals(fn)) {
-            firstname = fn;
-        }
-        if (!(lastname.equals(ln))) {
-            lastname = fn;
-        }
+        firstname = fn;
+        lastname = fn;
     }
 
     public void setEmail(String s) {

@@ -76,8 +76,8 @@ public class ProfileController {
 
     @FXML
     private void handleUpdatePressed() throws IOException {
+        setValues();
         MainFXApplication.userList.updateUser(user);
-
         Stage stage = (Stage) updateButton.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("../view/AppStartScreen.fxml"));
         stage.setScene(new Scene(root));
