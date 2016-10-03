@@ -54,6 +54,10 @@ public class ProfileController {
         lastNameField.setText(user.getLastname());
         emailField.setText(user.getEmail());
         phoneField.setText(user.getPhone());
+        streetField.setText(user.getStreet());
+        cityField.setText(user.getCity());
+        stateField.setText(user.getState());
+        zipField.setText(user.getZip());
     }
 
 

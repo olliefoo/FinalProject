@@ -9,7 +9,11 @@ public class User {
     private String email;
     private String firstname;
     private String lastname;
-    private String address;
+    public String address;
+    private String street;
+    private String city;
+    private String state;
+    private String zip;
     private String phone;
     private String gender;
     private String birthday;
@@ -41,8 +45,13 @@ public class User {
         email = s;
     }
 
-    public void setAddress(String street, String state, String city, String zip) {
-        address = street + ", " + city + ", " + state + ", " + zip;
+    public void setAddress(String str, String sta, String cit, String z) {
+        address = str + ", " + cit + ", " + sta + ", " + z;
+        street = str;
+        city = cit;
+        state = sta;
+        zip = z;
+
     }
 
     public void setPhone(String p) {
@@ -75,5 +84,21 @@ public class User {
 
     public String getPhone() {
         return phone;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public String getZip() {
+        return zip;
     }
 }
