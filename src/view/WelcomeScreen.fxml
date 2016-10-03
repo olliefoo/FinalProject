@@ -48,7 +48,7 @@
                   <Insets left="300.0" top="50.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="registerButton" mnemonicParsing="false" onAction="#handleRegistrationpressed" prefWidth="100.0" text="Register">
+            <Button fx:id="registerButton" mnemonicParsing="false" onAction="#handleRegistrationPressed" prefWidth="100.0" text="Register">
                <VBox.margin>
                   <Insets left="300.0" top="10.0" />
                </VBox.margin>
