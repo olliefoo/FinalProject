@@ -1,16 +1,14 @@
 package controller;
 
 import fxapp.MainFXApplication;
+import javafx.collections.FXCollections;
+import javafx.scene.control.*;
 import model.User;
-import model.Database;
+import model.userType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -34,9 +32,18 @@ public class RegistrationController {
     private Button registerButton;
 
     @FXML
+    private ComboBox choiceBox;
+
+    @FXML
     private Button cancelButton;
 
     private Stage dialogStage;
+
+    @FXML
+    private void initialize() {
+        choiceBox.setItems(FXCollections.observableArrayList(userType.values()));
+
+    }
 
     private boolean isInputValid() {
         String errorMessage = "";
