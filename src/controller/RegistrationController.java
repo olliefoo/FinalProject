@@ -4,6 +4,9 @@ import fxapp.MainFXApplication;
 import javafx.collections.FXCollections;
 import javafx.scene.control.*;
 import model.User;
+import model.Worker;
+import model.Manager;
+import model.Admin;
 import model.userType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,7 +45,7 @@ public class RegistrationController {
     @FXML
     private void initialize() {
         choiceBox.setItems(FXCollections.observableArrayList(userType.values()));
-
+        choiceBox.setValue(userType.U);
     }
 
     private boolean isInputValid() {
@@ -88,8 +91,22 @@ public class RegistrationController {
     @FXML
     private void handleRegistrationPressed() throws IOException {
         if (isInputValid()) {
-            User newUser = new User(usernameField.getText(), password1Field.getText(), emailField.getText());
-            MainFXApplication.userList.add(newUser);
+            if (choiceBox.getValue().equals(userType.U)) {
+                User newUser = new User(usernameField.getText(), password1Field.getText(), emailField.getText());
+                MainFXApplication.userList.add(newUser);
+            }
+            if (choiceBox.getValue().equals(userType.W)) {
+                User newWorker = new Worker(usernameField.getText(), password1Field.getText(), emailField.getText());
+                MainFXApplication.userList.add(newWorker);
+            }
+            if (choiceBox.getValue().equals(userType.M)) {
+                User newManager = new Manager(usernameField.getText(), password1Field.getText(), emailField.getText());
+                MainFXApplication.userList.add(newManager);
+            }
+            if (choiceBox.getValue().equals(userType.A)) {
+                User newAdmin = new Admin(usernameField.getText(), password1Field.getText(), emailField.getText());
+                MainFXApplication.userList.add(newAdmin);
+            }
             Stage stage = (Stage) registerButton.getScene().getWindow();
             Parent root = FXMLLoader.load(getClass().getResource("../view/WelcomeScreen.fxml"));
             stage.setScene(new Scene(root));
