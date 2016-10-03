@@ -3,7 +3,7 @@ package model;
 /**
  * Created by cbbjs on 10/2/2016.
  */
-public enum userType {
+public enum UserType {
     U ("USER"),
     W ("WORKER"),
     M ("MANAGER"),
@@ -11,7 +11,7 @@ public enum userType {
 
     private final String standing;
 
-    userType (String standing) {this.standing = standing;}
+    UserType (String standing) {this.standing = standing;}
     public String getStanding() {
         return standing;
     }
