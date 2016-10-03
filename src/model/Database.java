@@ -8,11 +8,13 @@ import java.util.ArrayList;
 public class Database {
     private static ArrayList<User> list;
 
+    private static String loggedIn = "";
+
     public Database() {
         list = new ArrayList<>(5);
     }
 
-    public static void add(User u) {
+    public void add(User u) {
         list.add(u);
     }
 
@@ -34,13 +36,29 @@ public class Database {
         return false;
     }
 
-    public User getUser(String username) {
+    public static User getUser(String username) {
         for (User u : list) {
             if (username.equals(u.getUsername())) {
                 return u;
             }
         }
         return null;
+    }
+
+    public static void updateUser(User user) {
+        for(User u : list) {
+            if (u.getUsername().equals(user.getUsername())) {
+                u = user;
+            }
+        }
+    }
+
+    public static String getLoggedIn() {
+        return loggedIn;
+    }
+
+    public static void setLoggedIn(String in) {
+        loggedIn = in;
     }
 
 }

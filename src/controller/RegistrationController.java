@@ -1,16 +1,17 @@
 package controller;
 
 import fxapp.MainFXApplication;
+import javafx.collections.FXCollections;
+import javafx.scene.control.*;
 import model.User;
-import model.Database;
+import model.Worker;
+import model.Manager;
+import model.Admin;
+import model.UserType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -34,9 +35,18 @@ public class RegistrationController {
     private Button registerButton;
 
     @FXML
+    private ComboBox choiceBox;
+
+    @FXML
     private Button cancelButton;
 
     private Stage dialogStage;
+
+    @FXML
+    private void initialize() {
+        choiceBox.setItems(FXCollections.observableArrayList(UserType.values()));
+        choiceBox.setValue(UserType.U);
+    }
 
     private boolean isInputValid() {
         String errorMessage = "";
@@ -81,8 +91,22 @@ public class RegistrationController {
     @FXML
     private void handleRegistrationPressed() throws IOException {
         if (isInputValid()) {
-            User newUser = new User(usernameField.getText(), password1Field.getText(), emailField.getText());
-            MainFXApplication.userList.add(newUser);
+            if (choiceBox.getValue().equals(UserType.U)) {
+                User newUser = new User(usernameField.getText(), password1Field.getText(), emailField.getText());
+                MainFXApplication.userList.add(newUser);
+            }
+            if (choiceBox.getValue().equals(UserType.W)) {
+                User newWorker = new Worker(usernameField.getText(), password1Field.getText(), emailField.getText());
+                MainFXApplication.userList.add(newWorker);
+            }
+            if (choiceBox.getValue().equals(UserType.M)) {
+                User newManager = new Manager(usernameField.getText(), password1Field.getText(), emailField.getText());
+                MainFXApplication.userList.add(newManager);
+            }
+            if (choiceBox.getValue().equals(UserType.A)) {
+                User newAdmin = new Admin(usernameField.getText(), password1Field.getText(), emailField.getText());
+                MainFXApplication.userList.add(newAdmin);
+            }
             Stage stage = (Stage) registerButton.getScene().getWindow();
             Parent root = FXMLLoader.load(getClass().getResource("../view/WelcomeScreen.fxml"));
             stage.setScene(new Scene(root));

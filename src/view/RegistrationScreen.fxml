@@ -107,6 +107,27 @@
                   <Insets right="20.0" />
                </GridPane.margin>
             </ButtonBar>
+<<<<<<< HEAD
+=======
+            <Label text="REGISTRATION" textFill="#040472" GridPane.columnIndex="1">
+               <font>
+                  <Font name="Arial Black" size="26.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="5.0" right="35.0" />
+               </GridPane.margin>
+            </Label>
+            <Label layoutX="119.0" layoutY="118.0" text="Account Type:" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+               <padding>
+                  <Insets right="5.0" />
+               </padding>
+            </Label>
+            <ComboBox fx:id="choiceBox" prefHeight="31.0" prefWidth="247.0" promptText="-Select One-" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="5.0" right="35.0" />
+               </GridPane.margin>
+            </ComboBox>
+>>>>>>> 802bb2072fc9567b889995397af101c38c0e41b0
          </children>
       </GridPane>
    </children>
