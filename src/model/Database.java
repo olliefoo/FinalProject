@@ -12,7 +12,7 @@ public class Database {
         list = new ArrayList<>(5);
     }
 
-    public static void add(User u) {
+    public void add(User u) {
         list.add(u);
     }
 
