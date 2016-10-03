@@ -14,28 +14,28 @@ import java.io.IOException;
 public class ProfileController {
 
     @FXML
-    private TextField firstName;
+    private TextField firstNameField;
 
     @FXML
-    private TextField lastName;
+    private TextField lastNameField;
 
     @FXML
-    private TextField email;
+    private TextField emailField;
 
     @FXML
-    private TextField phoneNumber;
+    private TextField phoneField;
 
     @FXML
-    private TextField aStreet;
+    private TextField streetField;
 
     @FXML
-    private TextField aState;
+    private TextField stateField;
 
     @FXML
-    private TextField aCity;
+    private TextField cityField;
 
     @FXML
-    private TextField aZip;
+    private TextField zipField;
 
     @FXML
     private Button updateButton;
@@ -43,29 +43,38 @@ public class ProfileController {
     @FXML
     private RadioButton gender;
 
-    //Database db = new Database();
 
     String in = Database.getLoggedIn();
-    //have to get the username string here somehow
     User user = Database.getUser(in);
 
     @FXML
-    private void handleDonePressed() throws IOException {
+    private void initialize() {
+        firstNameField.setText(user.getFirstname());
+        lastNameField.setText(user.getLastname());
+        emailField.setText(user.getEmail());
+        phoneField.setText(user.getPhone());
+    }
 
+
+    private void setValues() {
         //set variables of user to input values
-        String fName = firstName.getText();
-        String lName = lastName.getText();
-        String mail = email.getText();
-        String pNumber = phoneNumber.getText();
-        String street = aStreet.getText();
-        String city = aCity.getText();
-        String state = aState.getText();
-        String zip = aZip.getText();
+        String fName = firstNameField.getText();
+        String lName = lastNameField.getText();
+        String mail = emailField.getText();
+        String pNumber = phoneField.getText();
+        String street = streetField.getText();
+        String city = cityField.getText();
+        String state = stateField.getText();
+        String zip = zipField.getText();
 
         user.setName(fName,lName);
         user.setPhone(pNumber);
         user.setAddress(street, city, state, zip);
+        user.setEmail(mail);
+    }
 
+    @FXML
+    private void handleDonePressed() throws IOException {
         Database.updateUser(user);
 
         Stage stage = (Stage) updateButton.getScene().getWindow();
