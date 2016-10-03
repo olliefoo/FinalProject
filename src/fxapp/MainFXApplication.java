@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class MainFXApplication extends Application {
-    public static Database userList = new Database();
+    public static final Database userList = new Database();
     private Stage mainStage;
     private Parent rootLayout;
 
