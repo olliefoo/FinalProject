@@ -42,12 +42,22 @@ public class RegistrationController {
 
     private Stage dialogStage;
 
+    /**
+     * Method to initialize the registration page. Mainly used
+     * to make sure the combo box have choices, and the user to be
+     * the default type.
+     */
     @FXML
     private void initialize() {
         choiceBox.setItems(FXCollections.observableArrayList(UserType.values()));
         choiceBox.setValue(UserType.U);
     }
 
+    /**
+     * Method that makes sure all the inputs for registration does not break
+     * any rules. Also makes sure if the username or email used is unique.
+     * @return The boolean whether the registration process broke rules or not.
+     */
     private boolean isInputValid() {
         String errorMessage = "";
         if (usernameField.getText() == null || usernameField.getText().length() == 0) {
@@ -88,6 +98,12 @@ public class RegistrationController {
 
     }
 
+    /**
+     * The method that handles when the register button is pressed.
+     * It will add the user to the main database arraylist and lead the user
+     * to the appstart page.
+     * @throws IOException When something goes wrong.
+     */
     @FXML
     private void handleRegistrationPressed() throws IOException {
         if (isInputValid()) {
@@ -114,6 +130,11 @@ public class RegistrationController {
         }
     }
 
+    /**
+     * The method that is used when the cancel button is pressed.
+     * It will lead the user back to the welcome screen.
+     * @throws IOException
+     */
     @FXML
     private void handleCancelPressed() throws IOException {
         Stage stage = (Stage) cancelButton.getScene().getWindow();

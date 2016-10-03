@@ -17,6 +17,11 @@ public class AppStartController {
     @FXML
     private Button profile;
 
+    /**
+     * Method to handle the case when the logout button is pressed
+     * It will lead back to the welcome screen.
+     * @throws IOException If something messes up
+     */
     @FXML
     private void handleLogoutPressed() throws IOException {
         Stage stage = (Stage) myLogout.getScene().getWindow();
@@ -25,6 +30,11 @@ public class AppStartController {
         stage.show();
     }
 
+    /**
+     * Method to handle the case when the profile button is pressed
+     * It will lead to the profile edit page.
+     * @throws IOException If something messes up
+     */
     @FXML
     private void handleProfilePressed() throws IOException {
         Stage stage = (Stage) profile.getScene().getWindow();
