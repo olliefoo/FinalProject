@@ -7,7 +7,7 @@ import model.User;
 import model.Worker;
 import model.Manager;
 import model.Admin;
-import model.userType;
+import model.UserType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -44,8 +44,8 @@ public class RegistrationController {
 
     @FXML
     private void initialize() {
-        choiceBox.setItems(FXCollections.observableArrayList(userType.values()));
-        choiceBox.setValue(userType.U);
+        choiceBox.setItems(FXCollections.observableArrayList(UserType.values()));
+        choiceBox.setValue(UserType.U);
     }
 
     private boolean isInputValid() {
@@ -91,19 +91,19 @@ public class RegistrationController {
     @FXML
     private void handleRegistrationPressed() throws IOException {
         if (isInputValid()) {
-            if (choiceBox.getValue().equals(userType.U)) {
+            if (choiceBox.getValue().equals(UserType.U)) {
                 User newUser = new User(usernameField.getText(), password1Field.getText(), emailField.getText());
                 MainFXApplication.userList.add(newUser);
             }
-            if (choiceBox.getValue().equals(userType.W)) {
+            if (choiceBox.getValue().equals(UserType.W)) {
                 User newWorker = new Worker(usernameField.getText(), password1Field.getText(), emailField.getText());
                 MainFXApplication.userList.add(newWorker);
             }
-            if (choiceBox.getValue().equals(userType.M)) {
+            if (choiceBox.getValue().equals(UserType.M)) {
                 User newManager = new Manager(usernameField.getText(), password1Field.getText(), emailField.getText());
                 MainFXApplication.userList.add(newManager);
             }
-            if (choiceBox.getValue().equals(userType.A)) {
+            if (choiceBox.getValue().equals(UserType.A)) {
                 User newAdmin = new Admin(usernameField.getText(), password1Field.getText(), emailField.getText());
                 MainFXApplication.userList.add(newAdmin);
             }
