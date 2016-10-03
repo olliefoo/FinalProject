@@ -41,6 +41,15 @@ public class ProfileController {
     @FXML
     private Button updateButton;
 
+    @FXML
+    private ComboBox dayField;
+
+    @FXML
+    private ComboBox yearField;
+
+    @FXML
+    private ComboBox monthField;
+
     //@FXML
     //private RadioButton gender;
 
@@ -54,6 +63,10 @@ public class ProfileController {
         lastNameField.setText(user.getLastname());
         emailField.setText(user.getEmail());
         phoneField.setText(user.getPhone());
+        monthField.getItems().addAll(
+                "January", "February", "March", "April", "May", "June", "July",
+                "August", "September", "October", "November", "December"
+        );
     }
 
 
