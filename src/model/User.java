@@ -34,7 +34,7 @@ public class User {
 
     public void setName(String fn, String ln) {
         firstname = fn;
-        lastname = fn;
+        lastname = ln;
     }
 
     public void setEmail(String s) {
