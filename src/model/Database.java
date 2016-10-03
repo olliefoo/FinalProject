@@ -36,7 +36,7 @@ public class Database {
         return false;
     }
 
-    public static User getUser(String username) {
+    public User getUser(String username) {
         for (User u : list) {
             if (username.equals(u.getUsername())) {
                 return u;
@@ -45,7 +45,7 @@ public class Database {
         return null;
     }
 
-    public static void updateUser(User user) {
+    public void updateUser(User user) {
         for(User u : list) {
             if (u.getUsername().equals(user.getUsername())) {
                 u = user;
@@ -53,11 +53,11 @@ public class Database {
         }
     }
 
-    public static String getLoggedIn() {
+    public String getLoggedIn() {
         return loggedIn;
     }
 
-    public static void setLoggedIn(String in) {
+    public void setLoggedIn(String in) {
         loggedIn = in;
     }
 

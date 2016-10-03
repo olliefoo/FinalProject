@@ -14,6 +14,7 @@ import java.io.IOException;
 
 import model.Database;
 import model.User;
+import sun.applet.Main;
 
 public class LoginController {
 
@@ -69,7 +70,7 @@ public class LoginController {
     @FXML
     private void handleLoginPressed() throws IOException {
         if (isInputValid()) {
-            Database.setLoggedIn(usernameField.getText());
+            MainFXApplication.userList.setLoggedIn(usernameField.getText());
             Stage stage = (Stage) login.getScene().getWindow();
             Parent root = FXMLLoader.load(getClass().getResource("../view/AppStartScreen.fxml"));
             stage.setScene(new Scene(root));

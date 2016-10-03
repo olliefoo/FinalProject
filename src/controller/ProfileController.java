@@ -1,5 +1,6 @@
 package controller;
 
+import fxapp.MainFXApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -40,12 +41,12 @@ public class ProfileController {
     @FXML
     private Button updateButton;
 
-    @FXML
-    private RadioButton gender;
+    //@FXML
+    //private RadioButton gender;
 
 
-    String in = Database.getLoggedIn();
-    User user = Database.getUser(in);
+    String currentUsername = MainFXApplication.userList.getLoggedIn();
+    User user = MainFXApplication.userList.getUser(currentUsername);
 
     @FXML
     private void initialize() {
@@ -74,8 +75,8 @@ public class ProfileController {
     }
 
     @FXML
-    private void handleDonePressed() throws IOException {
-        Database.updateUser(user);
+    private void handleUpdatePressed() throws IOException {
+        MainFXApplication.userList.updateUser(user);
 
         Stage stage = (Stage) updateButton.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("../view/AppStartScreen.fxml"));
