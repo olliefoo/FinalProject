@@ -11,6 +11,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.io.IOException;
+
+import model.Database;
 import model.User;
 
 public class LoginController {
@@ -67,6 +69,7 @@ public class LoginController {
     @FXML
     private void handleLoginPressed() throws IOException {
         if (isInputValid()) {
+            Database.setLoggedIn(usernameField.getText());
             Stage stage = (Stage) login.getScene().getWindow();
             Parent root = FXMLLoader.load(getClass().getResource("../view/AppStartScreen.fxml"));
             stage.setScene(new Scene(root));

@@ -46,7 +46,7 @@ public class User {
     }
 
     public void setAddress(String street, String state, String city, String zip) {
-        address = street + ", " + state + ", " + city + ", " + zip;
+        address = street + ", " + city + ", " + state + ", " + zip;
     }
 
     public void setPhone(String p) {
@@ -67,5 +67,17 @@ public class User {
         }
         password = p;
         return true;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public String getPhone() {
+        return phone;
     }
 }
