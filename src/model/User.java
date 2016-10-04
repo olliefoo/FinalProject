@@ -15,8 +15,10 @@ public class User {
     private String state;
     private String zip;
     private String phone;
-    private String gender;
-    private String birthday;
+    private boolean gender;
+    private String month;
+    private String day;
+    private String year;
 
     public User(String username, String password, String email) {
         this.username = username;
@@ -58,12 +60,20 @@ public class User {
         phone = p;
     }
 
-    public void setGender(String g) {
+    public void setGender(boolean g) {
         gender = g;
     }
 
-    public void setBirthday(String month, String day, String year) {
-        birthday = month + "/" + day + "/" + year;
+    public void setMonth(String m) {
+        month = m;
+    }
+
+    public void setYear(String y) {
+        year = y;
+    }
+
+    public void setDay(String d) {
+        day = d;
     }
 
     public boolean setPassword(String p) {
@@ -101,4 +111,12 @@ public class User {
     public String getZip() {
         return zip;
     }
+
+    public String getMonth() { return month; }
+
+    public String getYear() { return year; }
+
+    public String getDay() { return day; }
+
+    public boolean getGender() { return gender; }
 }

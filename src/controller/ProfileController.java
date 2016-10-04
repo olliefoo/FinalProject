@@ -42,23 +42,35 @@ public class ProfileController {
     private Button updateButton;
 
     @FXML
-    private ComboBox dayField;
+    private ComboBox<String> dayField;
 
     @FXML
-    private ComboBox yearField;
+    private ComboBox<String> yearField;
 
     @FXML
-    private ComboBox monthField;
+    private ComboBox<String> monthField;
 
-    //@FXML
-    //private RadioButton gender;
+    @FXML
+    private RadioButton maleRadioButton;
 
+    @FXML
+    private RadioButton femaleRadioButton;
+
+    private final ToggleGroup group = new ToggleGroup();
 
     String currentUsername = MainFXApplication.userList.getLoggedIn();
     User user = MainFXApplication.userList.getUser(currentUsername);
 
     @FXML
     private void initialize() {
+        maleRadioButton.setToggleGroup(group);
+        femaleRadioButton.setToggleGroup(group);
+        if (user.getGender()) {
+            femaleRadioButton.setSelected(true);
+        } else {
+            maleRadioButton.setSelected(true);
+        }
+
         firstNameField.setText(user.getFirstname());
         lastNameField.setText(user.getLastname());
         emailField.setText(user.getEmail());
@@ -67,31 +79,32 @@ public class ProfileController {
         cityField.setText(user.getCity());
         stateField.setText(user.getState());
         zipField.setText(user.getZip());
+        monthField.setValue(user.getMonth());
+        dayField.setValue(user.getDay());
+        yearField.setValue(user.getYear());
 
         monthField.getItems().addAll(
-                "Jan", "Feb", "Mar", "Apr", "May", "June", "July",
-                "Aug", "Sept", "Oct", "Nov", "Dec"
+                "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep",
+                "Oct", "Nov", "Dec"
         );
 
         dayField.getItems().addAll(
-                "1", "2", "3", "4", "5", "6", "7",
-                "8", "9", "10", "11", "12", "13", "14",
-                "15", "16", "17", "18", "19", "20", "21",
-                "22", "23", "24", "25", "26", "27", "28",
-                "29", "30", "31", "32"
+                "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12",
+                "13", "14", "15", "16", "17", "18", "19", "20", "21", "22",
+                "23", "24", "25", "26", "27", "28", "29", "30", "31"
         );
 
         yearField.getItems().addAll(
-                "1950", "1951", "1952", "1953", "1954", "1955", "1956",
-                "1957", "1958", "1959", "1960", "1961", "1962", "1963",
-                "1964", "1965", "1966", "1967", "1968", "1969", "1970",
-                "1971", "1972", "1973", "1974", "1975", "1976",
-                "1977", "1978", "1979", "1980", "1981", "1982", "1983",
-                "1984", "1985", "1986", "1987", "1988", "1989", "1990",
-                "1991", "1992", "1993", "1994", "1995", "1996",
-                "1997", "1998", "1999", "2000", "2001", "2002", "2003",
-                "2004", "2005", "2006", "2007", "2008", "2009", "2010",
-                "2011", "2012", "2013", "2014", "2015", "2016"
+                "2016", "2015", "2014", "2013", "2012", "2011", "2010",
+                "2009", "2008", "2007", "2006", "2005", "2004", "2003",
+                "2002", "2001", "2000", "1999", "1998", "1997", "1996",
+                "1995", "1994", "1993", "1992", "1991", "1990", "1989",
+                "1988", "1987", "1986", "1985", "1984", "1983", "1982",
+                "1981", "1980", "1979", "1978", "1976", "1975", "1974",
+                "1973", "1972", "1971", "1970", "1969", "1968", "1967",
+                "1966", "1965", "1964", "1963", "1962", "1961", "1960",
+                "1959", "1958", "1957", "1956", "1955", "1954", "1953",
+                "1952", "1951", "1950"
         );
     }
 
@@ -106,11 +119,24 @@ public class ProfileController {
         String city = cityField.getText();
         String state = stateField.getText();
         String zip = zipField.getText();
+        String month = monthField.getValue();
+        String day = dayField.getValue();
+        String year = yearField.getValue();
+        boolean gender;
+        if (femaleRadioButton.isSelected()) {
+            gender = true;
+        } else {
+            gender = false;
+        }
 
         user.setName(fName,lName);
         user.setPhone(pNumber);
         user.setAddress(street, city, state, zip);
         user.setEmail(mail);
+        user.setMonth(month);
+        user.setDay(day);
+        user.setYear(year);
+        user.setGender(gender);
     }
 
     @FXML
