@@ -61,6 +61,11 @@ public class ProfileController {
     String currentUsername = MainFXApplication.userList.getLoggedIn();
     User user = MainFXApplication.userList.getUser(currentUsername);
 
+    /**
+     * Initializes the ProfileScreen. Sets the values for the comboboxes and
+     * show the user's previous edits to their profile.
+     *
+     */
     @FXML
     private void initialize() {
         maleRadioButton.setToggleGroup(group);
@@ -108,7 +113,10 @@ public class ProfileController {
         );
     }
 
-
+    /**
+     * Sets the user's attributes using the inputs from the various fields.
+     *
+     */
     private void setValues() {
         //set variables of user to input values
         String fName = firstNameField.getText();
@@ -139,6 +147,12 @@ public class ProfileController {
         user.setGender(gender);
     }
 
+    /**
+     * Handles the Update button press. When pressed, the inputs will be saved
+     * to the user and the user will be lead back to the AppStartScreen.
+     *
+     * @throws IOException
+     */
     @FXML
     private void handleUpdatePressed() throws IOException {
         setValues();
@@ -148,7 +162,6 @@ public class ProfileController {
         stage.setScene(new Scene(root));
         stage.show();
     }
-
 
 
 }

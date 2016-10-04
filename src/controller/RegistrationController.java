@@ -61,22 +61,22 @@ public class RegistrationController {
     private boolean isInputValid() {
         String errorMessage = "";
         if (usernameField.getText() == null || usernameField.getText().length() == 0) {
-            errorMessage += "Username cannot be blank.";
+            errorMessage += "Username cannot be blank.\n";
         }
         if (password1Field.getText() == null || password1Field.getText().length() == 0) {
-            errorMessage += "Password cannot be blank.";
+            errorMessage += "Password cannot be blank\n.";
         }
         if (emailField.getText() == null || emailField.getText().length() == 0) {
-            errorMessage += "Email cannot be blank.";
+            errorMessage += "Email cannot be blank.\n";
         }
         if (!(password2Field.getText().equals(password1Field.getText()))) {
-            errorMessage += "Verification must match the original password.";
+            errorMessage += "Verification must match the original password.\n";
         }
         if (MainFXApplication.userList.containsEmail(emailField.getText())) {
-            errorMessage += "email is already being used.";
+            errorMessage += "Email is already being used.\n";
         }
         if (MainFXApplication.userList.containsUsername(usernameField.getText())) {
-            errorMessage += "username is already being used.";
+            errorMessage += "Username is already being used.\n";
         }
 
         if (errorMessage.length() == 0) {
@@ -86,7 +86,7 @@ public class RegistrationController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initOwner(dialogStage);
             alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Please correct invalid fields");
+            alert.setHeaderText("Please Correct Invalid Fields");
             alert.setContentText(errorMessage);
 
             alert.showAndWait();

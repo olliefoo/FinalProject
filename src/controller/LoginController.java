@@ -32,6 +32,13 @@ public class LoginController {
 
     private Stage dialogStage;
 
+    /**
+     * Checks if the username and password entered are valid. The entered
+     * username must already exist in the database and the password must
+     * correspond to the stored username.
+     *
+     * @return whether or not the input is valid
+     */
     private boolean isInputValid() {
         String errorMessage = "";
 
@@ -39,7 +46,7 @@ public class LoginController {
 
         if (username == null || username.length() == 0
                 || !MainFXApplication.userList.containsUsername(username)) {
-            errorMessage += "Username does not exit\n";
+            errorMessage += "Username does not exist. Please register first.\n";
         } else {
             User currentUser = MainFXApplication.userList.getUser(username);
             String password = passwordField.getText();
@@ -67,6 +74,12 @@ public class LoginController {
         }
     }
 
+    /**
+     * Handles the Login button press. When pressed after entering a valid
+     * username and password, the user will be lead to the AppStartScreen.
+     *
+     * @throws IOException
+     */
     @FXML
     private void handleLoginPressed() throws IOException {
         if (isInputValid()) {
@@ -78,6 +91,12 @@ public class LoginController {
         }
     }
 
+    /**
+     * Handles the Cancel button pressed. When pressed, the user will be lead
+     * back to the WelcomeScreen.
+     *
+     * @throws IOException
+     */
     @FXML
     private void handleCancelPressed() throws IOException {
             Stage stage = (Stage) cancel.getScene().getWindow();
