@@ -1,13 +1,11 @@
 package controller;
 
 import fxapp.MainFXApplication;
-import javafx.collections.FXCollections;
 import javafx.scene.control.*;
 import model.User;
 import model.Worker;
 import model.Manager;
 import model.Admin;
-import model.UserType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -44,13 +42,13 @@ public class RegistrationController {
 
     /**
      * Method to initialize the registration page. Mainly used
-     * to make sure the combo box have choices, and the user to be
+     * to make sure the combo box have choices, and the User to be
      * the default type.
      */
     @FXML
     private void initialize() {
-        choiceBox.setItems(FXCollections.observableArrayList(UserType.values()));
-        choiceBox.setValue(UserType.U);
+        choiceBox.getItems().addAll("USER", "WORKER", "MANAGER", "ADMIN");
+        choiceBox.setValue("USER");
     }
 
     /**
@@ -61,22 +59,22 @@ public class RegistrationController {
     private boolean isInputValid() {
         String errorMessage = "";
         if (usernameField.getText() == null || usernameField.getText().length() == 0) {
-            errorMessage += "Username cannot be blank.\n";
+            errorMessage += "Username cannot be blank\n";
         }
         if (password1Field.getText() == null || password1Field.getText().length() == 0) {
-            errorMessage += "Password cannot be blank\n.";
+            errorMessage += "Password cannot be blank\n";
         }
         if (emailField.getText() == null || emailField.getText().length() == 0) {
-            errorMessage += "Email cannot be blank.\n";
+            errorMessage += "Email cannot be blank\n";
         }
         if (!(password2Field.getText().equals(password1Field.getText()))) {
-            errorMessage += "Verification must match the original password.\n";
+            errorMessage += "Verification must match the original password\n";
         }
         if (MainFXApplication.userList.containsEmail(emailField.getText())) {
-            errorMessage += "Email is already being used.\n";
+            errorMessage += "Email is already being used\n";
         }
         if (MainFXApplication.userList.containsUsername(usernameField.getText())) {
-            errorMessage += "Username is already being used.\n";
+            errorMessage += "Username is already being used\n";
         }
 
         if (errorMessage.length() == 0) {
@@ -107,19 +105,19 @@ public class RegistrationController {
     @FXML
     private void handleRegistrationPressed() throws IOException {
         if (isInputValid()) {
-            if (choiceBox.getValue().equals(UserType.U)) {
+            if (choiceBox.getValue().equals("USER")) {
                 User newUser = new User(usernameField.getText(), password1Field.getText(), emailField.getText());
                 MainFXApplication.userList.add(newUser);
             }
-            if (choiceBox.getValue().equals(UserType.W)) {
+            if (choiceBox.getValue().equals("WORKER")) {
                 User newWorker = new Worker(usernameField.getText(), password1Field.getText(), emailField.getText());
                 MainFXApplication.userList.add(newWorker);
             }
-            if (choiceBox.getValue().equals(UserType.M)) {
+            if (choiceBox.getValue().equals("MANAGER")) {
                 User newManager = new Manager(usernameField.getText(), password1Field.getText(), emailField.getText());
                 MainFXApplication.userList.add(newManager);
             }
-            if (choiceBox.getValue().equals(UserType.A)) {
+            if (choiceBox.getValue().equals("ADMIN")) {
                 User newAdmin = new Admin(usernameField.getText(), password1Field.getText(), emailField.getText());
                 MainFXApplication.userList.add(newAdmin);
             }
