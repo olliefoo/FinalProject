@@ -31,7 +31,7 @@ public class MainFXApplication extends Application {
 
         // Give the controller access to the main app.
         WelcomeController controller = loader.getController();
-        controller.setMainApp(this);
+        //controller.setMainApp(this);
 
         mainStage.setTitle("Clean Water Crowdsourcing");
         // Show the scene containing the root layout.

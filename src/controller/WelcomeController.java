@@ -24,18 +24,30 @@ public class WelcomeController {
     private Button registerButton;
 
     // set up link to the MainFXApplication
-    public void setMainApp(MainFXApplication mainFXApplication) {
+    /*public void setMainApp(MainFXApplication mainFXApplication) {
         mainApplication = mainFXApplication;
-    }
+    }*/
 
+    /**
+     * Handles Login button press. When pressed, leads the user to the
+     * LoginScreen.
+     *
+     * @throws IOException
+     */
     @FXML
-    private void handleLogin1pressed() throws IOException {
+    private void handleLoginPressed() throws IOException {
             Stage stage = (Stage) loginButton.getScene().getWindow();
             Parent root = FXMLLoader.load(getClass().getResource("../view/LoginScreen.fxml"));
             stage.setScene(new Scene(root));
             stage.show();
     }
 
+    /**
+     * Handles the Registration button press. When pressed, leads the user to
+     * the RegistrationScreen.
+     *
+     * @throws IOException
+     */
     @FXML
     private void handleRegistrationPressed() throws IOException {
         Stage stage = (Stage) registerButton.getScene().getWindow();
