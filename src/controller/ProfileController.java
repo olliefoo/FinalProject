@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Database;
+import model.Profile;
 import model.User;
 
 import java.io.IOException;
@@ -60,6 +61,7 @@ public class ProfileController {
 
     String currentUsername = MainFXApplication.userList.getLoggedIn();
     User user = MainFXApplication.userList.getUser(currentUsername);
+    Profile profile = user.getProfile();
 
     /**
      * Initializes the ProfileScreen. Sets the values for the comboboxes and
@@ -70,23 +72,23 @@ public class ProfileController {
     private void initialize() {
         maleRadioButton.setToggleGroup(group);
         femaleRadioButton.setToggleGroup(group);
-        if (user.getGender()) {
+        if (profile.getGender()) {
             femaleRadioButton.setSelected(true);
         } else {
             maleRadioButton.setSelected(true);
         }
 
-        firstNameField.setText(user.getFirstname());
-        lastNameField.setText(user.getLastname());
-        emailField.setText(user.getEmail());
-        phoneField.setText(user.getPhone());
-        streetField.setText(user.getStreet());
-        cityField.setText(user.getCity());
-        stateField.setText(user.getState());
-        zipField.setText(user.getZip());
-        monthField.setValue(user.getMonth());
-        dayField.setValue(user.getDay());
-        yearField.setValue(user.getYear());
+        firstNameField.setText(profile.getFirstname());
+        lastNameField.setText(profile.getLastname());
+        emailField.setText(profile.getEmail());
+        phoneField.setText(profile.getPhone());
+        streetField.setText(profile.getStreet());
+        cityField.setText(profile.getCity());
+        stateField.setText(profile.getState());
+        zipField.setText(profile.getZip());
+        monthField.setValue(profile.getMonth());
+        dayField.setValue(profile.getDay());
+        yearField.setValue(profile.getYear());
 
         monthField.getItems().addAll(
                 "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep",
@@ -137,14 +139,14 @@ public class ProfileController {
             gender = false;
         }
 
-        user.setName(fName,lName);
-        user.setPhone(pNumber);
-        user.setAddress(street, city, state, zip);
-        user.setEmail(mail);
-        user.setMonth(month);
-        user.setDay(day);
-        user.setYear(year);
-        user.setGender(gender);
+        profile.setName(fName,lName);
+        profile.setPhone(pNumber);
+        profile.setAddress(street, city, state, zip);
+        profile.setEmail(mail);
+        profile.setMonth(month);
+        profile.setDay(day);
+        profile.setYear(year);
+        profile.setGender(gender);
     }
 
     /**
