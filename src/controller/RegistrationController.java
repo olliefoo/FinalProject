@@ -101,18 +101,15 @@ public class RegistrationController {
                 Database.add(new User(usernameField.getText(), password1Field.getText(), emailField.getText()));
                 //MainFXApplication.userList.add(newUser);
                 //Database.add(newUser);
-            }
-            if (choiceBox.getValue().equals("WORKER")) {
+            } else if (choiceBox.getValue().equals("WORKER")) {
                 Database.add(new Worker(usernameField.getText(), password1Field.getText(), emailField.getText()));
                 //MainFXApplication.userList.add(newWorker);
                 //Database.add(newWorker);
-            }
-            if (choiceBox.getValue().equals("MANAGER")) {
+            } else if (choiceBox.getValue().equals("MANAGER")) {
                 Database.add(new Manager(usernameField.getText(), password1Field.getText(), emailField.getText()));
                 //MainFXApplication.userList.add(newManager);
                 //Database.add(newManager);
-            }
-            if (choiceBox.getValue().equals("ADMIN")) {
+            } else if (choiceBox.getValue().equals("ADMIN")) {
                 Database.add(new Admin(usernameField.getText(), password1Field.getText(), emailField.getText()));
                 //MainFXApplication.userList.add(newAdmin);
             }
