@@ -84,7 +84,7 @@ public class Database {
      * @param name the username of a user
      * @return the user with the specified username. NULL if user is not in the database
      */
-    public User getUser(String name) {
+    public static User getUser(String name) {
         for (User u : users) {
             if (name.equals(u.getUsername())) {
                 return u;
@@ -99,7 +99,7 @@ public class Database {
      * @param name the username of a worker
      * @return the worker with the specified username. NULL if worker is not in the database
      */
-    public User getWorker(String name) {
+    public static User getWorker(String name) {
         for (Worker w : workers) {
             if (name.equals(w.getUsername())) {
                 return w;
@@ -114,7 +114,7 @@ public class Database {
      * @param name the username of a manager
      * @return the manager with the specified username. NULL if manager is not in the database
      */
-    public User getManager(String name) {
+    public static User getManager(String name) {
         for (Manager m : managers) {
             if (name.equals(m.getUsername())) {
                 return m;
@@ -129,7 +129,7 @@ public class Database {
      * @param name the username of a admin
      * @return the admin with the specified username. NULL if admin is not in the database
      */
-    public User getAdmin(String name) {
+    public static User getAdmin(String name) {
         for (Admin a : admins) {
             if (name.equals(a.getUsername())) {
                 return a;
