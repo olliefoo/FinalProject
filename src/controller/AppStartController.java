@@ -6,16 +6,24 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import model.User;
+
 import java.io.IOException;
 
 
 public class AppStartController {
+
+    private User user;
 
     @FXML
     private Button myLogout;
 
     @FXML
     private Button profile;
+
+    public void setUser(User u) {
+        user = u;
+    }
 
     /**
      * Method to handle the case when the logout button is pressed
@@ -37,8 +45,10 @@ public class AppStartController {
      */
     @FXML
     private void handleProfilePressed() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ProfileScreen.fxml"));
         Stage stage = (Stage) profile.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("../view/ProfileScreen.fxml"));
+        Parent root = loader.load();
+        loader.<ProfileController>getController().setUser(user);
         stage.setScene(new Scene(root));
         stage.show();
     }

@@ -59,17 +59,20 @@ public class ProfileController {
 
     private final ToggleGroup group = new ToggleGroup();
 
-    String currentUsername = MainFXApplication.userList.getLoggedIn();
-    User user = MainFXApplication.userList.getUser(currentUsername);
-    Profile profile = user.getProfile();
+    private User user;
+    private Profile profile;
+
+    public void setUser(User u) {
+        user = u;
+        profile = user.getProfile();
+        setup();
+    }
 
     /**
-     * Initializes the ProfileScreen. Sets the values for the comboboxes and
-     * show the user's previous edits to their profile.
+     * Fill in the textboxes/comboboxes with the previous stored Profile values
      *
      */
-    @FXML
-    private void initialize() {
+    private void setup() {
         maleRadioButton.setToggleGroup(group);
         femaleRadioButton.setToggleGroup(group);
         if (profile.getGender()) {
@@ -158,12 +161,12 @@ public class ProfileController {
     @FXML
     private void handleUpdatePressed() throws IOException {
         setValues();
-        MainFXApplication.userList.updateUser(user);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppStartScreen.fxml"));
         Stage stage = (Stage) updateButton.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("../view/AppStartScreen.fxml"));
+        Parent root = loader.load();
+        loader.<AppStartController>getController().setUser(user);
         stage.setScene(new Scene(root));
         stage.show();
     }
-
 
 }

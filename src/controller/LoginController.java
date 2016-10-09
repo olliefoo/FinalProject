@@ -1,6 +1,5 @@
 package controller;
 
-import fxapp.MainFXApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,7 +13,6 @@ import java.io.IOException;
 
 import model.Database;
 import model.User;
-import sun.applet.Main;
 
 public class LoginController {
 
@@ -45,10 +43,10 @@ public class LoginController {
         String username = usernameField.getText();
 
         if (username == null || username.length() == 0
-                || !MainFXApplication.userList.containsUsername(username)) {
+                || !Database.containsUsername(username)) {
             errorMessage += "Username does not exist. Please register first.\n";
         } else {
-            User currentUser = MainFXApplication.userList.getUser(username);
+            User currentUser = Database.getUser(username);
             String password = passwordField.getText();
 
             if (password == null || password.length() == 0
@@ -83,9 +81,11 @@ public class LoginController {
     @FXML
     private void handleLoginPressed() throws IOException {
         if (isInputValid()) {
-            MainFXApplication.userList.setLoggedIn(usernameField.getText());
+            User user = Database.getUser(usernameField.getText());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppStartScreen.fxml"));
             Stage stage = (Stage) login.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource("../view/AppStartScreen.fxml"));
+            Parent root = loader.load();
+            loader.<AppStartController>getController().setUser(user);
             stage.setScene(new Scene(root));
             stage.show();
         }
@@ -100,11 +100,9 @@ public class LoginController {
     @FXML
     private void handleCancelPressed() throws IOException {
             Stage stage = (Stage) cancel.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource
-                    ("../view/WelcomeScreen.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("../view/WelcomeScreen.fxml"));
             stage.setScene(new Scene(root));
             stage.show();
     }
-
 
 }
