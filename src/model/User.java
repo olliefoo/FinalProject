@@ -42,5 +42,4 @@ public class User {
         password = p;
         return true;
     }
-
 }
