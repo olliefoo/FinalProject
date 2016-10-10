@@ -16,10 +16,16 @@ public class AppStartController {
     private User user;
 
     @FXML
-    private Button myLogout;
+    private Button logoutButton;
 
     @FXML
-    private Button profile;
+    private Button profileButton;
+
+    @FXML
+    private Button submitButton;
+
+    @FXML
+    private Button viewButton;
 
     public void setUser(User u) {
         user = u;
@@ -32,7 +38,7 @@ public class AppStartController {
      */
     @FXML
     private void handleLogoutPressed() throws IOException {
-        Stage stage = (Stage) myLogout.getScene().getWindow();
+        Stage stage = (Stage) logoutButton.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("../view/WelcomeScreen.fxml"));
         stage.setScene(new Scene(root));
         stage.show();
@@ -46,10 +52,20 @@ public class AppStartController {
     @FXML
     private void handleProfilePressed() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ProfileScreen.fxml"));
-        Stage stage = (Stage) profile.getScene().getWindow();
+        Stage stage = (Stage) profileButton.getScene().getWindow();
         Parent root = loader.load();
         loader.<ProfileController>getController().setUser(user);
         stage.setScene(new Scene(root));
         stage.show();
+    }
+
+    @FXML
+    private void handleSubmitPressed() throws IOException {
+
+    }
+
+    @FXML
+    private void handleViewPressed() throws IOException {
+
     }
 }
