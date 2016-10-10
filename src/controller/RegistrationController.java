@@ -2,10 +2,7 @@ package controller;
 
 import fxapp.MainFXApplication;
 import javafx.scene.control.*;
-import model.User;
-import model.Worker;
-import model.Manager;
-import model.Admin;
+import model.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -60,20 +57,15 @@ public class RegistrationController {
         String errorMessage = "";
         if (usernameField.getText() == null || usernameField.getText().length() == 0) {
             errorMessage += "Username cannot be blank\n";
-        }
-        if (password1Field.getText() == null || password1Field.getText().length() == 0) {
+        } else if (password1Field.getText() == null || password1Field.getText().length() == 0) {
             errorMessage += "Password cannot be blank\n";
-        }
-        if (emailField.getText() == null || emailField.getText().length() == 0) {
+        } else if (emailField.getText() == null || emailField.getText().length() == 0) {
             errorMessage += "Email cannot be blank\n";
-        }
-        if (!(password2Field.getText().equals(password1Field.getText()))) {
+        } else if (!(password2Field.getText().equals(password1Field.getText()))) {
             errorMessage += "Verification must match the original password\n";
-        }
-        if (MainFXApplication.userList.containsEmail(emailField.getText())) {
+        } else if (Database.containsEmail(emailField.getText())) {
             errorMessage += "Email is already being used\n";
-        }
-        if (MainFXApplication.userList.containsUsername(usernameField.getText())) {
+        } else if (Database.containsUsername(usernameField.getText())) {
             errorMessage += "Username is already being used\n";
         }
 
@@ -106,21 +98,25 @@ public class RegistrationController {
     private void handleRegistrationPressed() throws IOException {
         if (isInputValid()) {
             if (choiceBox.getValue().equals("USER")) {
-                User newUser = new User(usernameField.getText(), password1Field.getText(), emailField.getText());
-                MainFXApplication.userList.add(newUser);
+                Database.add(new User(usernameField.getText(), password1Field.getText(), emailField.getText()));
+                //MainFXApplication.userList.add(newUser);
+                //Database.add(newUser);
+            } else if (choiceBox.getValue().equals("WORKER")) {
+                Database.add(new Worker(usernameField.getText(), password1Field.getText(), emailField.getText()));
+                //MainFXApplication.userList.add(newWorker);
+                //Database.add(newWorker);
+            } else if (choiceBox.getValue().equals("MANAGER")) {
+                Database.add(new Manager(usernameField.getText(), password1Field.getText(), emailField.getText()));
+                //MainFXApplication.userList.add(newManager);
+                //Database.add(newManager);
+            } else if (choiceBox.getValue().equals("ADMIN")) {
+                Database.add(new Admin(usernameField.getText(), password1Field.getText(), emailField.getText()));
+                //MainFXApplication.userList.add(newAdmin);
             }
-            if (choiceBox.getValue().equals("WORKER")) {
-                User newWorker = new Worker(usernameField.getText(), password1Field.getText(), emailField.getText());
-                MainFXApplication.userList.add(newWorker);
-            }
-            if (choiceBox.getValue().equals("MANAGER")) {
-                User newManager = new Manager(usernameField.getText(), password1Field.getText(), emailField.getText());
-                MainFXApplication.userList.add(newManager);
-            }
-            if (choiceBox.getValue().equals("ADMIN")) {
-                User newAdmin = new Admin(usernameField.getText(), password1Field.getText(), emailField.getText());
-                MainFXApplication.userList.add(newAdmin);
-            }
+
+            Database.addEmail(emailField.getText());
+            Database.addUsername(usernameField.getText());
+
             Stage stage = (Stage) registerButton.getScene().getWindow();
             Parent root = FXMLLoader.load(getClass().getResource("../view/WelcomeScreen.fxml"));
             stage.setScene(new Scene(root));
@@ -136,8 +132,7 @@ public class RegistrationController {
     @FXML
     private void handleCancelPressed() throws IOException {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource
-                ("../view/WelcomeScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../view/WelcomeScreen.fxml"));
         stage.setScene(new Scene(root));
         stage.show();
     }
