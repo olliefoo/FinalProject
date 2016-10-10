@@ -1,7 +1,9 @@
 package controller;
 
 import fxapp.MainFXApplication;
+import javafx.event.EventHandler;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import model.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -46,6 +48,12 @@ public class RegistrationController {
     private void initialize() {
         choiceBox.getItems().addAll("USER", "WORKER", "MANAGER", "ADMIN");
         choiceBox.setValue("USER");
+        choiceBox.setOnMousePressed(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                choiceBox.requestFocus();
+            }
+        });
     }
 
     /**

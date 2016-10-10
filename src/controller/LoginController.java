@@ -1,13 +1,12 @@
 package controller;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -28,7 +27,27 @@ public class LoginController {
     @FXML
     private Button cancel;
 
+    @FXML
+    private ComboBox accountBox;
+
     private Stage dialogStage;
+
+    /**
+     * Initialize method called when controller is loaded. Used to set values
+     * for the account type combobox. Sets the default choice as USER.
+     *
+     */
+    @FXML
+    private void initialize() {
+        accountBox.getItems().addAll("USER", "WORKER", "MANAGER", "ADMIN");
+        accountBox.setValue("USER");
+        accountBox.setOnMousePressed(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                accountBox.requestFocus();
+            }
+        });
+    }
 
     /**
      * Checks if the username and password entered are valid. The entered
@@ -41,16 +60,25 @@ public class LoginController {
         String errorMessage = "";
 
         String username = usernameField.getText();
+        String password = passwordField.getText();
+
+        User user = Database.getUser(username);
+        if (accountBox.getValue().equals("WORKER")) {
+            user = Database.getWorker(username);
+        } else if (accountBox.getValue().equals("MANAGER")) {
+            user = Database.getManager(username);
+        } else if (accountBox.getValue().equals("ADMIN")) {
+            user = Database.getAdmin(username);
+        }
 
         if (username == null || username.length() == 0
                 || !Database.containsUsername(username)) {
             errorMessage += "Username does not exist. Please register first.\n";
+        } else if (user == null) {
+            errorMessage += "Wrong account type. Try Again.\n";
         } else {
-            User currentUser = Database.getUser(username);
-            String password = passwordField.getText();
-
             if (password == null || password.length() == 0
-                    || !(password.equals(currentUser.getPassword()))) {
+                    || !(password.equals(user.getPassword()))) {
                 errorMessage += "Wrong password. Try again.\n";
             }
         }
@@ -74,7 +102,8 @@ public class LoginController {
 
     /**
      * Handles the Login button press. When pressed after entering a valid
-     * username and password, the user will be lead to the AppStartScreen.
+     * username and password and account type, the user will be lead to a start
+     * screen depending on what type of user they are.
      *
      * @throws IOException
      */
@@ -82,9 +111,24 @@ public class LoginController {
     private void handleLoginPressed() throws IOException {
         if (isInputValid()) {
             User user = Database.getUser(usernameField.getText());
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppStartScreen.fxml"));
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("../view/AppStartScreen.fxml"));
+
+            if (accountBox.getValue().equals("WORKER")) {
+                user = Database.getWorker(usernameField.getText());
+                //loader.setLocation(getClass().getResource("../view/AppStartScreen2.fxml"));
+            } else if (accountBox.getValue().equals("MANAGER")) {
+                user = Database.getManager(usernameField.getText());
+                //loader.setLocation(getClass().getResource("../view/AppStartScreen3.fxml"));
+            } else if (accountBox.getValue().equals("ADMIN")) {
+                user = Database.getAdmin(usernameField.getText());
+                //loader.setLocation(getClass().getResource("../view/AppStartScreen4.fxml"));
+            }
+            //FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppStartScreen.fxml"));
+
             Stage stage = (Stage) login.getScene().getWindow();
             Parent root = loader.load();
+
             loader.<AppStartController>getController().setUser(user);
             stage.setScene(new Scene(root));
             stage.show();
