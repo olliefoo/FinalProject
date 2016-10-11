@@ -64,20 +64,6 @@
                   <Insets right="5.0" />
                </padding>
             </Label>
-            <ButtonBar prefHeight="40.0" prefWidth="182.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="7">
-              <buttons>
-                <Button fx:id="submitSourceButton" mnemonicParsing="false" onAction="#handleRegistrationPressed" prefHeight="31.0" prefWidth="262.0" text="Submit" translateX="-15.0" />
-                  <Button fx:id="cancelButton" layoutX="135.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleCancelPressed" text="Cancel" textFill="#e40505" translateX="-15.0" />
-              </buttons>
-               <GridPane.margin>
-                  <Insets right="20.0" />
-               </GridPane.margin>
-            </ButtonBar>
-            <Label layoutX="119.0" layoutY="118.0" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
-               <padding>
-                  <Insets right="5.0" />
-               </padding>
-            </Label>
             <Label text="Source Report" textFill="#22088a" GridPane.columnIndex="1">
                <font>
                   <Font name="Arial Black" size="32.0" />
@@ -88,17 +74,16 @@
                   <Insets right="5.0" />
                </padding>
             </Label>
-            <ComboBox fx:id="waterConditionCombo" prefHeight="31.0" prefWidth="247.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="6">
+            <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
-                  <Insets left="10.0" />
+                  <Insets bottom="10.0" right="30.0" top="10.0" />
                </GridPane.margin>
-            </ComboBox>
-            <ComboBox fx:id="waterTypeCombo" layoutX="184.0" layoutY="328.0" prefHeight="31.0" prefWidth="247.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5">
-               <GridPane.margin>
-                  <Insets left="10.0" />
-               </GridPane.margin>
-            </ComboBox>
-            <TextField fx:id="waterLocationField" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <buttons>
+                  <TextField fx:id="reportDate" prefHeight="31.0" translateX="-10.0" />
+                  <TextField fx:id="reportTime" layoutX="159.0" layoutY="11.0" />
+               </buttons>
+            </ButtonBar>
+            <TextField fx:id="reportNumber" editable="false" layoutX="184.0" layoutY="175.0" prefWidth="162.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="10.0" right="30.0" />
                </GridPane.margin>
@@ -108,19 +93,29 @@
                   <Insets left="10.0" right="30.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="reportNumber" layoutX="184.0" layoutY="175.0" prefWidth="162.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+            <TextField fx:id="waterLocationField" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets left="10.0" right="30.0" />
                </GridPane.margin>
             </TextField>
-            <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <ComboBox fx:id="waterTypeCombo" layoutX="184.0" layoutY="328.0" prefHeight="31.0" prefWidth="247.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5">
                <GridPane.margin>
-                  <Insets bottom="10.0" right="30.0" top="10.0" />
+                  <Insets left="10.0" />
                </GridPane.margin>
-               <buttons>
-                  <TextField fx:id="reportDate" prefHeight="31.0" translateX="-10.0" />
-                  <TextField fx:id="reportTime" layoutX="159.0" layoutY="11.0" />
-               </buttons>
+            </ComboBox>
+            <ComboBox fx:id="waterConditionCombo" prefHeight="31.0" prefWidth="247.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="6">
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </ComboBox>
+            <ButtonBar prefHeight="40.0" prefWidth="182.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="7">
+              <buttons>
+                <Button fx:id="submitSourceButton" mnemonicParsing="false" onAction="#handleRegistrationPressed" prefHeight="31.0" prefWidth="262.0" text="Submit" translateX="-15.0" />
+                  <Button fx:id="cancelButton" layoutX="135.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleCancelPressed" text="Cancel" textFill="#e40505" translateX="-15.0" />
+              </buttons>
+               <GridPane.margin>
+                  <Insets right="20.0" />
+               </GridPane.margin>
             </ButtonBar>
          </children>
       </GridPane>
