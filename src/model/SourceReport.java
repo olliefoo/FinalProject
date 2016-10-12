@@ -23,6 +23,12 @@ public class SourceReport {
         date = new Date();
     }
 
+    public static int getTotal() {
+        return total;
+    }
+    public static void setTotal(int num) {
+        total = num;
+    }
     public void setReporter(User u) {
         this.reporter = u;
     }

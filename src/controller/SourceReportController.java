@@ -106,8 +106,12 @@ public class SourceReportController {
      */
     @FXML
     private void handleCancelPressed() throws IOException {
+        // if cancel, then report number does not increment
+        SourceReport.setTotal(SourceReport.getTotal() - 1);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppStartScreen.fxml"));
         Stage stage = (Stage) cancelButton.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("../view/AppStartScreen.fxml"));
+        Parent root = loader.load();
+        loader.<AppStartController>getController().setUser(user);
         stage.setScene(new Scene(root));
         stage.show();
     }
