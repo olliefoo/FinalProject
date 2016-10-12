@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import model.SourceReport;
 import model.User;
 
 import java.io.IOException;
@@ -64,7 +65,7 @@ public class AppStartController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/SourceReportScreen.fxml"));
         Stage stage = (Stage) submitButton.getScene().getWindow();
         Parent root = loader.load();
-        loader.<ProfileController>getController().setUser(user);
+        loader.<SourceReportController>getController().setUser(user);
         stage.setScene(new Scene(root));
         stage.show();
     }
