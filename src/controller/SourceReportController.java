@@ -12,6 +12,7 @@ import model.User;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 
 public class SourceReportController {
     @FXML
@@ -57,8 +58,11 @@ public class SourceReportController {
 
         reportNumber.setText("" + r.getNumber());
 
-        reportDate.setText(r.getDate().toString());
-
+        SimpleDateFormat ft1 = new SimpleDateFormat("E MM/dd/yyyy");
+        SimpleDateFormat ft2 = new SimpleDateFormat("hh:mm a");
+        reportDate.setText(ft1.format(r.getDate()));
+        reportTime.setText(ft2.format(r.getDate()));
+        
         waterTypeCombo.getItems().addAll("Bottled", "Well", "Stream",
                 "Lake", "Spring", "Other");
 
