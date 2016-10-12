@@ -61,7 +61,12 @@ public class AppStartController {
 
     @FXML
     private void handleSubmitPressed() throws IOException {
-
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/SourceReportScreen.fxml"));
+        Stage stage = (Stage) submitButton.getScene().getWindow();
+        Parent root = loader.load();
+        loader.<ProfileController>getController().setUser(user);
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     @FXML
