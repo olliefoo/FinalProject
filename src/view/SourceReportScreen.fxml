@@ -98,12 +98,17 @@
                   <Insets left="10.0" right="30.0" />
                </GridPane.margin>
             </TextField>
-            <ComboBox fx:id="waterTypeCombo" layoutX="184.0" layoutY="328.0" prefHeight="31.0" prefWidth="247.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5">
+            <ComboBox fx:id="waterTypeCombo" layoutX="184.0" layoutY="328.0" prefHeight="31.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
             </ComboBox>
-            <ComboBox fx:id="waterConditionCombo" prefHeight="31.0" prefWidth="247.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="6">
+            <TextField fx:id="otherTypeField" prefHeight="31.0" prefWidth="344.0" promptText="If Other, please specify" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <GridPane.margin>
+                  <Insets left="175.0" right="30.0" />
+               </GridPane.margin>
+            </TextField>
+            <ComboBox fx:id="waterConditionCombo" prefHeight="31.0" prefWidth="175.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="6">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>

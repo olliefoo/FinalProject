@@ -34,6 +34,9 @@ public class SourceReportController {
     private ComboBox<String> waterTypeCombo;
 
     @FXML
+    private TextField otherTypeField;
+
+    @FXML
     private ComboBox<String> waterConditionCombo;
 
     @FXML
@@ -65,9 +68,11 @@ public class SourceReportController {
 
         waterTypeCombo.getItems().addAll("Bottled", "Well", "Stream",
                 "Lake", "Spring", "Other");
+        waterTypeCombo.setValue("Bottled");
 
         waterConditionCombo.getItems().addAll("Waste", "Treatable-Clear",
                 "Treatable-Muddy", "Potable");
+        waterConditionCombo.setValue("Waste");
     }
 
     private void setReportValues() {
@@ -76,7 +81,12 @@ public class SourceReportController {
         //String number = reportNumber.getText();
         String name = reporterNameField.getText();
         String location = waterLocationField.getText();
+
         String type = waterTypeCombo.getValue();
+        if (type.equals("Other")) {
+            type = otherTypeField.getText();
+        }
+
         String condition = waterConditionCombo.getValue();
         r.setReporter(user);
         r.setTime(time);
