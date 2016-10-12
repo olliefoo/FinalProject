@@ -9,18 +9,19 @@ public class SourceReport {
 
     private static int total = 0;
     private int number;
-    private Date date;
+    private Date fullDate;
     private User reporter;
     private String name;
     private String type;
     private String condition;
+    private String date;
     private String time;
     private String location;
 
     public SourceReport() {
         total++;
         number = total;
-        date = new Date();
+        fullDate = new Date();
     }
 
     public static int getTotal() {
@@ -44,6 +45,9 @@ public class SourceReport {
     public void setTime(String time) {
         this.time = time;
     }
+    public void setDate(String date) {
+        this.date = date;
+    }
     public void setLocation(String location) {
         this.location = location;
     }
@@ -62,13 +66,16 @@ public class SourceReport {
     public String getTime() {
         return time;
     }
+    public String getDate() {
+        return date;
+    }
     public String getLocation() {
         return location;
     }
     public int getNumber() {
         return number;
     }
-    public Date getDate() {
-        return date;
+    public Date getFullDate() {
+        return fullDate;
     }
 }

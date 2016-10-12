@@ -60,8 +60,8 @@ public class SourceReportController {
 
         SimpleDateFormat ft1 = new SimpleDateFormat("E MM/dd/yyyy");
         SimpleDateFormat ft2 = new SimpleDateFormat("h:mm a");
-        reportDate.setText(ft1.format(r.getDate()));
-        reportTime.setText(ft2.format(r.getDate()));
+        reportDate.setText(ft1.format(r.getFullDate()));
+        reportTime.setText(ft2.format(r.getFullDate()));
 
         waterTypeCombo.getItems().addAll("Bottled", "Well", "Stream",
                 "Lake", "Spring", "Other");
@@ -71,7 +71,7 @@ public class SourceReportController {
     }
 
     private void setReportValues() {
-        //String date = reportDate.getText();
+        String date = reportDate.getText();
         String time = reportTime.getText();
         //String number = reportNumber.getText();
         String name = reporterNameField.getText();
@@ -80,6 +80,7 @@ public class SourceReportController {
         String condition = waterConditionCombo.getValue();
         r.setReporter(user);
         r.setTime(time);
+        r.setDate(date);
         r.setName(name);
         r.setLocation(location);
         r.setType(type);
