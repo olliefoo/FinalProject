@@ -59,10 +59,10 @@ public class SourceReportController {
         reportNumber.setText("" + r.getNumber());
 
         SimpleDateFormat ft1 = new SimpleDateFormat("E MM/dd/yyyy");
-        SimpleDateFormat ft2 = new SimpleDateFormat("hh:mm a");
+        SimpleDateFormat ft2 = new SimpleDateFormat("h:mm a");
         reportDate.setText(ft1.format(r.getDate()));
         reportTime.setText(ft2.format(r.getDate()));
-        
+
         waterTypeCombo.getItems().addAll("Bottled", "Well", "Stream",
                 "Lake", "Spring", "Other");
 
