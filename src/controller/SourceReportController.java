@@ -4,14 +4,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Profile;
 import model.SourceReport;
 import model.User;
-
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import java.io.IOException;
 
 public class SourceReportController {
@@ -90,7 +89,7 @@ public class SourceReportController {
      * @throws IOException
      */
     @FXML
-    private void handleSubmitPressed() throws IOException {
+    private void handleReportSubmitPressed() throws IOException {
         setReportValues();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppStartScreen.fxml"));
         Stage stage = (Stage) submitSourceButton.getScene().getWindow();
