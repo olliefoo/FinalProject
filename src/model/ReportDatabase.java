@@ -22,4 +22,7 @@ public class ReportDatabase {
     public static SourceReport getSourceReport(int number) {
         return sourceReports.get(number - 1);
     }
+    public static SourceReport getSourceReport() {
+        return sourceReports.get(0);
+    }
 }

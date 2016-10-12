@@ -23,7 +23,7 @@ public class ReportReadController {
 
     @FXML
     private void initialize(){
-        SourceReport.getReport();
+        ReportDatabase.getSourceReport();
     }
 
     @FXML
