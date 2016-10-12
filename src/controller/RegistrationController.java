@@ -37,8 +37,6 @@ public class RegistrationController {
     @FXML
     private Button cancelButton;
 
-    private Stage dialogStage;
-
     /**
      * Method to initialize the registration page. Mainly used
      * to make sure the combo box have choices, and the User to be
@@ -82,7 +80,6 @@ public class RegistrationController {
         } else {
             // Show the error message if bad data
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initOwner(dialogStage);
             alert.setTitle("Invalid Fields");
             alert.setHeaderText("Please Correct Invalid Fields");
             alert.setContentText(errorMessage);
