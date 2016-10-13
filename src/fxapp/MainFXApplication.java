@@ -7,13 +7,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.ReportDatabase;
 
 import java.io.IOException;
 
 public class MainFXApplication extends Application {
 
-    // Creates a single instance of the database class
+    // Creates a single instance of the database classes
     public static final Database database = new Database();
+    public static final ReportDatabase reportDatabase = new ReportDatabase();
     private Stage mainStage;
     private Parent rootLayout;
 

@@ -6,10 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import model.Database;
-import model.Profile;
-import model.SourceReport;
-import model.User;
+import model.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import java.io.IOException;
@@ -155,6 +152,7 @@ public class SourceReportController {
     private void handleReportSubmitPressed() throws IOException {
         if (isInputValid()) {
             setReportValues();
+            ReportDatabase.add(r);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppStartScreen.fxml"));
             Stage stage = (Stage) submitSourceButton.getScene().getWindow();
             Parent root = loader.load();
