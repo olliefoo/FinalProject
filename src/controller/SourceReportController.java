@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import model.Database;
 import model.Profile;
 import model.SourceReport;
 import model.User;
@@ -44,6 +45,8 @@ public class SourceReportController {
 
     @FXML
     private Button cancelButton;
+
+    private Stage dialogStage;
 
     private User user;
     private Profile profile;
@@ -97,6 +100,37 @@ public class SourceReportController {
         r.setCondition(condition);
     }
 
+    private boolean isInputValid() {
+        String errorMessage = "";
+
+        String location = waterLocationField.getText();
+        String other = otherTypeField.getText();
+        String type = waterTypeCombo.getValue();
+
+        if (type.equals("Other") && other.length() == 0) {
+            errorMessage += "Please specify other.\n";
+        }
+        if (location.length() == 0) {
+            errorMessage += "Please enter a location.\n";
+        }
+
+        //no error message means success / good input
+        if (errorMessage.length() == 0) {
+            return true;
+        } else {
+            // Show the error message if bad data
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initOwner(dialogStage);
+            alert.setTitle("Invalid Fields");
+            alert.setHeaderText("Please correct invalid fields");
+            alert.setContentText(errorMessage);
+
+            alert.showAndWait();
+
+            return false;
+        }
+    }
+
     /**
      * Handles the Submit button press. When pressed, the inputs will be saved
      * to the user and the user will be lead back to the AppStartScreen.
@@ -105,15 +139,16 @@ public class SourceReportController {
      */
     @FXML
     private void handleReportSubmitPressed() throws IOException {
-        setReportValues();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppStartScreen.fxml"));
-        Stage stage = (Stage) submitSourceButton.getScene().getWindow();
-        Parent root = loader.load();
-        loader.<AppStartController>getController().setUser(user);
-        stage.setScene(new Scene(root));
-        stage.show();
+        if (isInputValid()) {
+            setReportValues();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppStartScreen.fxml"));
+            Stage stage = (Stage) submitSourceButton.getScene().getWindow();
+            Parent root = loader.load();
+            loader.<AppStartController>getController().setUser(user);
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
     }
-
     /**
      * The method that is used when the cancel button is pressed.
      * It will lead the user back to the app start screen screen.
