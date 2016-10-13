@@ -52,12 +52,19 @@ public class SourceReportController {
     private Profile profile;
     private SourceReport r = new SourceReport();
 
+    /**
+     * sets the current user of this source report
+     * @param u the user working on this source report
+     */
     public void setUser(User u) {
         user = u;
         profile = user.getProfile();
         setup();
     }
 
+    /**
+     * Inserts the initial inputs for the source report view
+     */
     private void setup() {
         reporterNameField.setText(profile.getFirstname() + " "
                 + profile.getLastname());
@@ -78,6 +85,9 @@ public class SourceReportController {
         waterConditionCombo.setValue("Waste");
     }
 
+    /**
+     * Sets the values from the view to the source report
+     */
     private void setReportValues() {
         String date = reportDate.getText();
         String time = reportTime.getText();
@@ -100,6 +110,10 @@ public class SourceReportController {
         r.setCondition(condition);
     }
 
+    /**
+     * Checks to see if the inputs on the source report screen are valid.
+     * @return true if valid, false otherwise
+     */
     private boolean isInputValid() {
         String errorMessage = "";
 
@@ -122,7 +136,7 @@ public class SourceReportController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initOwner(dialogStage);
             alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Please correct invalid fields");
+            alert.setHeaderText("Please address invalid fields");
             alert.setContentText(errorMessage);
 
             alert.showAndWait();

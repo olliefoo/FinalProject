@@ -18,12 +18,18 @@ public class SourceReport {
     private String time;
     private String location;
 
+    /**
+     * Constructor for a new source report
+     */
     public SourceReport() {
         total++;
         number = total;
         fullDate = new Date();
     }
 
+    /**
+     * List of getters and setters for source report values.
+     */
     public static int getTotal() {
         return total;
     }
