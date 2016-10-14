@@ -47,13 +47,13 @@ public class ViewSourceReportController {
      *Fills in text boxes
      */
     private void setUp () {
-        //reportDateField.setText(sourceReport.getReportDate());
-        //reportTimeField.setText(sourceReport.getReportTime());
-        //reportNumberField.setText(sourceReport.getReportNumber());
+        //reportDateField.setText(sourceReport.getDate());
+        //reportTimeField.setText(sourceReport.getTime());
+        //reportNumberField.setText(sourceReport.getNumber());
         //reporterNameField.setText(sourceReport.getReporterName());
-        //waterLocationField.setText(sourceReport.getWaterLocation());
-        //waterTypeField.setText(sourceReport.getWaterType());
-        //waterCondField.setText(sourceReport.getWaterConditions());
+        //waterLocationField.setText(sourceReport.getLocation());
+        //waterTypeField.setText(sourceReport.getType());
+        //waterCondField.setText(sourceReport.getCondition());
     }
 
     /**
