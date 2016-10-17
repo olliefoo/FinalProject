@@ -19,7 +19,7 @@ import java.io.IOException;
 /**
  * Created by cbbjs on 10/8/2016.
  */
-public class ReportChoiceController {
+public class SourceReportListController {
     @FXML
     private Button chooseButton;
 

@@ -114,7 +114,7 @@ public class AppStartController implements Initializable,
 
     /**
      * Handles the "Submit Report" button press. When pressed, leads the user to
-     * the SourceReportScreen.
+     * the SubmitSourceReportScreen.
      *
      * @throws IOException
      */
@@ -122,10 +122,10 @@ public class AppStartController implements Initializable,
     private void handleSubmitPressed() throws IOException {
         if (isProfileCreated()) {
             FXMLLoader loader = new FXMLLoader(getClass()
-                    .getResource("../view/SourceReportScreen.fxml"));
+                    .getResource("../view/SubmitSourceReportScreen.fxml"));
             Stage stage = (Stage) submitButton.getScene().getWindow();
             Parent root = loader.load();
-            loader.<SourceReportController>getController().setUser(user);
+            loader.<SubmitSourceReportController>getController().setUser(user);
             stage.setScene(new Scene(root));
             stage.show();
         } else {
@@ -150,7 +150,7 @@ public class AppStartController implements Initializable,
                 .getResource("../view/SourceReportListScreen.fxml"));
         Stage stage = (Stage) profileButton.getScene().getWindow();
         Parent root = loader.load();
-        loader.<ReportChoiceController>getController().setUser(user);
+        loader.<SourceReportListController>getController().setUser(user);
         stage.setScene(new Scene(root));
         stage.show();
     }

@@ -74,7 +74,7 @@ public class ViewSourceReportController {
                 ("../view/SourceReportListScreen.fxml"));
         Stage stage = (Stage) backButton.getScene().getWindow();
         Parent root = loader.load();
-        loader.<ReportChoiceController>getController().setUser(user);
+        loader.<SourceReportListController>getController().setUser(user);
         stage.setScene(new Scene(root));
         stage.show();
     }

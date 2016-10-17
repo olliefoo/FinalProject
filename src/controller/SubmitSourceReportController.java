@@ -12,7 +12,7 @@ import javafx.event.EventHandler;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 
-public class SourceReportController {
+public class SubmitSourceReportController {
     @FXML
     private TextField reportDate;
 
