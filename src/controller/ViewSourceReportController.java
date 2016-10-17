@@ -41,19 +41,26 @@ public class ViewSourceReportController {
     private Button backButton;
 
     private User user;
+
     private SourceReport sourceReport;
 
+    public void setup(User u, SourceReport r) {
+        user = u;
+        sourceReport = r;
+        fillInformation();
+    }
+
     /**
-     *Fills in text boxes
+     *Fills the textboxes with the information from the source report.
      */
-    private void setUp () {
-        //reportDateField.setText(sourceReport.getDate());
-        //reportTimeField.setText(sourceReport.getTime());
-        //reportNumberField.setText(sourceReport.getNumber());
-        //reporterNameField.setText(sourceReport.getReporterName());
-        //waterLocationField.setText(sourceReport.getLocation());
-        //waterTypeField.setText(sourceReport.getType());
-        //waterCondField.setText(sourceReport.getCondition());
+    private void fillInformation () {
+        reportDateField.setText(sourceReport.getDate());
+        reportTimeField.setText(sourceReport.getTime());
+        reportNumberField.setText(Integer.toString(sourceReport.getNumber()));
+        reporterNameField.setText(sourceReport.getName());
+        waterLocationField.setText(sourceReport.getLocation());
+        waterTypeField.setText(sourceReport.getType());
+        waterCondField.setText(sourceReport.getCondition());
     }
 
     /**
@@ -68,7 +75,7 @@ public class ViewSourceReportController {
                 ("../view/SourceReportListScreen.fxml"));
         Stage stage = (Stage) backButton.getScene().getWindow();
         Parent root = loader.load();
-        //loader.<SourceReportListController>getController().setUser(user);
+        loader.<ReportChoiceController>getController().setUser(user);
         stage.setScene(new Scene(root));
         stage.show();
     }

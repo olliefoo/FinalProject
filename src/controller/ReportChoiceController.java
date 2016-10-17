@@ -33,8 +33,11 @@ public class ReportChoiceController {
     private Button returnButton;
 
     private ObservableList<String> showList = FXCollections.observableArrayList();
+
     private User user;
-    private Profile profile;
+
+    private int reportIndex;
+
     @FXML
     private void initialize() {
         if (ReportDatabase.size() != 0) {
@@ -44,10 +47,15 @@ public class ReportChoiceController {
             sourceList.setItems(showList);
         }
     }
+
     public void setUser(User u) {
         user = u;
-        profile = user.getProfile();
     }
+
+    private boolean isIndexValid() {
+        return(reportIndex > 0);
+    }
+
     @FXML
     private void handleReturnPressed() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppStartScreen.fxml"));
@@ -60,11 +68,21 @@ public class ReportChoiceController {
 
     @FXML
     private void handleViewPressed() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ViewSourceReportScreen.fxml"));
-        Stage stage = (Stage) chooseButton.getScene().getWindow();
-        Parent root = loader.load();
-        stage.setScene(new Scene(root));
-        stage.show();
+        reportIndex = sourceList.getSelectionModel().getSelectedIndex() + 1;
+        if (isIndexValid()) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ViewSourceReportScreen.fxml"));
+            Stage stage = (Stage) chooseButton.getScene().getWindow();
+            Parent root = loader.load();
+            loader.<ViewSourceReportController>getController().setup(user, ReportDatabase.getSourceReport(reportIndex));
+            stage.setScene(new Scene(root));
+            stage.show();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Access Denied");
+            alert.setHeaderText("No Report Selected");
+            alert.setContentText("Please select a report to view.");
+            alert.showAndWait();
+        }
     }
 
 }
