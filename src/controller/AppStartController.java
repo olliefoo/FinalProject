@@ -14,15 +14,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import model.SourceReport;
 import model.User;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class AppStartController implements Initializable, MapComponentInitializedListener {
+public class AppStartController implements Initializable,
+        MapComponentInitializedListener {
 
     private User user;
 
@@ -80,7 +79,8 @@ public class AppStartController implements Initializable, MapComponentInitialize
     @FXML
     private void handleLogoutPressed() throws IOException {
         Stage stage = (Stage) logoutButton.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("../view/WelcomeScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass()
+                .getResource("../view/WelcomeScreen.fxml"));
         stage.setScene(new Scene(root));
         stage.show();
     }
@@ -92,7 +92,8 @@ public class AppStartController implements Initializable, MapComponentInitialize
      */
     @FXML
     private void handleProfilePressed() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ProfileScreen.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass()
+                .getResource("../view/ProfileScreen.fxml"));
         Stage stage = (Stage) profileButton.getScene().getWindow();
         Parent root = loader.load();
         loader.<ProfileController>getController().setUser(user);
@@ -111,11 +112,17 @@ public class AppStartController implements Initializable, MapComponentInitialize
                 user.getProfile().getLastname() != null);
     }
 
-
+    /**
+     * Handles the "Submit Report" button press. When pressed, leads the user to
+     * the SourceReportScreen.
+     *
+     * @throws IOException
+     */
     @FXML
     private void handleSubmitPressed() throws IOException {
         if (isProfileCreated()) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/SourceReportScreen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass()
+                    .getResource("../view/SourceReportScreen.fxml"));
             Stage stage = (Stage) submitButton.getScene().getWindow();
             Parent root = loader.load();
             loader.<SourceReportController>getController().setUser(user);
@@ -131,9 +138,16 @@ public class AppStartController implements Initializable, MapComponentInitialize
         }
     }
 
+    /**
+     * Handles the "View Reports" button press. When pressed, leads the user to
+     * the ViewSourceReportScreen.
+     *
+     * @throws IOException
+     */
     @FXML
     private void handleViewPressed() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/SourceReportListScreen.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass()
+                .getResource("../view/SourceReportListScreen.fxml"));
         Stage stage = (Stage) profileButton.getScene().getWindow();
         Parent root = loader.load();
         loader.<ReportChoiceController>getController().setUser(user);

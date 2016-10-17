@@ -1,13 +1,11 @@
 package controller;
 
-import fxapp.MainFXApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import model.Database;
 import model.Profile;
 import model.User;
 
@@ -161,7 +159,8 @@ public class ProfileController {
     @FXML
     private void handleUpdatePressed() throws IOException {
         setValues();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppStartScreen.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass()
+                .getResource("../view/AppStartScreen.fxml"));
         Stage stage = (Stage) updateButton.getScene().getWindow();
         Parent root = loader.load();
         loader.<AppStartController>getController().setUser(user);

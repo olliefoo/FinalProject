@@ -112,7 +112,8 @@ public class LoginController {
         if (isInputValid()) {
             User user = Database.getUser(usernameField.getText());
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("../view/AppStartScreen.fxml"));
+            loader.setLocation(getClass()
+                    .getResource("../view/AppStartScreen.fxml"));
 
             if (accountBox.getValue().equals("WORKER")) {
                 user = Database.getWorker(usernameField.getText());
@@ -144,7 +145,8 @@ public class LoginController {
     @FXML
     private void handleCancelPressed() throws IOException {
             Stage stage = (Stage) cancel.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource("../view/WelcomeScreen.fxml"));
+            Parent root = FXMLLoader.load(getClass()
+                    .getResource("../view/WelcomeScreen.fxml"));
             stage.setScene(new Scene(root));
             stage.show();
     }

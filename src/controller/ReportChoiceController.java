@@ -1,7 +1,6 @@
 package controller;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,7 +29,8 @@ public class ReportChoiceController {
     @FXML
     private Button returnButton;
 
-    private ObservableList<String> showList = FXCollections.observableArrayList();
+    private ObservableList<String> showList
+            = FXCollections.observableArrayList();
 
     private User user;
 

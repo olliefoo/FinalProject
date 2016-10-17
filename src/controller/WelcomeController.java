@@ -7,7 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 /**
@@ -23,11 +22,6 @@ public class WelcomeController {
     @FXML
     private Button registerButton;
 
-    // set up link to the MainFXApplication
-    /*public void setMainApp(MainFXApplication mainFXApplication) {
-        mainApplication = mainFXApplication;
-    }*/
-
     /**
      * Handles Login button press. When pressed, leads the user to the
      * LoginScreen.
@@ -37,7 +31,8 @@ public class WelcomeController {
     @FXML
     private void handleLoginPressed() throws IOException {
             Stage stage = (Stage) loginButton.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource("../view/LoginScreen.fxml"));
+            Parent root = FXMLLoader.load(getClass()
+                    .getResource("../view/LoginScreen.fxml"));
             stage.setScene(new Scene(root));
             stage.show();
     }
@@ -51,7 +46,8 @@ public class WelcomeController {
     @FXML
     private void handleRegistrationPressed() throws IOException {
         Stage stage = (Stage) registerButton.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("../view/RegistrationScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass()
+                .getResource("../view/RegistrationScreen.fxml"));
         stage.setScene(new Scene(root));
         stage.show();
     }
