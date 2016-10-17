@@ -30,8 +30,7 @@ public class ReportChoiceController {
     @FXML
     private Button returnButton;
 
-    private ObservableList<String> showList =
-            FXCollections.observableArrayList();
+    private ObservableList<String> showList = FXCollections.observableArrayList();
 
     private User user;
 
@@ -47,8 +46,8 @@ public class ReportChoiceController {
             SourceReport temp;
             for (int i = 1; i <= ReportDatabase.size(); i++) {
                 temp = ReportDatabase.getSourceReport(i);
-                showList.add(String.format("Report #%d            %s, %s" +
-                        "            %s",
+                showList.add(String.format("Report #%d               %s, %s" +
+                        "               %s",
                         i, temp.getDate(), temp.getTime(), temp.getLocation()));
             }
             sourceList.setItems(showList);
