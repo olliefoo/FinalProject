@@ -94,6 +94,11 @@ public class AppStartController {
 
     @FXML
     private void handleViewPressed() throws IOException {
-
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/SourceReportListScreen.fxml"));
+        Stage stage = (Stage) profileButton.getScene().getWindow();
+        Parent root = loader.load();
+        loader.<ReportChoiceController>getController().setUser(user);
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }

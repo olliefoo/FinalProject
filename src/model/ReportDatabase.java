@@ -42,4 +42,8 @@ public class ReportDatabase {
     public static SourceReport getSourceReport() {
         return sourceReports.get(0);
     }
+
+    public static int size() {
+        return sourceReports.size();
+    }
 }
