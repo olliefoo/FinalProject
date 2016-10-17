@@ -11,13 +11,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-import model.Profile;
 import model.ReportDatabase;
 import model.SourceReport;
 import model.User;
-
 import java.io.IOException;
-import java.util.ArrayList;
+
 
 /**
  * Created by cbbjs on 10/8/2016.
@@ -32,7 +30,8 @@ public class ReportChoiceController {
     @FXML
     private Button returnButton;
 
-    private ObservableList<String> showList = FXCollections.observableArrayList();
+    private ObservableList<String> showList =
+            FXCollections.observableArrayList();
 
     private User user;
 
@@ -45,8 +44,12 @@ public class ReportChoiceController {
     @FXML
     private void initialize() {
         if (ReportDatabase.size() != 0) {
-            for (int i = 0; i < ReportDatabase.size(); i++) {
-                showList.add("Report #" + String.valueOf(i + 1));
+            SourceReport temp;
+            for (int i = 1; i <= ReportDatabase.size(); i++) {
+                temp = ReportDatabase.getSourceReport(i);
+                showList.add(String.format("Report #%d            %s, %s" +
+                        "            %s",
+                        i, temp.getDate(), temp.getTime(), temp.getLocation()));
             }
             sourceList.setItems(showList);
         }
@@ -61,8 +64,8 @@ public class ReportChoiceController {
     }
 
     /**
-     *  Checks to see if a report is selected before the user is taken to the
-     *  view source report page.
+     * Checks to see if a report is selected before the user is taken to the
+     * view source report page.
      * @return true if a report is selected, false otherwise
      */
     private boolean isIndexValid() {
@@ -76,7 +79,8 @@ public class ReportChoiceController {
      */
     @FXML
     private void handleReturnPressed() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppStartScreen.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass()
+                .getResource("../view/AppStartScreen.fxml"));
         Stage stage = (Stage) returnButton.getScene().getWindow();
         Parent root = loader.load();
         loader.<AppStartController>getController().setUser(user);
@@ -92,12 +96,15 @@ public class ReportChoiceController {
      */
     @FXML
     private void handleViewPressed() throws IOException {
+        // adds 1 to reportIndex because no selection is -1
         reportIndex = sourceList.getSelectionModel().getSelectedIndex() + 1;
         if (isIndexValid()) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ViewSourceReportScreen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass()
+                    .getResource("../view/ViewSourceReportScreen.fxml"));
             Stage stage = (Stage) chooseButton.getScene().getWindow();
             Parent root = loader.load();
-            loader.<ViewSourceReportController>getController().setup(user, ReportDatabase.getSourceReport(reportIndex));
+            loader.<ViewSourceReportController>getController()
+                    .setup(user, ReportDatabase.getSourceReport(reportIndex));
             stage.setScene(new Scene(root));
             stage.show();
         } else {
