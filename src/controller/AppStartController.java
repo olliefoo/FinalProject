@@ -1,7 +1,14 @@
 package controller;
 
+import com.lynden.gmapsfx.GoogleMapView;
+import com.lynden.gmapsfx.MapComponentInitializedListener;
+import com.lynden.gmapsfx.javascript.object.GoogleMap;
+import com.lynden.gmapsfx.javascript.object.LatLong;
+import com.lynden.gmapsfx.javascript.object.MapOptions;
+import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -11,9 +18,11 @@ import model.SourceReport;
 import model.User;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
-public class AppStartController {
+public class AppStartController implements Initializable, MapComponentInitializedListener {
 
     private User user;
 
@@ -29,8 +38,38 @@ public class AppStartController {
     @FXML
     private Button viewButton;
 
+    @FXML
+    private GoogleMapView mapView;
+
+    private GoogleMap map;
+
     public void setUser(User u) {
         user = u;
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        mapView.addMapInializedListener(this);
+    }
+
+    @Override
+    public void mapInitialized() {
+        MapOptions options = new MapOptions();
+
+        //set up the center location for the map
+        LatLong center = new LatLong(34, -88);
+
+        options.center(center)
+                .zoom(9)
+                .overviewMapControl(false)
+                .panControl(false)
+                .rotateControl(false)
+                .scaleControl(false)
+                .streetViewControl(false)
+                .zoomControl(false)
+                .mapType(MapTypeIdEnum.TERRAIN);
+
+        map = mapView.createMap(options);
     }
 
     /**
