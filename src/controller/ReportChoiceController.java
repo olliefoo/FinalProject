@@ -38,6 +38,10 @@ public class ReportChoiceController {
 
     private int reportIndex;
 
+    /**
+     * Generates the list of reports to be shown on the Source Report List
+     * screen.
+     */
     @FXML
     private void initialize() {
         if (ReportDatabase.size() != 0) {
@@ -48,14 +52,28 @@ public class ReportChoiceController {
         }
     }
 
+    /**
+     * Sets User to the user that navigated to the page.
+     * @param u user that navigated to page
+     */
     public void setUser(User u) {
         user = u;
     }
 
+    /**
+     *  Checks to see if a report is selected before the user is taken to the
+     *  view source report page.
+     * @return true if a report is selected, false otherwise
+     */
     private boolean isIndexValid() {
         return(reportIndex > 0);
     }
 
+    /**
+     * Handles the return button pressed. When pressed, user will be returned
+     * to the App start screen.
+     * @throws IOException
+     */
     @FXML
     private void handleReturnPressed() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppStartScreen.fxml"));
@@ -66,6 +84,12 @@ public class ReportChoiceController {
         stage.show();
     }
 
+    /**
+     * Handles the view button pressed. When pressed, the user will be taken
+     * to the View Report Screen to view the data of the report that was
+     * selected on the Source Report List Screen.
+     * @throws IOException
+     */
     @FXML
     private void handleViewPressed() throws IOException {
         reportIndex = sourceList.getSelectionModel().getSelectedIndex() + 1;
