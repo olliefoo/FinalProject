@@ -8,6 +8,9 @@ import java.util.ArrayList;
 public class ReportDatabase {
     private static ArrayList<SourceReport> sourceReports;
 
+    private static int numSource;
+    private static int numPurity;
+
     /**
      * Constructor to create a list of all source reports.
      */
@@ -23,6 +26,7 @@ public class ReportDatabase {
         if (r instanceof SourceReport) {
             sourceReports.add((SourceReport) r);
         }
+        numSource++;
     }
 
     /**
@@ -42,7 +46,7 @@ public class ReportDatabase {
         return sourceReports.get(0);
     }
 
-    public static int size() {
+    /*public static int size() {
         return sourceReports.size();
-    }
+    }*/
 }
