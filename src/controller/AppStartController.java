@@ -13,8 +13,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Manager;
 import model.User;
+import model.Worker;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -38,12 +42,42 @@ public class AppStartController implements Initializable,
     private Button viewButton;
 
     @FXML
+    private Button submitQualityButton;
+
+    @FXML
+    private Button viewQualityButton;
+
+    @FXML
+    private Text sourceText;
+
+    @FXML
+    private Text qualityText;
+
+    @FXML
     private GoogleMapView mapView;
 
     private GoogleMap map;
 
+    /**
+     * Sets the current user into the controller. Also sets the visibilities of
+     * certain buttons depending on the type of user.
+     * @param u the current user
+     */
     public void setUser(User u) {
         user = u;
+        sourceText.setVisible(false);
+        qualityText.setVisible(false);
+        submitQualityButton.setVisible(false);
+        viewQualityButton.setVisible(false);
+
+        if (user instanceof Worker || user instanceof Manager) {
+            sourceText.setVisible(true);
+            qualityText.setVisible(true);
+            submitQualityButton.setVisible(true);
+        }
+        if (user instanceof Manager) {
+            viewQualityButton.setVisible(true);
+        }
     }
 
     @Override
@@ -153,5 +187,15 @@ public class AppStartController implements Initializable,
         loader.<SourceReportListController>getController().setUser(user);
         stage.setScene(new Scene(root));
         stage.show();
+    }
+
+    @FXML
+    private void handleSubmitQualityPressed() throws IOException {
+
+    }
+
+    @FXML
+    private void handleViewQualityPressed() throws IOException {
+
     }
 }
