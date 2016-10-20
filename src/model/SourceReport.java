@@ -17,6 +17,8 @@ public class SourceReport {
     private String date;
     private String time;
     private String location;
+    private double latitude;
+    private double longitude;
 
     /**
      * Constructor for a new source report

@@ -42,9 +42,9 @@ public class SourceReportListController {
      */
     @FXML
     private void initialize() {
-        if (ReportDatabase.size() != 0) {
+        if (ReportDatabase.numSource() != 0) {
             SourceReport temp;
-            for (int i = 1; i <= ReportDatabase.size(); i++) {
+            for (int i = 1; i <= ReportDatabase.numSource(); i++) {
                 temp = ReportDatabase.getSourceReport(i);
                 showList.add(String.format("Report #%d               %s, %s" +
                         "               %s",
