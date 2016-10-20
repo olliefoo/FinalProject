@@ -8,17 +8,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
    <children>
-      <TextField fx:id="usernameField" layoutX="250.0" layoutY="119.0" prefWidth="200.0" promptText="Enter username" />
-      <PasswordField fx:id="passwordField" layoutX="250.0" layoutY="158.0" prefWidth="200.0" promptText="Enter password" />
-      <Button fx:id="login" layoutX="276.0" layoutY="242.0" mnemonicParsing="false" onAction="#handleLoginPressed" prefWidth="70.0" text="Login" />
-      <Button fx:id="cancel" layoutX="354.0" layoutY="242.0" mnemonicParsing="false" onAction="#handleCancelPressed" prefWidth="70.0" text="Cancel" textFill="RED" />
-      <ComboBox fx:id="accountBox" layoutX="250.0" layoutY="198.0" prefWidth="200.0" promptText="Choose Account Type" />
-      <Text fill="#040472" layoutX="304.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOGIN">
+      <TextField fx:id="usernameField" layoutX="230.0" layoutY="119.0" prefWidth="250.0" promptText="Enter username" />
+      <PasswordField fx:id="passwordField" layoutX="230.0" layoutY="160.0" prefWidth="250.0" promptText="Enter password" />
+      <Button fx:id="login" layoutX="230.0" layoutY="240.0" mnemonicParsing="false" onAction="#handleLoginPressed" prefWidth="120.0" text="Login" />
+      <Button fx:id="cancel" layoutX="360.0" layoutY="240.0" mnemonicParsing="false" onAction="#handleCancelPressed" prefWidth="120.0" text="Cancel" textFill="RED" />
+      <ComboBox fx:id="accountBox" layoutX="230.0" layoutY="200.0" prefWidth="250.0" promptText="Choose Account Type" />
+      <Text fill="#040472" layoutX="298.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOGIN">
          <font>
-            <Font name="Arial Black" size="26.0" />
+            <Font name="Arial Bold" size="36.0" />
          </font>
       </Text>
    </children>
