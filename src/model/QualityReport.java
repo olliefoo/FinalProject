@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Created by Owner on 10/20/2016.
  */
-public class PurityReport {
+public class QualityReport {
 
     private static int total = 0;
     private int number;
@@ -21,7 +21,7 @@ public class PurityReport {
     /**
      * Constructor for a new source report
      */
-    public PurityReport() {
+    public QualityReport() {
         total++;
         number = total;
         fullDate = new Date();

@@ -7,14 +7,14 @@ import java.util.ArrayList;
  */
 public class ReportDatabase {
     private static ArrayList<SourceReport> sourceReports;
-    private static ArrayList<PurityReport> purityReports;
+    private static ArrayList<QualityReport> qualityReports;
 
     /**
      * Constructor to create a list of all source reports.
      */
     public ReportDatabase() {
         sourceReports = new ArrayList<>(10);
-        purityReports = new ArrayList<>(10);
+        qualityReports = new ArrayList<>(10);
     }
 
     /**
@@ -24,8 +24,8 @@ public class ReportDatabase {
     public static void add(Object r) { //report class in future?
         if (r instanceof SourceReport) {
             sourceReports.add((SourceReport) r);
-        } else if (r instanceof PurityReport) {
-            purityReports.add((PurityReport) r);
+        } else if (r instanceof QualityReport) {
+            qualityReports.add((QualityReport) r);
         }
     }
 
@@ -43,8 +43,8 @@ public class ReportDatabase {
      * @param number the purity report number to be retrieved
      * @return purity report requested
      */
-    public static PurityReport getPurityReport(int number) {
-        return purityReports.get(number - 1);
+    public static QualityReport getPurityReport(int number) {
+        return qualityReports.get(number - 1);
     }
 
     /**
@@ -67,8 +67,8 @@ public class ReportDatabase {
      * Returns the size of the list of source reports
      * @return size of source report
      */
-    public static int numPurity() {
-        return purityReports.size();
+    public static int numQuality() {
+        return qualityReports.size();
     }
 
 }
