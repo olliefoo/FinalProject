@@ -59,6 +59,12 @@ public class SourceReport {
     public void setLocation(String location) {
         this.location = location;
     }
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
     public User getReporter() {
         return reporter;
     }
@@ -85,5 +91,11 @@ public class SourceReport {
     }
     public Date getFullDate() {
         return fullDate;
+    }
+    public double getLatitude() {
+        return latitude;
+    }
+    public double getLongitude() {
+        return longitude;
     }
 }

@@ -10,6 +10,7 @@ import model.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 
 public class SubmitSourceReportController {
@@ -27,6 +28,18 @@ public class SubmitSourceReportController {
 
     @FXML
     private TextField waterLocationField;
+
+    @FXML
+    private TextField latitudeField;
+
+    @FXML
+    private TextField longitudeField;
+
+    @FXML
+    private Slider latitudeSlider;
+
+    @FXML
+    private Slider longitudeSlider;
 
     @FXML
     private ComboBox<String> waterTypeCombo;
@@ -80,6 +93,17 @@ public class SubmitSourceReportController {
         waterConditionCombo.getItems().addAll("Waste", "Treatable-Clear",
                 "Treatable-Muddy", "Potable");
         waterConditionCombo.setValue("Waste");
+
+        latitudeSlider.setValue(0);
+        longitudeSlider.setValue(0);
+        latitudeField.setText(Double.toString(0));
+        longitudeField.setText(Double.toString(0));
+        latitudeField.textProperty().bindBidirectional(
+                latitudeSlider.valueProperty(),
+                NumberFormat.getNumberInstance());
+        longitudeField.textProperty().bindBidirectional(
+                longitudeSlider.valueProperty(),
+                NumberFormat.getNumberInstance());
     }
 
     /**
@@ -91,6 +115,9 @@ public class SubmitSourceReportController {
         //String number = reportNumber.getText();
         String name = reporterNameField.getText();
         String location = waterLocationField.getText();
+        double latitude = latitudeSlider.getValue();
+        double longitude = longitudeSlider.getValue();
+
 
         String type = waterTypeCombo.getValue();
         if (type.equals("Other")) {
@@ -105,6 +132,8 @@ public class SubmitSourceReportController {
         r.setLocation(location);
         r.setType(type);
         r.setCondition(condition);
+        r.setLatitude(latitude);
+        r.setLongitude(longitude);
     }
 
     /**
