@@ -87,7 +87,11 @@ public class AppStartController implements Initializable,
         MapOptions options = new MapOptions();
 
         //set up the center location for the map
-        LatLong center = new LatLong(34, -88);
+        LatLong center = new LatLong(33, -84);
+        if (ReportDatabase.numSource() != 0) {
+            SourceReport newest = ReportDatabase.getSourceReport(ReportDatabase.numSource());
+            center = new LatLong(newest.getLatitude(), newest.getLongitude());
+        }
 
         options.center(center)
                 .zoom(9)
@@ -103,20 +107,21 @@ public class AppStartController implements Initializable,
 
         //place markers on map
         if (ReportDatabase.numSource() != 0) {
-            SourceReport temp;
+            SourceReport currentReport;
             double lat;
             double lng;
             LatLong point;
             for (int i = 1; i <= ReportDatabase.numSource(); i++) {
                 MarkerOptions markerOptions = new MarkerOptions();
-                temp = ReportDatabase.getSourceReport(i);
-                lat = temp.getLatitude();
-                lng = temp.getLongitude();
+                currentReport = ReportDatabase.getSourceReport(i);
+                String description = currentReport.toString();
+                lat = currentReport.getLatitude();
+                lng = currentReport.getLongitude();
                 point = new LatLong(lat, lng);
 
                 markerOptions.position( point )
                         .visible(Boolean.TRUE)
-                        .title(temp.getLocation());
+                        .title(currentReport.getLocation());
 
                 Marker marker = new Marker( markerOptions );
 
@@ -124,9 +129,7 @@ public class AppStartController implements Initializable,
                         UIEventType.click,
                         (JSObject obj) -> {
                             InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
-                            /*infoWindowOptions.content(Integer.toString(temp
-                                    .getNumber()));*/
-
+                            infoWindowOptions.content(description);
                             InfoWindow window = new InfoWindow(infoWindowOptions);
                             window.open(map, marker);});
 

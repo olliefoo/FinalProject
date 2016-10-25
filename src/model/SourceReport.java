@@ -30,6 +30,16 @@ public class SourceReport {
     }
 
     /**
+     * Returns the string representation of the source report
+     * @return the string representing the report
+     */
+    public String toString() {
+        String string = "<h1>" + location + "<h2><br>Type of Water: " + type +
+                "<br>Condition of Water: " + condition;
+        return string;
+    }
+
+    /**
      * List of getters and setters for source report values.
      */
     public static int getTotal() {
