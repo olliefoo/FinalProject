@@ -2,6 +2,7 @@ package controller;
 
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.MapComponentInitializedListener;
+import com.lynden.gmapsfx.javascript.event.UIEventType;
 import com.lynden.gmapsfx.javascript.object.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.*;
+import netscape.javascript.JSObject;
 
 import java.io.IOException;
 import java.net.URL;
@@ -117,6 +119,17 @@ public class AppStartController implements Initializable,
                         .title(temp.getLocation());
 
                 Marker marker = new Marker( markerOptions );
+
+                map.addUIEventHandler(marker,
+                        UIEventType.click,
+                        (JSObject obj) -> {
+                            InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
+                            /*infoWindowOptions.content(Integer.toString(temp
+                                    .getNumber()));*/
+
+                            InfoWindow window = new InfoWindow(infoWindowOptions);
+                            window.open(map, marker);});
+
                 map.addMarker(marker);
 
             }
