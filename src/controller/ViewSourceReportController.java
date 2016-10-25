@@ -31,6 +31,12 @@ public class ViewSourceReportController {
     private TextField waterLocationField;
 
     @FXML
+    private TextField latField;
+
+    @FXML
+    private TextField longField;
+
+    @FXML
     private TextField waterTypeField;
 
     @FXML
@@ -60,6 +66,8 @@ public class ViewSourceReportController {
         waterLocationField.setText(sourceReport.getLocation());
         waterTypeField.setText(sourceReport.getType());
         waterCondField.setText(sourceReport.getCondition());
+        latField.setText(Double.toString(sourceReport.getLatitude()));
+        longField.setText(Double.toString(sourceReport.getLongitude()));
     }
 
     /**
