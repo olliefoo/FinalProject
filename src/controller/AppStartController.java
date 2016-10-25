@@ -2,10 +2,7 @@ package controller;
 
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.MapComponentInitializedListener;
-import com.lynden.gmapsfx.javascript.object.GoogleMap;
-import com.lynden.gmapsfx.javascript.object.LatLong;
-import com.lynden.gmapsfx.javascript.object.MapOptions;
-import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
+import com.lynden.gmapsfx.javascript.object.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,9 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import model.Manager;
-import model.User;
-import model.Worker;
+import model.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -103,6 +98,29 @@ public class AppStartController implements Initializable,
                 .mapType(MapTypeIdEnum.TERRAIN);
 
         map = mapView.createMap(options);
+
+        //place markers on map
+        if (ReportDatabase.numSource() != 0) {
+            SourceReport temp;
+            double lat;
+            double lng;
+            LatLong point;
+            for (int i = 1; i <= ReportDatabase.numSource(); i++) {
+                MarkerOptions markerOptions = new MarkerOptions();
+                temp = ReportDatabase.getSourceReport(i);
+                lat = temp.getLatitude();
+                lng = temp.getLongitude();
+                point = new LatLong(lat, lng);
+
+                markerOptions.position( point )
+                        .visible(Boolean.TRUE)
+                        .title(temp.getLocation());
+
+                Marker marker = new Marker( markerOptions );
+                map.addMarker(marker);
+
+            }
+        }
     }
 
     /**
