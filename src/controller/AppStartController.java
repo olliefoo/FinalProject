@@ -82,6 +82,10 @@ public class AppStartController implements Initializable,
         mapView.addMapInializedListener(this);
     }
 
+    /**
+     * Initializes the map and markers for the bodies of water submitted
+     * through the submit water source report page.
+     */
     @Override
     public void mapInitialized() {
         MapOptions options = new MapOptions();
@@ -225,7 +229,22 @@ public class AppStartController implements Initializable,
 
     @FXML
     private void handleSubmitQualityPressed() throws IOException {
-
+        if (isProfileCreated()) {
+            FXMLLoader loader = new FXMLLoader(getClass()
+                    .getResource("../view/SubmitQualityReportScreen.fxml"));
+            Stage stage = (Stage) submitButton.getScene().getWindow();
+            Parent root = loader.load();
+            loader.<SubmitQualityReportController>getController().setUser(user);
+            stage.setScene(new Scene(root));
+            stage.show();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Access Denied");
+            alert.setHeaderText("Please Edit Profile");
+            alert.setContentText("Please edit your profile first to proceed." +
+                    "Need first name and last name.");
+            alert.showAndWait();
+        }
     }
 
     @FXML
