@@ -70,8 +70,8 @@ public class ViewQualityReportController {
         conditionField.setText(qualityReport.getCondition());
         latField.setText(Double.toString(qualityReport.getLatitude()));
         longField.setText(Double.toString(qualityReport.getLongitude()));
-        virusField.setText(Double.toString(qualityReport.getVirus()));
-        virusField.setText(Double.toString(qualityReport.getContaminant()));
+        virusField.setText(qualityReport.getVirus());
+        contaminantField.setText(qualityReport.getContaminant());
     }
 
     /**

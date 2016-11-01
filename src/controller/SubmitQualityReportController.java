@@ -126,7 +126,8 @@ public class SubmitQualityReportController {
         String location = waterLocationField.getText();
         double latitude = latitudeSlider.getValue();
         double longitude = longitudeSlider.getValue();
-
+        String virus = virusField.getText();
+        String cont = contaminantField.getText();
 
 
         String condition = conditionCombo.getValue();
@@ -138,6 +139,8 @@ public class SubmitQualityReportController {
         r.setCondition(condition);
         r.setLatitude(latitude);
         r.setLongitude(longitude);
+        r.setVirus(virus);
+        r.setContaminent(cont);
     }
 
     /**
