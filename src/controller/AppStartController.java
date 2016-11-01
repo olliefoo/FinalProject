@@ -96,6 +96,10 @@ public class AppStartController implements Initializable,
             SourceReport newest = ReportDatabase.getSourceReport(ReportDatabase.numSource());
             center = new LatLong(newest.getLatitude(), newest.getLongitude());
         }
+        if (ReportDatabase.numQuality() != 0) {
+            QualityReport newest = ReportDatabase.getPurityReport(ReportDatabase.numQuality());
+            center = new LatLong(newest.getLatitude(), newest.getLongitude());
+        }
 
         options.center(center)
                 .zoom(9)
@@ -118,6 +122,38 @@ public class AppStartController implements Initializable,
             for (int i = 1; i <= ReportDatabase.numSource(); i++) {
                 MarkerOptions markerOptions = new MarkerOptions();
                 currentReport = ReportDatabase.getSourceReport(i);
+                String description = currentReport.toString();
+                lat = currentReport.getLatitude();
+                lng = currentReport.getLongitude();
+                point = new LatLong(lat, lng);
+
+                markerOptions.position( point )
+                        .visible(Boolean.TRUE)
+                        .title(currentReport.getLocation());
+
+                Marker marker = new Marker( markerOptions );
+
+                map.addUIEventHandler(marker,
+                        UIEventType.click,
+                        (JSObject obj) -> {
+                            InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
+                            infoWindowOptions.content(description);
+                            InfoWindow window = new InfoWindow(infoWindowOptions);
+                            window.open(map, marker);});
+
+                map.addMarker(marker);
+
+            }
+        }
+        //place purity marker
+        if (ReportDatabase.numQuality() != 0) {
+            QualityReport currentReport;
+            double lat;
+            double lng;
+            LatLong point;
+            for (int i = 1; i <= ReportDatabase.numQuality(); i++) {
+                MarkerOptions markerOptions = new MarkerOptions();
+                currentReport = ReportDatabase.getPurityReport(i);
                 String description = currentReport.toString();
                 lat = currentReport.getLatitude();
                 lng = currentReport.getLongitude();
