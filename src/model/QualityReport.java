@@ -18,8 +18,8 @@ public class QualityReport {
     private String time;
     private double latitude;
     private double longitude;
-    private double virus;
-    private double contaminant;
+    private String virus;
+    private String contaminant;
 
     /**
      * Constructor for a new source report
@@ -99,11 +99,11 @@ public class QualityReport {
     public double getLongitude() {
         return longitude;
     }
-    public void setVirus(double virus) {this.virus = virus;}
-    public void setContaminent(double contaminent) {this.contaminant =
+    public void setVirus(String virus) {this.virus = virus;}
+    public void setContaminent(String contaminent) {this.contaminant =
             contaminent; }
-    public double getVirus() {return virus; }
-    public double getContaminant() {return contaminant; }
+    public String getVirus() {return virus; }
+    public String getContaminant() {return contaminant; }
 
 
 }
