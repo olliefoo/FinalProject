@@ -39,7 +39,7 @@ public class QualityReportListController {
     private int reportIndex;
 
     /**
-     * Generates the list of reports to be shown on the Source Report List
+     * Generates the list of reports to be shown on the Quality Report List
      * screen.
      */
     @FXML
@@ -92,7 +92,7 @@ public class QualityReportListController {
     /**
      * Handles the view button pressed. When pressed, the user will be taken
      * to the View Report Screen to view the data of the report that was
-     * selected on the Source Report List Screen.
+     * selected on the Quality Report List Screen.
      * @throws IOException
      */
     @FXML

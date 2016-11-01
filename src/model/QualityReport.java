@@ -29,7 +29,15 @@ public class QualityReport {
         number = total;
         fullDate = new Date();
     }
-
+    /**
+     * Returns the string representation of the quality report
+     * @return the string representing the report
+     */
+    public String toString() {
+        String string = "<h1>" + location + "<h2><br>Virus PPM: " + virus +
+                "<br>Contaminant Level: " + contaminant;
+        return string;
+    }
     /**
      * List of getters and setters for source report values.
      */

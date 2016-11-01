@@ -96,6 +96,10 @@ public class AppStartController implements Initializable,
             SourceReport newest = ReportDatabase.getSourceReport(ReportDatabase.numSource());
             center = new LatLong(newest.getLatitude(), newest.getLongitude());
         }
+        if (ReportDatabase.numQuality() != 0) {
+            QualityReport newest = ReportDatabase.getPurityReport(ReportDatabase.numQuality());
+            center = new LatLong(newest.getLatitude(), newest.getLongitude());
+        }
 
         options.center(center)
                 .zoom(9)
@@ -126,6 +130,38 @@ public class AppStartController implements Initializable,
                 markerOptions.position( point )
                         .visible(Boolean.TRUE)
                         .title(currentReport.getLocation());
+
+                Marker marker = new Marker( markerOptions );
+
+                map.addUIEventHandler(marker,
+                        UIEventType.click,
+                        (JSObject obj) -> {
+                            InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
+                            infoWindowOptions.content(description);
+                            InfoWindow window = new InfoWindow(infoWindowOptions);
+                            window.open(map, marker);});
+
+                map.addMarker(marker);
+
+            }
+        }
+        //place markers on map
+        if (ReportDatabase.numQuality() != 0) {
+            QualityReport currentReport1;
+            double lat;
+            double lng;
+            LatLong point;
+            for (int i = 1; i <= ReportDatabase.numQuality(); i++) {
+                MarkerOptions markerOptions = new MarkerOptions();
+                currentReport1 = ReportDatabase.getPurityReport(i);
+                String description = currentReport1.toString();
+                lat = currentReport1.getLatitude();
+                lng = currentReport1.getLongitude();
+                point = new LatLong(lat, lng);
+
+                markerOptions.position( point )
+                        .visible(Boolean.TRUE)
+                        .title(currentReport1.getLocation());
 
                 Marker marker = new Marker( markerOptions );
 
