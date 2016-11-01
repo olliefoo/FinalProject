@@ -148,8 +148,17 @@ public class SubmitQualityReportController {
         String errorMessage = "";
 
         String location = waterLocationField.getText();
-
-
+        String virus = virusField.getText();
+        String contamin = contaminantField.getText();
+        if (virus.length() == 0) {
+            errorMessage += "Please enter a Virus PPM value.\n";
+        }
+        if (contamin.length() == 0) {
+            errorMessage += "Please enter a contamination value.\n";
+        }
+        if (location.length() == 0) {
+            errorMessage += "Please enter a location.\n";
+        }
         //no error message means success / good input
         if (errorMessage.length() == 0) {
             return true;
