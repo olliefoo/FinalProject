@@ -44,9 +44,9 @@ public class QualityReportListController {
      */
     @FXML
     private void initialize() {
-        if (ReportDatabase.numSource() != 0) {
+        if (ReportDatabase.numQuality() != 0) {
             QualityReport temp;
-            for (int i = 1; i <= ReportDatabase.numSource(); i++) {
+            for (int i = 1; i <= ReportDatabase.numQuality(); i++) {
                 temp = ReportDatabase.getPurityReport(i);
                 showList.add(String.format("Report #%d               %s, %s" +
                                 "               %s",

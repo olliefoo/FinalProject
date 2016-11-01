@@ -253,7 +253,7 @@ public class AppStartController implements Initializable,
                 .getResource("../view/QualityReportListScreen.fxml"));
         Stage stage = (Stage) profileButton.getScene().getWindow();
         Parent root = loader.load();
-        loader.<SourceReportListController>getController().setUser(user);
+        loader.<QualityReportListController>getController().setUser(user);
         stage.setScene(new Scene(root));
         stage.show();
     }
