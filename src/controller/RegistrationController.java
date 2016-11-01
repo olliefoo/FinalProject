@@ -147,4 +147,8 @@ public class RegistrationController {
         stage.setScene(new Scene(root));
         stage.show();
     }
+
+    @FXML private void handleLoginPressed() {
+
+    }
 }

@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.*;
@@ -51,6 +52,9 @@ public class AppStartController implements Initializable,
     private Text qualityText;
 
     @FXML
+    private Rectangle workerRect;
+
+    @FXML
     private GoogleMapView mapView;
 
     private GoogleMap map;
@@ -62,12 +66,14 @@ public class AppStartController implements Initializable,
      */
     public void setUser(User u) {
         user = u;
-        sourceText.setVisible(false);
+        //sourceText.setVisible(false);
         qualityText.setVisible(false);
         submitQualityButton.setVisible(false);
         viewQualityButton.setVisible(false);
+        workerRect.setVisible(false);
 
         if (user instanceof Worker || user instanceof Manager) {
+            workerRect.setVisible(true);
             sourceText.setVisible(true);
             qualityText.setVisible(true);
             submitQualityButton.setVisible(true);
