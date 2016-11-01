@@ -249,6 +249,12 @@ public class AppStartController implements Initializable,
 
     @FXML
     private void handleViewQualityPressed() throws IOException {
-
+        FXMLLoader loader = new FXMLLoader(getClass()
+                .getResource("../view/QualityReportListScreen.fxml"));
+        Stage stage = (Stage) profileButton.getScene().getWindow();
+        Parent root = loader.load();
+        loader.<SourceReportListController>getController().setUser(user);
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }
