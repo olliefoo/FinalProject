@@ -148,7 +148,15 @@ public class RegistrationController {
         stage.show();
     }
 
-    @FXML private void handleLoginPressed() {
-
+    /**
+     * Leads the user to the login screen when the Sign In link is pressed
+     * @throws IOException
+     */
+    @FXML private void handleLoginPressed() throws IOException {
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass()
+                .getResource("../view/LoginScreen.fxml"));
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }
