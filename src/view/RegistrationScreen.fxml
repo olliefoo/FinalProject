@@ -40,7 +40,7 @@
                   <Insets right="5.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="16.0" />
+                  <Font name="Arial Bold" size="16.0" />
                </font>
             </Label>
             <Label layoutX="10.0" layoutY="45.0" text="Username*" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
@@ -51,7 +51,7 @@
                   <Insets right="5.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="16.0" />
+                  <Font name="Arial Bold" size="16.0" />
                </font>
             </Label>
             <Label layoutX="10.0" layoutY="75.0" text="Password*" GridPane.halignment="LEFT" GridPane.rowIndex="6" GridPane.valignment="BOTTOM">
@@ -62,7 +62,7 @@
                   <Insets right="5.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="16.0" />
+                  <Font name="Arial Bold" size="16.0" />
                </font>
             </Label>
             <Label layoutX="10.0" layoutY="105.0" text="Re-enter Password*" GridPane.halignment="LEFT" GridPane.rowIndex="8" GridPane.valignment="BOTTOM">
@@ -73,7 +73,7 @@
                   <Insets right="5.0" />
                </padding>
                <font>
-                  <Font name="Arial" size="16.0" />
+                  <Font name="Arial Bold" size="16.0" />
                </font>
             </Label>
             <TextField fx:id="emailField" layoutX="243.0" layoutY="52.0" minWidth="320.0" prefHeight="35.0" GridPane.halignment="LEFT" GridPane.hgrow="NEVER" GridPane.rowIndex="3" GridPane.vgrow="NEVER">
@@ -104,7 +104,7 @@
                   <Insets />
                </GridPane.margin>
                <font>
-                  <Font name="Arial" size="16.0" />
+                  <Font name="Arial Bold" size="16.0" />
                </font>
             </Label>
             <ComboBox fx:id="choiceBox" prefHeight="35.0" prefWidth="150.0" promptText="- Select One -" GridPane.halignment="LEFT" GridPane.rowIndex="1">
@@ -126,7 +126,7 @@
       </Button>
       <Hyperlink fx:id="loginLink" layoutX="281.0" layoutY="500.0" onAction="#handleLoginPressed" text="Sign In">
          <font>
-            <Font name="Arial" size="16.0" />
+            <Font name="Arial Bold" size="16.0" />
          </font>
       </Hyperlink>
       <Text layoutX="152.0" layoutY="520.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Have an account?">
