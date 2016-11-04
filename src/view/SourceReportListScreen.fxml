@@ -10,11 +10,11 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SourceReportListController">
    <children>
       <VBox layoutX="50.0" layoutY="63.0" prefHeight="370.0" prefWidth="600.0" />
-      <Button fx:id="chooseButton" layoutX="300.0" layoutY="459.0" mnemonicParsing="false" onAction="#handleViewPressed" prefWidth="100.0" style="-fx-background-color: #008fff;" text="View" textFill="WHITE">
+      <Button fx:id="chooseButton" layoutX="586.0" layoutY="459.0" mnemonicParsing="false" onAction="#handleViewPressed" prefWidth="100.0" style="-fx-background-color: #008fff;" text="View" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font></Button>
-      <Button fx:id="returnButton" layoutX="586.0" layoutY="459.0" mnemonicParsing="false" onAction="#handleReturnPressed" prefWidth="100.0" style="-fx-background-color: red;" text="Return" textFill="WHITE">
+      <Button fx:id="returnButton" layoutX="14.0" layoutY="459.0" mnemonicParsing="false" onAction="#handleReturnPressed" prefWidth="100.0" style="-fx-background-color: red;" text="Return" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font></Button>

@@ -182,6 +182,13 @@ public class SubmitSourceReportController {
         if (isInputValid()) {
             setReportValues();
             ReportDatabase.add(r);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            //alert.setTitle("Invalid Fields");
+            alert.setHeaderText("Thank you for submitting a report.");
+            //alert.setContentText("Thank you for submitting a report.");
+            alert.showAndWait();
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppStartScreen.fxml"));
             Stage stage = (Stage) submitSourceButton.getScene().getWindow();
             Parent root = loader.load();
