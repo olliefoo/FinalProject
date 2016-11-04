@@ -6,9 +6,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.ReportDatabase;
 import model.SourceReport;
@@ -23,14 +22,29 @@ public class SourceReportListController {
     @FXML
     private Button chooseButton;
 
+    //@FXML
+    //private ListView<String> sourceList;
+
     @FXML
-    private ListView<String> sourceList;
+    TableView table;
+
+    @FXML
+    TableColumn numberCol;
+
+    @FXML
+    TableColumn locationCol;
+
+    @FXML
+    TableColumn dateCol;
+
+    @FXML
+    TableColumn userCol;
 
     @FXML
     private Button returnButton;
 
-    private ObservableList<String> showList
-            = FXCollections.observableArrayList();
+    /*private ObservableList<String> showList
+            = FXCollections.observableArrayList();*/
 
     private User user;
 
@@ -43,14 +57,27 @@ public class SourceReportListController {
     @FXML
     private void initialize() {
         if (ReportDatabase.numSource() != 0) {
-            SourceReport temp;
+            ObservableList<SourceReport> list
+                    = FXCollections.observableArrayList();
+            SourceReport report;
+            for (int i = 1; i <= ReportDatabase.numSource(); i++) {
+                report = ReportDatabase.getSourceReport(i);
+                list.add(report);
+            }
+
+            numberCol.setCellValueFactory(new PropertyValueFactory<SourceReport, String>("reportNumber"));
+            locationCol.setCellValueFactory(new PropertyValueFactory<SourceReport, String>("location"));
+            dateCol.setCellValueFactory(new PropertyValueFactory<SourceReport, String>("date"));
+            userCol.setCellValueFactory(new PropertyValueFactory<SourceReport, String>("username"));
+            table.setItems(list);
+            /*SourceReport temp;
             for (int i = 1; i <= ReportDatabase.numSource(); i++) {
                 temp = ReportDatabase.getSourceReport(i);
                 showList.add(String.format("Report #%d               %s, %s" +
                         "               %s",
                         i, temp.getDate(), temp.getTime(), temp.getLocation()));
-            }
-            sourceList.setItems(showList);
+            }*/
+            //sourceList.setItems(showList);
         }
     }
 
@@ -96,7 +123,7 @@ public class SourceReportListController {
     @FXML
     private void handleViewPressed() throws IOException {
         // adds 1 to reportIndex because no selection is -1
-        reportIndex = sourceList.getSelectionModel().getSelectedIndex() + 1;
+        reportIndex = table.getSelectionModel().getSelectedIndex() + 1;
         if (isIndexValid()) {
             FXMLLoader loader = new FXMLLoader(getClass()
                     .getResource("../view/ViewSourceReportScreen.fxml"));

@@ -246,8 +246,7 @@ public class AppStartController implements Initializable,
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Access Denied");
             alert.setHeaderText("Please Edit Profile");
-            alert.setContentText("Please edit your profile first to proceed." +
-                    "Need first name and last name.");
+            alert.setContentText("Please edit your profile first to proceed.");
             alert.showAndWait();
         }
     }
