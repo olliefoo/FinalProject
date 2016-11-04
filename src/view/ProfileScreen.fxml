@@ -199,9 +199,9 @@
             </ButtonBar>
          </children>
       </GridPane>
-      <Label layoutX="109.0" layoutY="25.0" text="USER PROFILE" textFill="WHITE">
+      <Label layoutX="137.0" layoutY="22.0" text="USER PROFILE" textFill="WHITE">
          <font>
-            <Font name="Calibri Light" size="50.0" />
+            <Font name="Calibri Light" size="40.0" />
          </font>
       </Label>
    </children>
