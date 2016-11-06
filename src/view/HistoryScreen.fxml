@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#008fff" height="90.0" stroke="#008fff" strokeType="INSIDE" width="600.0" />
+      <LineChart layoutX="50.0" layoutY="100.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </LineChart>
+      <ComboBox layoutX="108.0" layoutY="500.0" prefHeight="35.0" prefWidth="150.0" promptText="PPM" />
+      <ComboBox layoutX="108.0" layoutY="546.0" prefHeight="35.0" prefWidth="150.0" promptText="Year" />
+      <Button fx:id="viewButton" layoutX="394.0" layoutY="546.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" text="View">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="returnButton" layoutX="394.0" layoutY="500.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: red;" text="Return" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
