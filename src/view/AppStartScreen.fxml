@@ -38,6 +38,11 @@
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font></Button>
+      <Button fx:id="historyButton" layoutX="14.0" layoutY="504.0" mnemonicParsing="false" onAction="#handleHistoryPressed" prefHeight="35.0" prefWidth="125.0" style="-fx-background-color: white;" text="View Trends" textFill="#013650">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+      </Button>
       <Text fx:id="qualityText" fill="#013046" layoutX="6.0" layoutY="393.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WATER QUALITY">
          <font>
             <Font name="Calibri" size="20.0" />

@@ -46,6 +46,9 @@ public class AppStartController implements Initializable,
     private Button viewQualityButton;
 
     @FXML
+    private Button historyButton;
+
+    @FXML
     private Text sourceText;
 
     @FXML
@@ -71,6 +74,7 @@ public class AppStartController implements Initializable,
         submitQualityButton.setVisible(false);
         viewQualityButton.setVisible(false);
         workerRect.setVisible(false);
+        historyButton.setVisible(false);
 
         if (user instanceof Worker || user instanceof Manager) {
             workerRect.setVisible(true);
@@ -80,6 +84,7 @@ public class AppStartController implements Initializable,
         }
         if (user instanceof Manager) {
             viewQualityButton.setVisible(true);
+            historyButton.setVisible(true);
         }
     }
 
@@ -268,6 +273,10 @@ public class AppStartController implements Initializable,
         stage.show();
     }
 
+    /**
+     * When pressed, leads the user to the SubmitQualityReport Screen.
+     * @throws IOException
+     */
     @FXML
     private void handleSubmitQualityPressed() throws IOException {
         if (isProfileCreated()) {
@@ -288,6 +297,10 @@ public class AppStartController implements Initializable,
         }
     }
 
+    /**
+     * When pressed, leads the user to view the list of quality reports
+     * @throws IOException
+     */
     @FXML
     private void handleViewQualityPressed() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass()
@@ -297,5 +310,14 @@ public class AppStartController implements Initializable,
         loader.<QualityReportListController>getController().setUser(user);
         stage.setScene(new Scene(root));
         stage.show();
+    }
+
+    /**
+     * When pressed, leads the user to view the historical report
+     * @throws IOException
+     */
+    @FXML
+    private void handleHistoryPressed() throws  IOException {
+
     }
 }
