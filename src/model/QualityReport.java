@@ -1,11 +1,12 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Owner on 10/20/2016.
  */
-public class QualityReport {
+public class QualityReport implements Serializable {
 
     private static int total = 0;
     private int number;

@@ -9,13 +9,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.ReportDatabase;
 
-import java.io.IOException;
+import java.io.*;
 
 public class MainFXApplication extends Application {
 
     // Creates a single instance of the database classes
-    public static final Database database = new Database();
-    public static final ReportDatabase reportDatabase = new ReportDatabase();
+    public static Database database = new Database();
+    public static ReportDatabase reportDatabase = new ReportDatabase();
     private Stage mainStage;
     private Parent rootLayout;
 
@@ -46,6 +46,29 @@ public class MainFXApplication extends Application {
 
 
     public static void main(String[] args) {
-        launch(args);
+        String fileName = "data.bin";
+        try {
+            ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(fileName));
+            os.writeObject(database);
+            os.writeObject(reportDatabase);
+            os.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            ObjectInputStream is = new ObjectInputStream(new FileInputStream(fileName));
+            database = (Database) is.readObject();
+            reportDatabase = (ReportDatabase) is.readObject();
+            is.close();
+        } catch (FileNotFoundException e){
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    launch(args);
     }
 }

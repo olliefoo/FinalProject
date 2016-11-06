@@ -2,12 +2,13 @@ package model;
 
 import javafx.beans.property.SimpleStringProperty;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Owner on 10/6/2016.
  */
-public class SourceReport {
+public class SourceReport implements Serializable {
 
     private static int total = 0;
 
