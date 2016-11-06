@@ -1,11 +1,12 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Kijana on 10/11/2016.
  */
-public class ReportDatabase {
+public class ReportDatabase implements Serializable {
     private static ArrayList<SourceReport> sourceReports;
     private static ArrayList<QualityReport> qualityReports;
 

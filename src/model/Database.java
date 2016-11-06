@@ -1,11 +1,12 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Owner on 10/2/2016.
  */
-public class Database {
+public class Database implements Serializable {
     private static ArrayList<User> users;
     private static ArrayList<Worker> workers;
     private static ArrayList<Manager> managers;
