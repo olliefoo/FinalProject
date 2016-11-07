@@ -266,7 +266,7 @@ public class AppStartController implements Initializable,
     private void handleViewPressed() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass()
                 .getResource("../view/SourceReportListScreen.fxml"));
-        Stage stage = (Stage) profileButton.getScene().getWindow();
+        Stage stage = (Stage) viewButton.getScene().getWindow();
         Parent root = loader.load();
         loader.<SourceReportListController>getController().setUser(user);
         stage.setScene(new Scene(root));
@@ -282,7 +282,7 @@ public class AppStartController implements Initializable,
         if (isProfileCreated()) {
             FXMLLoader loader = new FXMLLoader(getClass()
                     .getResource("../view/SubmitQualityReportScreen.fxml"));
-            Stage stage = (Stage) submitButton.getScene().getWindow();
+            Stage stage = (Stage) submitQualityButton.getScene().getWindow();
             Parent root = loader.load();
             loader.<SubmitQualityReportController>getController().setUser(user);
             stage.setScene(new Scene(root));
@@ -305,7 +305,7 @@ public class AppStartController implements Initializable,
     private void handleViewQualityPressed() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass()
                 .getResource("../view/QualityReportListScreen.fxml"));
-        Stage stage = (Stage) profileButton.getScene().getWindow();
+        Stage stage = (Stage) viewQualityButton.getScene().getWindow();
         Parent root = loader.load();
         loader.<QualityReportListController>getController().setUser(user);
         stage.setScene(new Scene(root));
@@ -318,6 +318,12 @@ public class AppStartController implements Initializable,
      */
     @FXML
     private void handleHistoryPressed() throws  IOException {
-
+        FXMLLoader loader = new FXMLLoader(getClass()
+                .getResource("../view/HistoryScreen.fxml"));
+        Stage stage = (Stage) historyButton.getScene().getWindow();
+        Parent root = loader.load();
+        loader.<HistoryController>getController().setUser(user);
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }

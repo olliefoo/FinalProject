@@ -2,7 +2,7 @@
   <library name="com.lynden:GMapsFX:2.0.9" type="repository">
     <properties maven-id="com.lynden:GMapsFX:2.0.9" />
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/com/lynden/GMapsFX/2.0.9/GMapsFX-2.0.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/GMapsFX-2.0.9.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
