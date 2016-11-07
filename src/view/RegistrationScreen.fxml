@@ -107,7 +107,7 @@
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Label>
-            <ComboBox fx:id="choiceBox" prefHeight="35.0" prefWidth="150.0" promptText="- Select One -" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+            <ComboBox fx:id="choiceBox" prefHeight="35.0" prefWidth="150.0" promptText="- Select One -" style="-fx-font-family: Arial; -fx-font-weight: bold;" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets right="35.0" />
                </GridPane.margin>

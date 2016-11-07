@@ -22,7 +22,7 @@
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font></Button>
-      <ComboBox fx:id="accountBox" layoutX="90.0" layoutY="113.0" prefHeight="35.0" prefWidth="320.0" promptText="- Account Type - " />
+      <ComboBox fx:id="accountBox" layoutX="90.0" layoutY="118.0" prefHeight="35.0" prefWidth="320.0" promptText="- Account Type - " style="-fx-font-family: Arial; -fx-font-weight: bold;" />
       <Text fill="WHITE" layoutX="185.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOGIN">
          <font>
             <Font name="Calibri Light" size="50.0" />

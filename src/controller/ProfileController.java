@@ -62,6 +62,10 @@ public class ProfileController {
     private User user;
     private Profile profile;
 
+    /**
+     * Sets the current user in the controller
+     * @param u
+     */
     public void setUser(User u) {
         user = u;
         profile = user.getProfile();
@@ -94,8 +98,8 @@ public class ProfileController {
         yearField.setValue(profile.getYear());
 
         monthField.getItems().addAll(
-                "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep",
-                "Oct", "Nov", "Dec"
+                "January", "February", "March", "April", "May", "June", "July",
+                "August", "September", "October", "November", "December"
         );
 
         dayField.getItems().addAll(
