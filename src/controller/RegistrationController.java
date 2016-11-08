@@ -36,6 +36,9 @@ public class RegistrationController {
     @FXML
     private Button cancelButton;
 
+    @FXML
+    private Hyperlink loginLink;
+
     /**
      * Method to initialize the registration page. Mainly used
      * to make sure the combo box have choices, and the User to be
@@ -153,7 +156,7 @@ public class RegistrationController {
      * @throws IOException
      */
     @FXML private void handleLoginPressed() throws IOException {
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        Stage stage = (Stage) loginLink.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass()
                 .getResource("../view/LoginScreen.fxml"));
         stage.setScene(new Scene(root));
