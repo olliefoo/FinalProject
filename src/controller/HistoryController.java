@@ -77,7 +77,7 @@ public class HistoryController {
         xAxis.setCategories(monthNames);
 
         TreeSet<String> locations = new TreeSet<>();
-        for(QualityReport r : ReportDatabase.getInstance().getQualityReports()) {
+        for(QualityReport r : ReportDatabase.getQualityReports()) {
             locations.add(r.getLocation());
         }
         /*String[] locations = new String [QualityReport.getTotal()];
@@ -94,7 +94,7 @@ public class HistoryController {
         ppmBox.getItems().addAll(ppmType);
 
         TreeSet<String> years = new TreeSet<>();
-        for(QualityReport r : ReportDatabase.getInstance().getQualityReports()) {
+        for(QualityReport r : ReportDatabase.getQualityReports()) {
             years.add(r.getYear());
         }
         yearBox.getItems().addAll(years);
@@ -106,35 +106,43 @@ public class HistoryController {
      */
     @FXML
     private void handleViewPressed() throws IOException {
-        ArrayList<QualityReport> locationList = new ArrayList<>(10);
-        ArrayList<QualityReport> yearList = new ArrayList<>(10);
+        if(isInputValid()) {
+            // Can only view one line at a time. Every time press view button,
+            // delete old line.
+            graph.getData().clear();
 
-        //adds the reports with the specified location to the list
-        for (QualityReport r : ReportDatabase.getInstance().getQualityReports()) {
-            if(r.getLocation().equals(locationBox.getValue())) {
-                locationList.add(r);
+            ArrayList<QualityReport> locationList = new ArrayList<>(10);
+            ArrayList<QualityReport> yearList = new ArrayList<>(10);
+
+            //adds the reports with the specified location to the list
+            for (QualityReport r : ReportDatabase.getQualityReports()) {
+                if (r.getLocation().equals(locationBox.getValue())) {
+                    locationList.add(r);
+                }
             }
+
+            //adds the reports from the locationList with the specified year
+            for (QualityReport r : locationList) {
+                if ((r.getYear().equals(yearBox.getValue()))) {
+                    yearList.add(r);
+                }
+            }
+
+            XYChart.Series series = new XYChart.Series();
+            if (ppmBox.getValue().equals("Virus")) {
+                for (QualityReport r : yearList) {
+                    series.getData().add(new XYChart.Data(r.getMonth(), r.getVirus()));
+                }
+                series.setName(locationBox.getValue() + ", " + yearBox.getValue() + ", Virus PPM");
+            } else if (ppmBox.getValue().equals("Contaminant")) {
+                for (QualityReport r : yearList) {
+                    series.getData().add(new XYChart.Data(r.getMonth(), r.getContaminant()));
+                }
+                series.setName(locationBox.getValue() + ", " + yearBox.getValue() + ", Contaminant PPM");
+            }
+
+            graph.getData().add(series);
         }
-
-        //adds the reports from the locationList with the specified year
-        for (QualityReport r : locationList) {
-            if((r.getYear().equals(yearBox.getValue()))) {
-                yearList.add(r);
-            }
-        }
-
-        XYChart.Series series = new XYChart.Series();
-        if(ppmBox.getValue().equals("Virus")) {
-            for (QualityReport r : yearList) {
-                series.getData().add(new XYChart.Data(r.getMonth(), r.getVirus()));
-            }
-        } else if (ppmBox.getValue().equals("Contaminant")) {
-            for (QualityReport r : yearList) {
-                series.getData().add(new XYChart.Data(r.getMonth(), r.getContaminant()));
-            }
-        }
-
-        graph.getData().add(series);
     }
 
     /**
@@ -152,7 +160,15 @@ public class HistoryController {
         stage.show();
     }
 
+    /**
+     * Checks whether the combobox values are selected
+     */
+    private boolean isInputValid() {
 
+        // not working correctly. choosing just location and ppm works but should not
+        return (locationBox.getValue() != null && ppmBox.getValue() != null
+                && yearBox.getItems() != null);
+    }
 
 
 
