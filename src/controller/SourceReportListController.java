@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -13,12 +14,14 @@ import model.ReportDatabase;
 import model.SourceReport;
 import model.User;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
 /**
  * Created by cbbjs on 10/8/2016.
  */
-public class SourceReportListController {
+public class SourceReportListController{
     @FXML
     private Button chooseButton;
 
@@ -50,18 +53,19 @@ public class SourceReportListController {
 
     private int reportIndex;
 
+
     /**
      * Generates the list of reports to be shown on the Source Report List
      * screen.
      */
     @FXML
     private void initialize() {
-        if (ReportDatabase.numSource() != 0) {
+        if (ReportDatabase.getInstance().numSource() != 0) {
             ObservableList<SourceReport> list
                     = FXCollections.observableArrayList();
             SourceReport report;
-            for (int i = 1; i <= ReportDatabase.numSource(); i++) {
-                report = ReportDatabase.getSourceReport(i);
+            for (int i = 1; i <= ReportDatabase.getInstance().numSource(); i++) {
+                report = ReportDatabase.getInstance().getSourceReport(i);
                 list.add(report);
             }
 
@@ -130,7 +134,7 @@ public class SourceReportListController {
             Stage stage = (Stage) chooseButton.getScene().getWindow();
             Parent root = loader.load();
             loader.<ViewSourceReportController>getController()
-                    .setup(user, ReportDatabase.getSourceReport(reportIndex));
+                    .setup(user, ReportDatabase.getInstance().getSourceReport(reportIndex));
             stage.setScene(new Scene(root));
             stage.show();
         } else {

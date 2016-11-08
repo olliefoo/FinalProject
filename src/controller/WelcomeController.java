@@ -7,6 +7,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import model.Database;
+
 import java.io.IOException;
 
 /**
@@ -30,6 +32,7 @@ public class WelcomeController {
      */
     @FXML
     private void handleLoginPressed() throws IOException {
+            Database.loadAll();
             Stage stage = (Stage) loginButton.getScene().getWindow();
             Parent root = FXMLLoader.load(getClass()
                     .getResource("../view/LoginScreen.fxml"));
@@ -45,6 +48,7 @@ public class WelcomeController {
      */
     @FXML
     private void handleRegistrationPressed() throws IOException {
+        Database.loadAll();
         Stage stage = (Stage) registerButton.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass()
                 .getResource("../view/RegistrationScreen.fxml"));

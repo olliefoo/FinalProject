@@ -1,6 +1,7 @@
 package model;
 
-import java.io.Serializable;
+import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -40,7 +41,42 @@ public class Database implements Serializable {
             users.add(u);
         }
     }
-
+    public static void saveAll()  {
+        try {
+            try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("all.bin"))) {
+                out.writeObject(users);
+                out.writeObject(workers);
+                out.writeObject(managers);
+                out.writeObject(admins);
+                out.writeObject(usernameList);
+                out.writeObject(emailList);
+            }
+        } catch (IOException ex) {
+            ex.getStackTrace();
+        }
+    }
+    public static void loadAll()  {
+        try {
+            try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("all.bin"))) {
+                ArrayList<User> uL = (ArrayList<User>) in.readObject();
+                ArrayList<Worker> wL = (ArrayList<Worker>) in.readObject();
+                ArrayList<Manager> mL = (ArrayList<Manager>) in.readObject();
+                ArrayList<Admin> aL = (ArrayList<Admin>) in.readObject();
+                ArrayList<String> usL = (ArrayList<String>) in.readObject();
+                ArrayList<String> eL = (ArrayList<String>) in.readObject();
+                users = uL;
+                workers = wL;
+                managers = mL;
+                admins = aL;
+                usernameList = usL;
+                emailList = eL;
+            }
+        } catch (IOException ex) {
+            ex.getStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.getStackTrace();
+        }
+    }
     /**
      * Adds the username to the username list
      *

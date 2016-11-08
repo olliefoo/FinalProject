@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 import model.Database;
+import model.ReportDatabase;
 import model.User;
 
 public class LoginController {
@@ -107,6 +108,8 @@ public class LoginController {
     @FXML
     private void handleLoginPressed() throws IOException {
         if (isInputValid()) {
+            ReportDatabase.getInstance().loadSource();
+            ReportDatabase.getInstance().loadQuality();
             User user = Database.getUser(usernameField.getText());
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass()

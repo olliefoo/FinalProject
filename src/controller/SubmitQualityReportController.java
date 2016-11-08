@@ -189,7 +189,8 @@ public class SubmitQualityReportController {
     private void handleReportSubmitPressed() throws IOException {
         if (isInputValid()) {
             setReportValues();
-            ReportDatabase.add(r);
+            ReportDatabase.getInstance().add(r);
+            ReportDatabase.getInstance().saveQuality();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppStartScreen.fxml"));
             Stage stage = (Stage) submitPurityButton.getScene().getWindow();
             Parent root = loader.load();

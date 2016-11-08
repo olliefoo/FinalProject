@@ -100,15 +100,14 @@ public class AppStartController implements Initializable,
     @Override
     public void mapInitialized() {
         MapOptions options = new MapOptions();
-
         //set up the center location for the map
         LatLong center = new LatLong(33, -84);
-        if (ReportDatabase.numSource() != 0) {
-            SourceReport newest = ReportDatabase.getSourceReport(ReportDatabase.numSource());
+        if (ReportDatabase.getInstance().numSource() != 0) {
+            SourceReport newest = ReportDatabase.getInstance().getSourceReport(ReportDatabase.getInstance().numSource());
             center = new LatLong(newest.getLatitude(), newest.getLongitude());
         }
-        if (ReportDatabase.numQuality() != 0) {
-            QualityReport newest = ReportDatabase.getPurityReport(ReportDatabase.numQuality());
+        if (ReportDatabase.getInstance().numQuality() != 0) {
+            QualityReport newest = ReportDatabase.getInstance().getPurityReport(ReportDatabase.getInstance().numQuality());
             center = new LatLong(newest.getLatitude(), newest.getLongitude());
         }
 
@@ -125,14 +124,14 @@ public class AppStartController implements Initializable,
         map = mapView.createMap(options);
 
         //place markers on map
-        if (ReportDatabase.numSource() != 0) {
+        if (ReportDatabase.getInstance().numSource() != 0) {
             SourceReport currentReport;
             double lat;
             double lng;
             LatLong point;
-            for (int i = 1; i <= ReportDatabase.numSource(); i++) {
+            for (int i = 1; i <= ReportDatabase.getInstance().numSource(); i++) {
                 MarkerOptions markerOptions = new MarkerOptions();
-                currentReport = ReportDatabase.getSourceReport(i);
+                currentReport = ReportDatabase.getInstance().getSourceReport(i);
                 String description = currentReport.toString();
                 lat = currentReport.getLatitude();
                 lng = currentReport.getLongitude();
@@ -157,14 +156,14 @@ public class AppStartController implements Initializable,
             }
         }
         //place purity marker
-        if (ReportDatabase.numQuality() != 0) {
+        if (ReportDatabase.getInstance().numQuality() != 0) {
             QualityReport currentReport;
             double lat;
             double lng;
             LatLong point;
-            for (int i = 1; i <= ReportDatabase.numQuality(); i++) {
+            for (int i = 1; i <= ReportDatabase.getInstance().numQuality(); i++) {
                 MarkerOptions markerOptions = new MarkerOptions();
-                currentReport = ReportDatabase.getPurityReport(i);
+                currentReport = ReportDatabase.getInstance().getPurityReport(i);
                 String description = currentReport.toString();
                 lat = currentReport.getLatitude();
                 lng = currentReport.getLongitude();

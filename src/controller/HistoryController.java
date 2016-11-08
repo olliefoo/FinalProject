@@ -77,7 +77,7 @@ public class HistoryController {
         xAxis.setCategories(monthNames);
 
         TreeSet<String> locations = new TreeSet<>();
-        for(QualityReport r : ReportDatabase.getQualityReports()) {
+        for(QualityReport r : ReportDatabase.getInstance().getQualityReports()) {
             locations.add(r.getLocation());
         }
         /*String[] locations = new String [QualityReport.getTotal()];
@@ -94,7 +94,7 @@ public class HistoryController {
         ppmBox.getItems().addAll(ppmType);
 
         TreeSet<String> years = new TreeSet<>();
-        for(QualityReport r : ReportDatabase.getQualityReports()) {
+        for(QualityReport r : ReportDatabase.getInstance().getQualityReports()) {
             years.add(r.getYear());
         }
         yearBox.getItems().addAll(years);
@@ -110,7 +110,7 @@ public class HistoryController {
         ArrayList<QualityReport> yearList = new ArrayList<>(10);
 
         //adds the reports with the specified location to the list
-        for (QualityReport r : ReportDatabase.getQualityReports()) {
+        for (QualityReport r : ReportDatabase.getInstance().getQualityReports()) {
             if(r.getLocation().equals(locationBox.getValue())) {
                 locationList.add(r);
             }

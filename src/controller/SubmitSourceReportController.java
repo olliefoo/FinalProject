@@ -1,7 +1,9 @@
 package controller;
 
+import fxapp.MainFXApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -10,8 +12,10 @@ import model.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import java.io.IOException;
+import java.net.URL;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.ResourceBundle;
 
 public class SubmitSourceReportController {
     @FXML
@@ -181,8 +185,8 @@ public class SubmitSourceReportController {
     private void handleReportSubmitPressed() throws IOException {
         if (isInputValid()) {
             setReportValues();
-            ReportDatabase.add(r);
-
+            ReportDatabase.getInstance().add(r);
+            ReportDatabase.getInstance().saveSource();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             //alert.setTitle("Invalid Fields");
             alert.setHeaderText("Thank you for submitting a report.");
@@ -213,4 +217,5 @@ public class SubmitSourceReportController {
         stage.setScene(new Scene(root));
         stage.show();
     }
+
 }

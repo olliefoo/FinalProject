@@ -125,10 +125,9 @@ public class RegistrationController {
                         password1Field.getText(), emailField.getText()));
                 //MainFXApplication.userList.add(newAdmin);
             }
-
             Database.addEmail(emailField.getText());
             Database.addUsername(usernameField.getText());
-
+            Database.saveAll();
             Stage stage = (Stage) registerButton.getScene().getWindow();
             Parent root = FXMLLoader.load(getClass()
                     .getResource("../view/WelcomeScreen.fxml"));
