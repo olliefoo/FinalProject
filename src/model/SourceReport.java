@@ -12,10 +12,10 @@ public class SourceReport implements Serializable {
 
     private static int total = 0;
 
-    private final SimpleStringProperty reportNumber;
+    /*private final SimpleStringProperty reportNumber;
     private SimpleStringProperty date = new SimpleStringProperty();
     private SimpleStringProperty location = new SimpleStringProperty();
-    private SimpleStringProperty username = new SimpleStringProperty();
+    private SimpleStringProperty username = new SimpleStringProperty();*/
 
     private int number;
     private Date fullDate;
@@ -23,9 +23,9 @@ public class SourceReport implements Serializable {
     private String name;
     private String type;
     private String condition;
-    //private String date;
+    private String date;
     private String time;
-    //private String location;
+    private String location;
     private double latitude;
     private double longitude;
 
@@ -35,7 +35,7 @@ public class SourceReport implements Serializable {
     public SourceReport() {
         total++;
         number = total;
-        reportNumber = new SimpleStringProperty(Integer.toString(number));
+        //reportNumber = new SimpleStringProperty(Integer.toString(number));
         fullDate = new Date();
     }
 
@@ -60,7 +60,7 @@ public class SourceReport implements Serializable {
     }
     public void setReporter(User u) {
         this.reporter = u;
-        username = new SimpleStringProperty(reporter.getUsername());
+        //username = new SimpleStringProperty(reporter.getUsername());
     }
     public void setName(String name) {
         this.name = name;
@@ -75,10 +75,12 @@ public class SourceReport implements Serializable {
         this.time = time;
     }
     public void setDate(String date) {
-        this.date = new SimpleStringProperty(date);
+        //this.date = new SimpleStringProperty(date);
+        this.date = date;
     }
     public void setLocation(String location) {
-        this.location = new SimpleStringProperty(location);
+        //this.location = new SimpleStringProperty(location);
+        this.location = location;
     }
     public void setLatitude(double latitude) {
         this.latitude = latitude;
@@ -86,8 +88,12 @@ public class SourceReport implements Serializable {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
+    public int getNumber() {
+        return number;
+    }
     public String getUsername() {
-        return username.get();
+        //return username.get();
+        return reporter.getUsername();
     }
     public String getName() {
         return name;
@@ -102,13 +108,10 @@ public class SourceReport implements Serializable {
         return time;
     }
     public String getDate() {
-        return date.get();
+        return date;
     }
     public String getLocation() {
-        return location.get();
-    }
-    public String getReportNumber() {
-        return reportNumber.get();
+        return location;
     }
     public Date getFullDate() {
         return fullDate;

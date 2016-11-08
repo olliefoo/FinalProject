@@ -83,7 +83,7 @@ public class SubmitSourceReportController {
         reporterNameField.setText(profile.getFirstname() + " "
                 + profile.getLastname());
 
-        reportNumber.setText("" + Integer.parseInt(r.getReportNumber()));
+        reportNumber.setText("" + r.getNumber());
 
         SimpleDateFormat ft1 = new SimpleDateFormat("E MM/dd/yyyy");
         SimpleDateFormat ft2 = new SimpleDateFormat("h:mm a");
