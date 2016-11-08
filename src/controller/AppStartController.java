@@ -107,7 +107,7 @@ public class AppStartController implements Initializable,
             center = new LatLong(newest.getLatitude(), newest.getLongitude());
         }
         if (ReportDatabase.getInstance().numQuality() != 0) {
-            QualityReport newest = ReportDatabase.getInstance().getPurityReport(ReportDatabase.getInstance().numQuality());
+            QualityReport newest = ReportDatabase.getInstance().getQualityReport(ReportDatabase.getInstance().numQuality());
             center = new LatLong(newest.getLatitude(), newest.getLongitude());
         }
 
@@ -163,7 +163,7 @@ public class AppStartController implements Initializable,
             LatLong point;
             for (int i = 1; i <= ReportDatabase.getInstance().numQuality(); i++) {
                 MarkerOptions markerOptions = new MarkerOptions();
-                currentReport = ReportDatabase.getInstance().getPurityReport(i);
+                currentReport = ReportDatabase.getInstance().getQualityReport(i);
                 String description = currentReport.toString();
                 lat = currentReport.getLatitude();
                 lng = currentReport.getLongitude();

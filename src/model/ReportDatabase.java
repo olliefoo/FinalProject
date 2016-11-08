@@ -66,6 +66,7 @@ public class ReportDatabase{
             try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("source.bin"))) {
                 ArrayList<SourceReport> srl = (ArrayList<SourceReport>) in.readObject();
                 sourceReports = srl;
+                SourceReport.setTotal(getSourceReport(numSource()).getNumber());
             }
         } catch (IOException ex) {
             ex.getStackTrace();
@@ -83,6 +84,7 @@ public class ReportDatabase{
             try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("quality.bin"))) {
                 ArrayList<QualityReport> qrl = (ArrayList<QualityReport>) in.readObject();
                 qualityReports = qrl;
+                QualityReport.setTotal((getQualityReport(numQuality()).getNumber()));
             }
         } catch (IOException ex) {
             ex.getStackTrace();
@@ -100,11 +102,11 @@ public class ReportDatabase{
     }
 
     /**
-     * Returns the purity report specified by number
-     * @param number the purity report number to be retrieved
-     * @return purity report requested
+     * Returns the quality report specified by number
+     * @param number the quality report number to be retrieved
+     * @return quality report requested
      */
-    public QualityReport getPurityReport(int number) {
+    public QualityReport getQualityReport(int number) {
         return qualityReports.get(number - 1);
     }
 
