@@ -24,6 +24,7 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.TreeSet;
 
 /**
  * Created by Owner on 11/6/2016.
@@ -75,18 +76,28 @@ public class HistoryController {
         monthNames.addAll(Arrays.asList(months));
         xAxis.setCategories(monthNames);
 
-        String[] locations = new String [QualityReport.getTotal()];
+        TreeSet<String> locations = new TreeSet<>();
+        for(QualityReport r : ReportDatabase.getQualityReports()) {
+            locations.add(r.getLocation());
+        }
+        /*String[] locations = new String [QualityReport.getTotal()];
         if (ReportDatabase.numQuality() != 0) {
             QualityReport temp;
             for (int i = 1; i <= ReportDatabase.numQuality(); i++) {
                 temp = ReportDatabase.getPurityReport(i);
                 locations[i - 1] = temp.getLocation();
             }
-        }
+        }*/
         locationBox.getItems().addAll(locations);
 
-        String[] corv = {"Contaminant" , "Virus"};
-        ppmBox.getItems().addAll(corv);
+        String[] ppmType = {"Contaminant" , "Virus"};
+        ppmBox.getItems().addAll(ppmType);
+
+        TreeSet<String> years = new TreeSet<>();
+        for(QualityReport r : ReportDatabase.getQualityReports()) {
+            years.add(r.getYear());
+        }
+        yearBox.getItems().addAll(years);
     }
 
     /**
@@ -117,7 +128,7 @@ public class HistoryController {
             for (QualityReport r : yearList) {
                 series.getData().add(new XYChart.Data(r.getMonth(), r.getVirus()));
             }
-        } else if (ppmBox.getValue().equals("contaminant")) {
+        } else if (ppmBox.getValue().equals("Contaminant")) {
             for (QualityReport r : yearList) {
                 series.getData().add(new XYChart.Data(r.getMonth(), r.getContaminant()));
             }
