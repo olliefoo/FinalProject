@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -107,5 +108,13 @@ public class QualityReport implements Serializable {
     public double getVirus() {return virus; }
     public double getContaminant() {return contaminant; }
 
+    public String getYear() {
+        SimpleDateFormat yr = new SimpleDateFormat("yyyy");
+        return yr.format(fullDate);
+    }
 
+    public String getMonth() {
+        SimpleDateFormat mn = new SimpleDateFormat("MMM");
+        return mn.format(fullDate);
+    }
 }
