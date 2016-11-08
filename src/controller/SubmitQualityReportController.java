@@ -139,8 +139,8 @@ public class SubmitQualityReportController {
         r.setCondition(condition);
         r.setLatitude(latitude);
         r.setLongitude(longitude);
-        r.setVirus(virus);
-        r.setContaminent(cont);
+        r.setVirus(Double.parseDouble(virus));
+        r.setContaminent(Double.parseDouble(cont));
     }
 
     /**
