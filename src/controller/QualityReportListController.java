@@ -47,7 +47,7 @@ public class QualityReportListController {
         if (ReportDatabase.getInstance().numQuality() != 0) {
             QualityReport temp;
             for (int i = 1; i <= ReportDatabase.getInstance().numQuality(); i++) {
-                temp = ReportDatabase.getInstance().getPurityReport(i);
+                temp = ReportDatabase.getInstance().getQualityReport(i);
                 showList.add(String.format("Report #%d               %s, %s" +
                                 "               %s",
                         i, temp.getDate(), temp.getTime(), temp.getLocation()));
@@ -105,7 +105,7 @@ public class QualityReportListController {
             Stage stage = (Stage) chooseButton.getScene().getWindow();
             Parent root = loader.load();
             loader.<ViewQualityReportController>getController()
-                    .setup(user, ReportDatabase.getInstance().getPurityReport(reportIndex));
+                    .setup(user, ReportDatabase.getInstance().getQualityReport(reportIndex));
             stage.setScene(new Scene(root));
             stage.show();
         } else {
