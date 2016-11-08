@@ -30,6 +30,10 @@ public class ReportDatabase{
             qualityReports.add((QualityReport) r);
         }
     }
+
+    /**
+     * saves the submitted source report to the report database
+     */
     public void saveSource()  {
         try {
             try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("source.bin"))) {
@@ -39,6 +43,10 @@ public class ReportDatabase{
             ex.getStackTrace();
         }
     }
+
+    /**
+     * saves the submitted quality report to the report database
+     */
     public void saveQuality()  {
         try {
             try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("quality.bin"))) {
@@ -48,6 +56,11 @@ public class ReportDatabase{
             ex.getStackTrace();
         }
     }
+
+    /**
+     * loads the source reports from the report database and puts them into
+     * the app
+     */
     public void loadSource()  {
         try {
             try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("source.bin"))) {
@@ -60,6 +73,11 @@ public class ReportDatabase{
             ex.getStackTrace();
         }
     }
+
+    /**
+     * loads the quality reports from the report database and puts them into
+     * the app
+     */
     public void loadQuality()  {
         try {
             try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("quality.bin"))) {

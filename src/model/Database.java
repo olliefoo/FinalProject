@@ -41,6 +41,10 @@ public class Database implements Serializable {
             users.add(u);
         }
     }
+
+    /**
+     * saves all of the users that have registered an account
+     */
     public static void saveAll()  {
         try {
             try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("all.bin"))) {
@@ -55,6 +59,10 @@ public class Database implements Serializable {
             ex.getStackTrace();
         }
     }
+
+    /**
+     * loads all of the users that have registered an account
+     */
     public static void loadAll()  {
         try {
             try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("all.bin"))) {
