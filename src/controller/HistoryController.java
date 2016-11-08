@@ -9,15 +9,20 @@ import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
+
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
+
+
 import model.QualityReport;
 import model.ReportDatabase;
-import model.SourceReport;
 import model.User;
 
 import java.io.IOException;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -80,7 +85,7 @@ public class HistoryController {
         }
         locationBox.getItems().addAll(locations);
 
-        String[] corv = {"Contaminent" , "Virus"};
+        String[] corv = {"Contaminant" , "Virus"};
         ppmBox.getItems().addAll(corv);
     }
 
@@ -90,7 +95,35 @@ public class HistoryController {
      */
     @FXML
     private void handleViewPressed() throws IOException {
+        ArrayList<QualityReport> locationList = new ArrayList<>(10);
+        ArrayList<QualityReport> yearList = new ArrayList<>(10);
 
+        //adds the reports with the specified location to the list
+        for (QualityReport r : ReportDatabase.getQualityReports()) {
+            if(r.getLocation().equals(locationBox.getValue())) {
+                locationList.add(r);
+            }
+        }
+
+        //adds the reports from the locationList with the specified year
+        for (QualityReport r : locationList) {
+            if((r.getYear().equals(yearBox.getValue()))) {
+                yearList.add(r);
+            }
+        }
+
+        XYChart.Series series = new XYChart.Series();
+        if(ppmBox.getValue().equals("Virus")) {
+            for (QualityReport r : yearList) {
+                series.getData().add(new XYChart.Data(r.getMonth(), r.getVirus()));
+            }
+        } else if (ppmBox.getValue().equals("contaminant")) {
+            for (QualityReport r : yearList) {
+                series.getData().add(new XYChart.Data(r.getMonth(), r.getContaminant()));
+            }
+        }
+
+        graph.getData().add(series);
     }
 
     /**
