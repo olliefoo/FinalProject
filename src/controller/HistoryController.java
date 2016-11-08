@@ -12,6 +12,9 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
+import model.QualityReport;
+import model.ReportDatabase;
+import model.SourceReport;
 import model.User;
 
 import java.io.IOException;
@@ -66,6 +69,19 @@ public class HistoryController {
                 "Aug", "Sep", "Oct", "Nov", "Dec"};
         monthNames.addAll(Arrays.asList(months));
         xAxis.setCategories(monthNames);
+
+        String[] locations = new String [QualityReport.getTotal()];
+        if (ReportDatabase.numQuality() != 0) {
+            QualityReport temp;
+            for (int i = 1; i <= ReportDatabase.numQuality(); i++) {
+                temp = ReportDatabase.getPurityReport(i);
+                locations[i - 1] = temp.getLocation();
+            }
+        }
+        locationBox.getItems().addAll(locations);
+
+        String[] corv = {"Contaminent" , "Virus"};
+        ppmBox.getItems().addAll(corv);
     }
 
     /**
