@@ -9,13 +9,22 @@ import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
+
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
+
+
+import model.QualityReport;
+import model.ReportDatabase;
 import model.User;
 
 import java.io.IOException;
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.TreeSet;
 
 /**
  * Created by Owner on 11/6/2016.
@@ -66,6 +75,29 @@ public class HistoryController {
                 "Aug", "Sep", "Oct", "Nov", "Dec"};
         monthNames.addAll(Arrays.asList(months));
         xAxis.setCategories(monthNames);
+
+        TreeSet<String> locations = new TreeSet<>();
+        for(QualityReport r : ReportDatabase.getQualityReports()) {
+            locations.add(r.getLocation());
+        }
+        /*String[] locations = new String [QualityReport.getTotal()];
+        if (ReportDatabase.numQuality() != 0) {
+            QualityReport temp;
+            for (int i = 1; i <= ReportDatabase.numQuality(); i++) {
+                temp = ReportDatabase.getPurityReport(i);
+                locations[i - 1] = temp.getLocation();
+            }
+        }*/
+        locationBox.getItems().addAll(locations);
+
+        String[] ppmType = {"Contaminant" , "Virus"};
+        ppmBox.getItems().addAll(ppmType);
+
+        TreeSet<String> years = new TreeSet<>();
+        for(QualityReport r : ReportDatabase.getQualityReports()) {
+            years.add(r.getYear());
+        }
+        yearBox.getItems().addAll(years);
     }
 
     /**
@@ -74,7 +106,35 @@ public class HistoryController {
      */
     @FXML
     private void handleViewPressed() throws IOException {
+        ArrayList<QualityReport> locationList = new ArrayList<>(10);
+        ArrayList<QualityReport> yearList = new ArrayList<>(10);
 
+        //adds the reports with the specified location to the list
+        for (QualityReport r : ReportDatabase.getQualityReports()) {
+            if(r.getLocation().equals(locationBox.getValue())) {
+                locationList.add(r);
+            }
+        }
+
+        //adds the reports from the locationList with the specified year
+        for (QualityReport r : locationList) {
+            if((r.getYear().equals(yearBox.getValue()))) {
+                yearList.add(r);
+            }
+        }
+
+        XYChart.Series series = new XYChart.Series();
+        if(ppmBox.getValue().equals("Virus")) {
+            for (QualityReport r : yearList) {
+                series.getData().add(new XYChart.Data(r.getMonth(), r.getVirus()));
+            }
+        } else if (ppmBox.getValue().equals("Contaminant")) {
+            for (QualityReport r : yearList) {
+                series.getData().add(new XYChart.Data(r.getMonth(), r.getContaminant()));
+            }
+        }
+
+        graph.getData().add(series);
     }
 
     /**

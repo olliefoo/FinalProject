@@ -72,4 +72,11 @@ public class ReportDatabase implements Serializable {
         return qualityReports.size();
     }
 
+    /**
+     * Gets the list of quality reports
+     * @return
+     */
+    public static ArrayList<QualityReport> getQualityReports() {
+        return qualityReports;
+    }
 }
