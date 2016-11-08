@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.*;
@@ -45,10 +46,16 @@ public class AppStartController implements Initializable,
     private Button viewQualityButton;
 
     @FXML
+    private Button historyButton;
+
+    @FXML
     private Text sourceText;
 
     @FXML
     private Text qualityText;
+
+    @FXML
+    private Rectangle workerRect;
 
     @FXML
     private GoogleMapView mapView;
@@ -62,18 +69,22 @@ public class AppStartController implements Initializable,
      */
     public void setUser(User u) {
         user = u;
-        sourceText.setVisible(false);
+        //sourceText.setVisible(false);
         qualityText.setVisible(false);
         submitQualityButton.setVisible(false);
         viewQualityButton.setVisible(false);
+        workerRect.setVisible(false);
+        historyButton.setVisible(false);
 
         if (user instanceof Worker || user instanceof Manager) {
+            workerRect.setVisible(true);
             sourceText.setVisible(true);
             qualityText.setVisible(true);
             submitQualityButton.setVisible(true);
         }
         if (user instanceof Manager) {
             viewQualityButton.setVisible(true);
+            historyButton.setVisible(true);
         }
     }
 
@@ -145,23 +156,23 @@ public class AppStartController implements Initializable,
 
             }
         }
-        //place markers on map
+        //place purity marker
         if (ReportDatabase.numQuality() != 0) {
-            QualityReport currentReport1;
+            QualityReport currentReport;
             double lat;
             double lng;
             LatLong point;
             for (int i = 1; i <= ReportDatabase.numQuality(); i++) {
                 MarkerOptions markerOptions = new MarkerOptions();
-                currentReport1 = ReportDatabase.getPurityReport(i);
-                String description = currentReport1.toString();
-                lat = currentReport1.getLatitude();
-                lng = currentReport1.getLongitude();
+                currentReport = ReportDatabase.getPurityReport(i);
+                String description = currentReport.toString();
+                lat = currentReport.getLatitude();
+                lng = currentReport.getLongitude();
                 point = new LatLong(lat, lng);
 
                 markerOptions.position( point )
                         .visible(Boolean.TRUE)
-                        .title(currentReport1.getLocation());
+                        .title(currentReport.getLocation());
 
                 Marker marker = new Marker( markerOptions );
 
@@ -240,8 +251,7 @@ public class AppStartController implements Initializable,
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Access Denied");
             alert.setHeaderText("Please Edit Profile");
-            alert.setContentText("Please edit your profile first to proceed." +
-                    "Need first name and last name.");
+            alert.setContentText("Please edit your profile first to proceed.");
             alert.showAndWait();
         }
     }
@@ -256,19 +266,23 @@ public class AppStartController implements Initializable,
     private void handleViewPressed() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass()
                 .getResource("../view/SourceReportListScreen.fxml"));
-        Stage stage = (Stage) profileButton.getScene().getWindow();
+        Stage stage = (Stage) viewButton.getScene().getWindow();
         Parent root = loader.load();
         loader.<SourceReportListController>getController().setUser(user);
         stage.setScene(new Scene(root));
         stage.show();
     }
 
+    /**
+     * When pressed, leads the user to the SubmitQualityReport Screen.
+     * @throws IOException
+     */
     @FXML
     private void handleSubmitQualityPressed() throws IOException {
         if (isProfileCreated()) {
             FXMLLoader loader = new FXMLLoader(getClass()
                     .getResource("../view/SubmitQualityReportScreen.fxml"));
-            Stage stage = (Stage) submitButton.getScene().getWindow();
+            Stage stage = (Stage) submitQualityButton.getScene().getWindow();
             Parent root = loader.load();
             loader.<SubmitQualityReportController>getController().setUser(user);
             stage.setScene(new Scene(root));
@@ -283,13 +297,32 @@ public class AppStartController implements Initializable,
         }
     }
 
+    /**
+     * When pressed, leads the user to view the list of quality reports
+     * @throws IOException
+     */
     @FXML
     private void handleViewQualityPressed() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass()
                 .getResource("../view/QualityReportListScreen.fxml"));
-        Stage stage = (Stage) profileButton.getScene().getWindow();
+        Stage stage = (Stage) viewQualityButton.getScene().getWindow();
         Parent root = loader.load();
         loader.<QualityReportListController>getController().setUser(user);
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    /**
+     * When pressed, leads the user to view the historical report
+     * @throws IOException
+     */
+    @FXML
+    private void handleHistoryPressed() throws  IOException {
+        FXMLLoader loader = new FXMLLoader(getClass()
+                .getResource("../view/HistoryScreen.fxml"));
+        Stage stage = (Stage) historyButton.getScene().getWindow();
+        Parent root = loader.load();
+        loader.<HistoryController>getController().setUser(user);
         stage.setScene(new Scene(root));
         stage.show();
     }

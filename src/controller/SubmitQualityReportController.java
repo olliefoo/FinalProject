@@ -153,14 +153,14 @@ public class SubmitQualityReportController {
         String location = waterLocationField.getText();
         String virus = virusField.getText();
         String contamin = contaminantField.getText();
-        if (virus.length() == 0) {
-            errorMessage += "Please enter a Virus PPM value.\n";
-        }
-        if (contamin.length() == 0) {
-            errorMessage += "Please enter a contamination value.\n";
-        }
         if (location.length() == 0) {
             errorMessage += "Please enter a location.\n";
+        }
+        if (virus.length() == 0 || !virus.matches("[0-9]+")) {
+            errorMessage += "Please enter a numeric value for Virus PPM\n";
+        }
+        if (contamin.length() == 0 || !contamin.matches("[0-9]+")) {
+            errorMessage += "Please enter a numeric value for Contaminant PPM\n";
         }
         //no error message means success / good input
         if (errorMessage.length() == 0) {

@@ -55,11 +55,17 @@ public class ProfileController {
     @FXML
     private RadioButton femaleRadioButton;
 
+    private Stage dialogStage;
+
     private final ToggleGroup group = new ToggleGroup();
 
     private User user;
     private Profile profile;
 
+    /**
+     * Sets the current user in the controller
+     * @param u
+     */
     public void setUser(User u) {
         user = u;
         profile = user.getProfile();
@@ -92,8 +98,8 @@ public class ProfileController {
         yearField.setValue(profile.getYear());
 
         monthField.getItems().addAll(
-                "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep",
-                "Oct", "Nov", "Dec"
+                "January", "February", "March", "April", "May", "June", "July",
+                "August", "September", "October", "November", "December"
         );
 
         dayField.getItems().addAll(
@@ -158,14 +164,29 @@ public class ProfileController {
      */
     @FXML
     private void handleUpdatePressed() throws IOException {
-        setValues();
-        FXMLLoader loader = new FXMLLoader(getClass()
-                .getResource("../view/AppStartScreen.fxml"));
-        Stage stage = (Stage) updateButton.getScene().getWindow();
-        Parent root = loader.load();
-        loader.<AppStartController>getController().setUser(user);
-        stage.setScene(new Scene(root));
-        stage.show();
+        String firstName = firstNameField.getText();
+        String lastName = lastNameField.getText();
+
+        if (firstName == null || firstName.length() == 0 ||
+                lastName == null || lastName.length() == 0) {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Missing Fields");
+            alert.setHeaderText("Please enter required fields");
+            alert.setContentText("Please enter both your first name and last " +
+                    "name to continue.");
+
+            alert.showAndWait();
+        } else {
+            setValues();
+            FXMLLoader loader = new FXMLLoader(getClass()
+                    .getResource("../view/AppStartScreen.fxml"));
+            Stage stage = (Stage) updateButton.getScene().getWindow();
+            Parent root = loader.load();
+            loader.<AppStartController>getController().setUser(user);
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
     }
 
 }

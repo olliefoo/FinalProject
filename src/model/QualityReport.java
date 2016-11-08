@@ -1,11 +1,12 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Owner on 10/20/2016.
  */
-public class QualityReport {
+public class QualityReport implements Serializable {
 
     private static int total = 0;
     private int number;
@@ -34,10 +35,11 @@ public class QualityReport {
      * @return the string representing the report
      */
     public String toString() {
-        String string = "<h1>" + location + "<h2><br>Virus PPM: " + virus +
-                "<br>Contaminant Level: " + contaminant;
+        String string = "<h1>" + location + "<h2><br>Virus PPM Level: " + virus +
+                "<br>Contamination Level: " + contaminant;
         return string;
     }
+
     /**
      * List of getters and setters for source report values.
      */

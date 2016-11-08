@@ -79,7 +79,7 @@ public class SubmitSourceReportController {
         reporterNameField.setText(profile.getFirstname() + " "
                 + profile.getLastname());
 
-        reportNumber.setText("" + r.getNumber());
+        reportNumber.setText("" + Integer.parseInt(r.getReportNumber()));
 
         SimpleDateFormat ft1 = new SimpleDateFormat("E MM/dd/yyyy");
         SimpleDateFormat ft2 = new SimpleDateFormat("h:mm a");
@@ -182,6 +182,13 @@ public class SubmitSourceReportController {
         if (isInputValid()) {
             setReportValues();
             ReportDatabase.add(r);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            //alert.setTitle("Invalid Fields");
+            alert.setHeaderText("Thank you for submitting a report.");
+            //alert.setContentText("Thank you for submitting a report.");
+            alert.showAndWait();
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppStartScreen.fxml"));
             Stage stage = (Stage) submitSourceButton.getScene().getWindow();
             Parent root = loader.load();

@@ -30,8 +30,6 @@ public class LoginController {
     @FXML
     private ComboBox accountBox;
 
-    private Stage dialogStage;
-
     /**
      * Initialize method called when controller is loaded. Used to set values
      * for the account type combobox. Sets the default choice as USER.
@@ -89,7 +87,6 @@ public class LoginController {
         } else {
             // Show the error message if bad data
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initOwner(dialogStage);
             alert.setTitle("Invalid Fields");
             alert.setHeaderText("Please correct invalid fields");
             alert.setContentText(errorMessage);

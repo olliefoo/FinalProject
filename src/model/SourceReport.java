@@ -1,22 +1,31 @@
 package model;
 
+import javafx.beans.property.SimpleStringProperty;
+
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Owner on 10/6/2016.
  */
-public class SourceReport {
+public class SourceReport implements Serializable {
 
     private static int total = 0;
+
+    private final SimpleStringProperty reportNumber;
+    private SimpleStringProperty date = new SimpleStringProperty();
+    private SimpleStringProperty location = new SimpleStringProperty();
+    private SimpleStringProperty username = new SimpleStringProperty();
+
     private int number;
     private Date fullDate;
     private User reporter;
     private String name;
     private String type;
     private String condition;
-    private String date;
+    //private String date;
     private String time;
-    private String location;
+    //private String location;
     private double latitude;
     private double longitude;
 
@@ -26,6 +35,7 @@ public class SourceReport {
     public SourceReport() {
         total++;
         number = total;
+        reportNumber = new SimpleStringProperty(Integer.toString(number));
         fullDate = new Date();
     }
 
@@ -50,6 +60,7 @@ public class SourceReport {
     }
     public void setReporter(User u) {
         this.reporter = u;
+        username = new SimpleStringProperty(reporter.getUsername());
     }
     public void setName(String name) {
         this.name = name;
@@ -64,10 +75,10 @@ public class SourceReport {
         this.time = time;
     }
     public void setDate(String date) {
-        this.date = date;
+        this.date = new SimpleStringProperty(date);
     }
     public void setLocation(String location) {
-        this.location = location;
+        this.location = new SimpleStringProperty(location);
     }
     public void setLatitude(double latitude) {
         this.latitude = latitude;
@@ -75,8 +86,8 @@ public class SourceReport {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
-    public User getReporter() {
-        return reporter;
+    public String getUsername() {
+        return username.get();
     }
     public String getName() {
         return name;
@@ -91,13 +102,13 @@ public class SourceReport {
         return time;
     }
     public String getDate() {
-        return date;
+        return date.get();
     }
     public String getLocation() {
-        return location;
+        return location.get();
     }
-    public int getNumber() {
-        return number;
+    public String getReportNumber() {
+        return reportNumber.get();
     }
     public Date getFullDate() {
         return fullDate;
