@@ -191,6 +191,11 @@ public class SubmitQualityReportController {
             setReportValues();
             ReportDatabase.getInstance().add(r);
             ReportDatabase.getInstance().saveQuality();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            //alert.setTitle("Invalid Fields");
+            alert.setHeaderText("Thank you for submitting a report.");
+            //alert.setContentText("Thank you for submitting a report.");
+            alert.showAndWait();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppStartScreen.fxml"));
             Stage stage = (Stage) submitPurityButton.getScene().getWindow();
             Parent root = loader.load();
