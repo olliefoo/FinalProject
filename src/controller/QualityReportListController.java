@@ -1,15 +1,16 @@
 package controller;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import model.ReportDatabase;
 import model.User;
 import model.QualityReport;
@@ -26,13 +27,28 @@ public class QualityReportListController {
     private Button chooseButton;
 
     @FXML
+    TableView table;
+
+    @FXML
+    TableColumn numberCol;
+
+    @FXML
+    TableColumn locationCol;
+
+    @FXML
+    TableColumn dateCol;
+
+    @FXML
+    TableColumn userCol;
+
+    @FXML
     private ListView<String> qualityList;
 
     @FXML
     private Button returnButton;
 
-    private ObservableList<String> showList
-            = FXCollections.observableArrayList();
+    /*private ObservableList<String> showList
+            = FXCollections.observableArrayList();*/
 
     private User user;
 
@@ -45,14 +61,38 @@ public class QualityReportListController {
     @FXML
     private void initialize() {
         if (ReportDatabase.getInstance().numQuality() != 0) {
+            ObservableList<QualityReport> list
+                    = FXCollections.observableArrayList();
             QualityReport temp;
             for (int i = 1; i <= ReportDatabase.getInstance().numQuality(); i++) {
                 temp = ReportDatabase.getInstance().getQualityReport(i);
-                showList.add(String.format("Report #%d               %s, %s" +
-                                "               %s",
-                        i, temp.getDate(), temp.getTime(), temp.getLocation()));
+                list.add(temp);
             }
-            qualityList.setItems(showList);
+
+            numberCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<QualityReport, String>, ObservableValue<String>>() {
+                public ObservableValue<String> call(TableColumn.CellDataFeatures<QualityReport, String> r) {
+                    return new SimpleStringProperty(Integer.toString(r.getValue().getNumber()));
+                }
+            });
+
+            locationCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<QualityReport, String>, ObservableValue<String>>() {
+                public ObservableValue<String> call(TableColumn.CellDataFeatures<QualityReport, String> r) {
+                    return new SimpleStringProperty(r.getValue().getLocation());
+                }
+            });
+
+            dateCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<QualityReport, String>, ObservableValue<String>>() {
+                public ObservableValue<String> call(TableColumn.CellDataFeatures<QualityReport, String> r) {
+                    return new SimpleStringProperty(r.getValue().getDate());
+                }
+            });
+
+            userCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<QualityReport, String>, ObservableValue<String>>() {
+                public ObservableValue<String> call(TableColumn.CellDataFeatures<QualityReport, String> r) {
+                    return new SimpleStringProperty(r.getValue().getName());
+                }
+            });
+            table.setItems(list);
         }
     }
 
@@ -97,8 +137,7 @@ public class QualityReportListController {
      */
     @FXML
     private void handleViewPressed() throws IOException {
-        // adds 1 to reportIndex because no selection is -1
-        reportIndex = qualityList.getSelectionModel().getSelectedIndex() + 1;
+        reportIndex = table.getSelectionModel().getSelectedIndex() + 1;
         if (isIndexValid()) {
             FXMLLoader loader = new FXMLLoader(getClass()
                     .getResource("../view/ViewQualityReportScreen.fxml"));
