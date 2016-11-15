@@ -30,11 +30,13 @@ public class Profile implements Serializable {
         email = e;
     }
     public void setAddress(String str, String sta, String cit, String z) {
-        address = str + ", " + cit + ", " + sta + ", " + z;
-        street = str;
-        city = cit;
-        state = sta;
-        zip = z;
+        if (str != null && sta != null && cit != null & z != null) {
+            address = str + ", " + cit + ", " + sta + ", " + z;
+            street = str;
+            city = cit;
+            state = sta;
+            zip = z;
+        }
     }
     public void setPhone(String p) {
         phone = p;
