@@ -59,7 +59,7 @@ public class HistoryController {
 
     /**
      * Sets the current user into the controller
-     * @param u
+     * @param u the current user
      */
     public void setUser(User u) {
         user = u;

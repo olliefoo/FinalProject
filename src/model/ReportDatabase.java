@@ -134,7 +134,7 @@ public class ReportDatabase{
 
     /**
      * Gets the list of quality reports
-     * @return
+     * @return a list of quality reports
      */
     public List<QualityReport> getQualityReports() {
         return qualityReports;

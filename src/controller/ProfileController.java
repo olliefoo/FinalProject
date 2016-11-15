@@ -65,7 +65,7 @@ public class ProfileController {
 
     /**
      * Sets the current user in the controller
-     * @param u
+     * @param u the current user
      */
     public void setUser(User u) {
         user = u;

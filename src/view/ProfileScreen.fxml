@@ -44,208 +44,206 @@
          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
       </rowConstraints>
-      <children>
-         <Label text="Gender:" GridPane.halignment="RIGHT"
-                GridPane.rowIndex="9">
-            <padding>
-               <Insets right="5.0"/>
-            </padding>
-            <font>
-               <Font name="Arial Bold" size="16.0"/>
-            </font>
-         </Label>
-         <Label layoutX="10.0" layoutY="45.0" text="Last Name*"
-                GridPane.halignment="RIGHT" GridPane.rowIndex="1">
-            <padding>
-               <Insets right="5.0"/>
-            </padding>
-            <font>
-               <Font name="Arial Bold" size="16.0"/>
-            </font>
-         </Label>
-         <Label layoutX="10.0" layoutY="15.0" text="First Name*"
-                GridPane.halignment="RIGHT">
-            <padding>
-               <Insets right="5.0"/>
-            </padding>
-            <font>
-               <Font name="Arial Bold" size="16.0"/>
-            </font>
-         </Label>
-         <Label layoutX="10.0" layoutY="15.0" text="Street Address:"
-                GridPane.halignment="RIGHT" GridPane.rowIndex="2">
-            <padding>
-               <Insets right="5.0"/>
-            </padding>
-            <font>
-               <Font name="Arial Bold" size="16.0"/>
-            </font>
-         </Label>
-         <Label layoutX="10.0" layoutY="135.0" text="City:"
-                GridPane.halignment="RIGHT" GridPane.rowIndex="3">
-            <padding>
-               <Insets right="5.0"/>
-            </padding>
-            <font>
-               <Font name="Arial Bold" size="16.0"/>
-            </font>
-         </Label>
-         <Label layoutX="10.0" layoutY="165.0" text="Birthday:"
-                GridPane.halignment="RIGHT" GridPane.rowIndex="8">
-            <padding>
-               <Insets right="5.0"/>
-            </padding>
-            <font>
-               <Font name="Arial Bold" size="16.0"/>
-            </font>
-         </Label>
-         <Label layoutX="10.0" layoutY="165.0" text="Email Address:"
-                GridPane.halignment="RIGHT" GridPane.rowIndex="7">
-            <padding>
-               <Insets right="5.0"/>
-            </padding>
-            <font>
-               <Font name="Arial Bold" size="16.0"/>
-            </font>
-         </Label>
-         <Label layoutX="10.0" layoutY="165.0" text="Phone Number:"
-                GridPane.halignment="RIGHT" GridPane.rowIndex="6">
-            <padding>
-               <Insets right="5.0"/>
-            </padding>
-            <font>
-               <Font name="Arial Bold" size="16.0"/>
-            </font>
-         </Label>
-         <Label layoutX="10.0" layoutY="165.0" text="Zip:"
-                GridPane.halignment="RIGHT" GridPane.rowIndex="5">
-            <padding>
-               <Insets right="5.0"/>
-            </padding>
-            <font>
-               <Font name="Arial Bold" size="16.0"/>
-            </font>
-         </Label>
-         <Label layoutX="10.0" layoutY="15.0" text="State:"
-                GridPane.halignment="RIGHT" GridPane.rowIndex="4">
-            <padding>
-               <Insets right="5.0"/>
-            </padding>
-            <font>
-               <Font name="Arial Bold" size="16.0"/>
-            </font>
-         </Label>
-         <TextField fx:id="firstNameField" prefHeight="35.0" promptText="George"
-                    GridPane.columnIndex="1" GridPane.halignment="LEFT">
-            <GridPane.margin>
-               <Insets left="5.0" right="20.0"/>
-            </GridPane.margin>
-         </TextField>
-         <TextField fx:id="lastNameField" prefHeight="35.0" promptText="Burdell"
-                    GridPane.columnIndex="1" GridPane.halignment="LEFT"
-                    GridPane.rowIndex="1">
-            <GridPane.margin>
-               <Insets left="5.0" right="20.0"/>
-            </GridPane.margin>
-         </TextField>
-         <TextField fx:id="streetField" prefHeight="35.0"
-                    promptText="12 Fake Address Way" GridPane.columnIndex="1"
-                    GridPane.halignment="LEFT" GridPane.rowIndex="2">
-            <GridPane.margin>
-               <Insets left="5.0" right="20.0"/>
-            </GridPane.margin>
-         </TextField>
-         <TextField fx:id="cityField" prefHeight="35.0" promptText="Atlanta"
-                    GridPane.columnIndex="1" GridPane.halignment="LEFT"
-                    GridPane.rowIndex="3">
-            <GridPane.margin>
-               <Insets left="5.0" right="20.0"/>
-            </GridPane.margin>
-         </TextField>
-         <TextField fx:id="stateField" prefHeight="35.0" promptText="Georgia"
-                    GridPane.columnIndex="1" GridPane.halignment="LEFT"
-                    GridPane.rowIndex="4">
-            <GridPane.margin>
-               <Insets left="5.0" right="20.0"/>
-            </GridPane.margin>
-         </TextField>
-         <TextField fx:id="zipField" prefHeight="35.0" promptText="12345"
-                    GridPane.columnIndex="1" GridPane.halignment="LEFT"
-                    GridPane.rowIndex="5">
-            <GridPane.margin>
-               <Insets left="5.0" right="20.0"/>
-            </GridPane.margin>
-         </TextField>
-         <TextField fx:id="phoneField" prefHeight="35.0" promptText="0123456789"
-                    GridPane.columnIndex="1" GridPane.halignment="LEFT"
-                    GridPane.rowIndex="6">
-            <GridPane.margin>
-               <Insets left="5.0" right="20.0"/>
-            </GridPane.margin>
-         </TextField>
-         <TextField fx:id="emailField" prefHeight="35.0"
-                    promptText="example@gmail.com" GridPane.columnIndex="1"
-                    GridPane.halignment="LEFT" GridPane.rowIndex="7">
-            <GridPane.margin>
-               <Insets left="5.0" right="20.0"/>
-            </GridPane.margin>
-         </TextField>
-         <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1"
-                    GridPane.rowIndex="9">
-            <buttons>
-               <RadioButton fx:id="maleRadioButton" mnemonicParsing="false"
-                            text="Male" translateX="-125.0">
-                  <toggleGroup>
-                     <ToggleGroup fx:id="gender"/>
-                  </toggleGroup>
-                  <font>
-                     <Font name="Arial" size="16.0"/>
-                  </font>
-               </RadioButton>
-               <RadioButton fx:id="femaleRadioButton" layoutX="245.0"
-                            layoutY="18.0" mnemonicParsing="false" text="Female"
-                            toggleGroup="$gender" translateX="-125.0">
-                  <font>
-                     <Font name="Arial" size="16.0"/>
-                  </font>
-               </RadioButton>
-            </buttons>
-            <GridPane.margin>
-               <Insets left="5.0" right="70.0"/>
-            </GridPane.margin>
-         </ButtonBar>
-         <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1"
-                    GridPane.rowIndex="8">
-            <buttons>
-               <ComboBox fx:id="monthField" prefHeight="35.0" prefWidth="150.0"
-                         promptText="Month" translateX="-20.0"/>
-               <ComboBox fx:id="dayField" layoutX="205.0" layoutY="13.0"
-                         prefHeight="35.0" prefWidth="150.0" promptText="Day"
-                         translateX="-10.0"/>
-               <ComboBox fx:id="yearField" layoutX="205.0" layoutY="13.0"
-                         prefHeight="35.0" prefWidth="150.0" promptText="Year"/>
-            </buttons>
-            <GridPane.margin>
-               <Insets left="5.0" right="20.0"/>
-            </GridPane.margin>
-         </ButtonBar>
-         <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1"
-                    GridPane.rowIndex="10">
-            <buttons>
-               <Button fx:id="updateButton" mnemonicParsing="false"
-                       onAction="#handleUpdatePressed" prefHeight="35.0"
-                       prefWidth="100.0" style="-fx-background-color: #008fff;"
-                       text="Update" textFill="WHITE">
-                  <font>
-                     <Font name="Arial Bold" size="16.0"/>
-                  </font>
-               </Button>
-            </buttons>
-            <GridPane.margin>
-               <Insets left="5.0" right="20.0"/>
-            </GridPane.margin>
-         </ButtonBar>
-      </children>
+      <Label text="Gender:" GridPane.halignment="RIGHT"
+             GridPane.rowIndex="9">
+         <padding>
+            <Insets right="5.0"/>
+         </padding>
+         <font>
+            <Font name="Arial Bold" size="16.0"/>
+         </font>
+      </Label>
+      <Label layoutX="10.0" layoutY="45.0" text="Last Name*"
+             GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+         <padding>
+            <Insets right="5.0"/>
+         </padding>
+         <font>
+            <Font name="Arial Bold" size="16.0"/>
+         </font>
+      </Label>
+      <Label layoutX="10.0" layoutY="15.0" text="First Name*"
+             GridPane.halignment="RIGHT">
+         <padding>
+            <Insets right="5.0"/>
+         </padding>
+         <font>
+            <Font name="Arial Bold" size="16.0"/>
+         </font>
+      </Label>
+      <Label layoutX="10.0" layoutY="15.0" text="Street Address:"
+             GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+         <padding>
+            <Insets right="5.0"/>
+         </padding>
+         <font>
+            <Font name="Arial Bold" size="16.0"/>
+         </font>
+      </Label>
+      <Label layoutX="10.0" layoutY="135.0" text="City:"
+             GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+         <padding>
+            <Insets right="5.0"/>
+         </padding>
+         <font>
+            <Font name="Arial Bold" size="16.0"/>
+         </font>
+      </Label>
+      <Label layoutX="10.0" layoutY="165.0" text="Birthday:"
+             GridPane.halignment="RIGHT" GridPane.rowIndex="8">
+         <padding>
+            <Insets right="5.0"/>
+         </padding>
+         <font>
+            <Font name="Arial Bold" size="16.0"/>
+         </font>
+      </Label>
+      <Label layoutX="10.0" layoutY="165.0" text="Email Address:"
+             GridPane.halignment="RIGHT" GridPane.rowIndex="7">
+         <padding>
+            <Insets right="5.0"/>
+         </padding>
+         <font>
+            <Font name="Arial Bold" size="16.0"/>
+         </font>
+      </Label>
+      <Label layoutX="10.0" layoutY="165.0" text="Phone Number:"
+             GridPane.halignment="RIGHT" GridPane.rowIndex="6">
+         <padding>
+            <Insets right="5.0"/>
+         </padding>
+         <font>
+            <Font name="Arial Bold" size="16.0"/>
+         </font>
+      </Label>
+      <Label layoutX="10.0" layoutY="165.0" text="Zip:"
+             GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+         <padding>
+            <Insets right="5.0"/>
+         </padding>
+         <font>
+            <Font name="Arial Bold" size="16.0"/>
+         </font>
+      </Label>
+      <Label layoutX="10.0" layoutY="15.0" text="State:"
+             GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+         <padding>
+            <Insets right="5.0"/>
+         </padding>
+         <font>
+            <Font name="Arial Bold" size="16.0"/>
+         </font>
+      </Label>
+      <TextField fx:id="firstNameField" prefHeight="35.0" promptText="George"
+                 GridPane.columnIndex="1" GridPane.halignment="LEFT">
+         <GridPane.margin>
+            <Insets left="5.0" right="20.0"/>
+         </GridPane.margin>
+      </TextField>
+      <TextField fx:id="lastNameField" prefHeight="35.0" promptText="Burdell"
+                 GridPane.columnIndex="1" GridPane.halignment="LEFT"
+                 GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="5.0" right="20.0"/>
+         </GridPane.margin>
+      </TextField>
+      <TextField fx:id="streetField" prefHeight="35.0"
+                 promptText="12 Fake Address Way" GridPane.columnIndex="1"
+                 GridPane.halignment="LEFT" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets left="5.0" right="20.0"/>
+         </GridPane.margin>
+      </TextField>
+      <TextField fx:id="cityField" prefHeight="35.0" promptText="Atlanta"
+                 GridPane.columnIndex="1" GridPane.halignment="LEFT"
+                 GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets left="5.0" right="20.0"/>
+         </GridPane.margin>
+      </TextField>
+      <TextField fx:id="stateField" prefHeight="35.0" promptText="Georgia"
+                 GridPane.columnIndex="1" GridPane.halignment="LEFT"
+                 GridPane.rowIndex="4">
+         <GridPane.margin>
+            <Insets left="5.0" right="20.0"/>
+         </GridPane.margin>
+      </TextField>
+      <TextField fx:id="zipField" prefHeight="35.0" promptText="12345"
+                 GridPane.columnIndex="1" GridPane.halignment="LEFT"
+                 GridPane.rowIndex="5">
+         <GridPane.margin>
+            <Insets left="5.0" right="20.0"/>
+         </GridPane.margin>
+      </TextField>
+      <TextField fx:id="phoneField" prefHeight="35.0" promptText="0123456789"
+                 GridPane.columnIndex="1" GridPane.halignment="LEFT"
+                 GridPane.rowIndex="6">
+         <GridPane.margin>
+            <Insets left="5.0" right="20.0"/>
+         </GridPane.margin>
+      </TextField>
+      <TextField fx:id="emailField" prefHeight="35.0"
+                 promptText="example@gmail.com" GridPane.columnIndex="1"
+                 GridPane.halignment="LEFT" GridPane.rowIndex="7">
+         <GridPane.margin>
+            <Insets left="5.0" right="20.0"/>
+         </GridPane.margin>
+      </TextField>
+      <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1"
+                 GridPane.rowIndex="9">
+         <buttons>
+            <RadioButton fx:id="maleRadioButton" mnemonicParsing="false"
+                         text="Male" translateX="-125.0">
+               <toggleGroup>
+                  <ToggleGroup fx:id="gender"/>
+               </toggleGroup>
+               <font>
+                  <Font name="Arial" size="16.0"/>
+               </font>
+            </RadioButton>
+            <RadioButton fx:id="femaleRadioButton" layoutX="245.0"
+                         layoutY="18.0" mnemonicParsing="false" text="Female"
+                         toggleGroup="$gender" translateX="-125.0">
+               <font>
+                  <Font name="Arial" size="16.0"/>
+               </font>
+            </RadioButton>
+         </buttons>
+         <GridPane.margin>
+            <Insets left="5.0" right="70.0"/>
+         </GridPane.margin>
+      </ButtonBar>
+      <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1"
+                 GridPane.rowIndex="8">
+         <buttons>
+            <ComboBox fx:id="monthField" prefHeight="35.0" prefWidth="150.0"
+                      promptText="Month" translateX="-20.0"/>
+            <ComboBox fx:id="dayField" layoutX="205.0" layoutY="13.0"
+                      prefHeight="35.0" prefWidth="150.0" promptText="Day"
+                      translateX="-10.0"/>
+            <ComboBox fx:id="yearField" layoutX="205.0" layoutY="13.0"
+                      prefHeight="35.0" prefWidth="150.0" promptText="Year"/>
+         </buttons>
+         <GridPane.margin>
+            <Insets left="5.0" right="20.0"/>
+         </GridPane.margin>
+      </ButtonBar>
+      <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1"
+                 GridPane.rowIndex="10">
+         <buttons>
+            <Button fx:id="updateButton" mnemonicParsing="false"
+                    onAction="#handleUpdatePressed" prefHeight="35.0"
+                    prefWidth="100.0" style="-fx-background-color: #008fff;"
+                    text="Update" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="16.0"/>
+               </font>
+            </Button>
+         </buttons>
+         <GridPane.margin>
+            <Insets left="5.0" right="20.0"/>
+         </GridPane.margin>
+      </ButtonBar>
    </GridPane>
    <Label layoutX="162.0" layoutY="22.0" text="USER PROFILE" textFill="WHITE">
       <font>
