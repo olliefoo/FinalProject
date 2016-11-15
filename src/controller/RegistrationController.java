@@ -31,7 +31,7 @@ public class RegistrationController {
     private Button registerButton;
 
     @FXML
-    private ComboBox choiceBox;
+    private ComboBox<String> choiceBox;
 
     @FXML
     private Button cancelButton;

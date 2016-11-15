@@ -14,6 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import model.QualityReport;
 import model.ReportDatabase;
 import model.SourceReport;
 import model.User;
@@ -30,19 +31,19 @@ public class SourceReportListController{
     //private ListView<String> sourceList;
 
     @FXML
-    TableView table;
+    TableView<SourceReport> table;
 
     @FXML
-    TableColumn numberCol;
+    TableColumn<SourceReport, String> numberCol;
 
     @FXML
-    TableColumn locationCol;
+    TableColumn<SourceReport, String> locationCol;
 
     @FXML
-    TableColumn dateCol;
+    TableColumn<SourceReport, String> dateCol;
 
     @FXML
-    TableColumn userCol;
+    TableColumn<SourceReport, String> userCol;
 
     @FXML
     private Button returnButton;

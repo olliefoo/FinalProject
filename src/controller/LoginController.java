@@ -29,7 +29,7 @@ public class LoginController {
     private Button cancel;
 
     @FXML
-    private ComboBox accountBox;
+    private ComboBox<String> accountBox;
 
     /**
      * Initialize method called when controller is loaded. Used to set values

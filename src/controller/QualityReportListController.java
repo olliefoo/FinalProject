@@ -28,23 +28,23 @@ public class QualityReportListController {
 
     @FXML
     private
-    TableView table;
+    TableView<QualityReport> table;
 
     @FXML
     private
-    TableColumn numberCol;
+    TableColumn<QualityReport, String> numberCol;
 
     @FXML
     private
-    TableColumn locationCol;
+    TableColumn<QualityReport, String> locationCol;
 
     @FXML
     private
-    TableColumn dateCol;
+    TableColumn<QualityReport, String> dateCol;
 
     @FXML
     private
-    TableColumn userCol;
+    TableColumn<QualityReport, String> userCol;
 
     @FXML
     private ListView<String> qualityList;

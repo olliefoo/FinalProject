@@ -34,7 +34,7 @@ public class HistoryController {
     private User user;
 
     @FXML
-    private LineChart graph;
+    private LineChart<String, Double> graph;
 
     @FXML
     private CategoryAxis xAxis;
@@ -49,13 +49,13 @@ public class HistoryController {
     private Button returnButton;
 
     @FXML
-    private ComboBox locationBox;
+    private ComboBox<String> locationBox;
 
     @FXML
-    private ComboBox ppmBox;
+    private ComboBox<String> ppmBox;
 
     @FXML
-    private ComboBox yearBox;
+    private ComboBox<String> yearBox;
 
     /**
      * Sets the current user into the controller
@@ -127,15 +127,17 @@ public class HistoryController {
                 }
             }
 
-            XYChart.Series series = new XYChart.Series();
+            XYChart.Series<String, Double> series = new XYChart.Series<String, Double>();
             if (ppmBox.getValue().equals("Virus")) {
                 for (QualityReport r : yearList) {
-                    series.getData().add(new XYChart.Data(r.getMonth(), r.getVirus()));
+                    XYChart.Data<String, Double> new_chart = new XYChart.Data<>(r.getMonth(), r.getVirus());
+                    series.getData().add(new_chart);
                 }
                 series.setName(locationBox.getValue() + ", " + yearBox.getValue() + ", Virus PPM");
             } else if (ppmBox.getValue().equals("Contaminant")) {
                 for (QualityReport r : yearList) {
-                    series.getData().add(new XYChart.Data(r.getMonth(), r.getContaminant()));
+                    XYChart.Data<String, Double> new_chart = new XYChart.Data<>(r.getMonth(), r.getContaminant());
+                    series.getData().add(new_chart);
                 }
                 series.setName(locationBox.getValue() + ", " + yearBox.getValue() + ", Contaminant PPM");
             }
