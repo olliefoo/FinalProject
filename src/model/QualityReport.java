@@ -37,8 +37,11 @@ public class QualityReport implements Serializable {
      * @return the string representing the report
      */
     public String toString() {
-        return("<h1>" + location + "<h2><br>Virus PPM Level: " + virus +
-                "<br>Contamination Level: " + contaminant);
+        return "<b>Quality Report:</b> " + number + "<br />"
+                + "<b>Location:</b> " + location + "<br />"
+                + "<b>Water Condition:</b> " + condition + "<br />"
+                + "<b>Contaminant PPM:</b> " + contaminant + "<br />"
+                + "<b>Virus PPM:</b> " + virus + "<br />";
     }
 
     /**

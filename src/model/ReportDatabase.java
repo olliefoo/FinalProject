@@ -67,9 +67,7 @@ public class ReportDatabase{
                 sourceReports = (ArrayList<SourceReport>) in.readObject();
                 SourceReport.setTotal(getSourceReport(numSource()).getNumber());
             }
-        } catch (IOException ex) {
-            ex.getStackTrace();
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             ex.getStackTrace();
         }
     }
@@ -84,9 +82,7 @@ public class ReportDatabase{
                 qualityReports = (ArrayList<QualityReport>) in.readObject();
                 QualityReport.setTotal((getQualityReport(numQuality()).getNumber()));
             }
-        } catch (IOException ex) {
-            ex.getStackTrace();
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             ex.getStackTrace();
         }
     }

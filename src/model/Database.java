@@ -78,9 +78,7 @@ public class Database implements Serializable {
                 usernameList = usL;
                 emailList = eL;
             }
-        } catch (IOException ex) {
-            ex.getStackTrace();
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             ex.getStackTrace();
         }
     }
