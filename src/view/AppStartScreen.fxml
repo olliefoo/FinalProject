@@ -8,50 +8,92 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #2779A1;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AppStartController">
-   <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#013046" height="60.0" stroke="#013046" strokeType="INSIDE" width="900.0" />
-      <Rectangle fx:id="workerRect" arcHeight="5.0" arcWidth="5.0" fill="#7bc7eb" height="275.0" layoutY="325.0" stroke="#6ab0d2" strokeType="INSIDE" width="150.0" />
-      <Button fx:id="logoutButton" layoutX="761.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleLogoutPressed" prefHeight="35.0" prefWidth="125.0" style="-fx-background-color: red;" text="Logout" textFill="WHITE">
-         <font>
-            <Font name="Arial Bold" size="16.0" />
-         </font></Button>
-      <Button fx:id="profileButton" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleProfilePressed" prefHeight="35.0" prefWidth="125.0" style="-fx-background-color: white;" text="Edit Profile" textFill="#013650">
-         <font>
-            <Font name="Arial Bold" size="16.0" />
-         </font></Button>
-      <Accordion layoutX="99.0" layoutY="45.0" />
-      <Button fx:id="submitButton" layoutX="14.0" layoutY="142.0" mnemonicParsing="false" onAction="#handleSubmitPressed" prefHeight="35.0" prefWidth="125.0" style="-fx-background-color: white;" text="Submit Report" textFill="#013650">
-         <font>
-            <Font name="Arial Bold" size="15.0" />
-         </font></Button>
-      <Button fx:id="viewButton" layoutX="14.0" layoutY="189.0" mnemonicParsing="false" onAction="#handleViewPressed" prefHeight="35.0" prefWidth="125.0" style="-fx-background-color: white;" text="View Reports" textFill="#013650">
-         <font>
-            <Font name="Arial Bold" size="15.0" />
-         </font></Button>
-      <GoogleMapView fx:id="mapView" layoutX="150.0" layoutY="60.0" prefHeight="540.0" prefWidth="750.0" />
-      <Button fx:id="submitQualityButton" layoutX="13.0" layoutY="412.0" mnemonicParsing="false" onAction="#handleSubmitQualityPressed" prefHeight="35.0" prefWidth="125.0" style="-fx-background-color: white;" text="Submit Report" textFill="#013650">
-         <font>
-            <Font name="Arial Bold" size="15.0" />
-         </font></Button>
-      <Button fx:id="viewQualityButton" layoutX="13.0" layoutY="459.0" mnemonicParsing="false" onAction="#handleViewQualityPressed" prefHeight="35.0" prefWidth="125.0" style="-fx-background-color: white;" text="View Reports" textFill="#013650">
-         <font>
-            <Font name="Arial Bold" size="15.0" />
-         </font></Button>
-      <Button fx:id="historyButton" layoutX="14.0" layoutY="504.0" mnemonicParsing="false" onAction="#handleHistoryPressed" prefHeight="35.0" prefWidth="125.0" style="-fx-background-color: white;" text="View Trends" textFill="#013650">
-         <font>
-            <Font name="Arial Bold" size="16.0" />
-         </font>
-      </Button>
-      <Text fx:id="qualityText" fill="#013046" layoutX="6.0" layoutY="393.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WATER QUALITY">
-         <font>
-            <Font name="Calibri" size="20.0" />
-         </font>
-      </Text>
-      <Text fx:id="sourceText" fill="WHITE" layoutX="9.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WATER SOURCE">
-         <font>
-            <Font name="Calibri" size="20.0" />
-         </font>
-      </Text>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0"
+            style="-fx-background-color: #2779A1;"
+            xmlns="http://javafx.com/javafx/8.0.60"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.AppStartController">
+   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#013046" height="60.0"
+              stroke="#013046" strokeType="INSIDE" width="900.0"/>
+   <Rectangle fx:id="workerRect" arcHeight="5.0" arcWidth="5.0" fill="#7bc7eb"
+              height="275.0" layoutY="325.0" stroke="#6ab0d2"
+              strokeType="INSIDE" width="150.0"/>
+   <Button fx:id="logoutButton" layoutX="761.0" layoutY="13.0"
+           mnemonicParsing="false" onAction="#handleLogoutPressed"
+           prefHeight="35.0" prefWidth="125.0"
+           style="-fx-background-color: red;" text="Logout" textFill="WHITE">
+      <font>
+         <Font name="Arial Bold" size="16.0"/>
+      </font>
+   </Button>
+   <Button fx:id="profileButton" layoutX="14.0" layoutY="13.0"
+           mnemonicParsing="false" onAction="#handleProfilePressed"
+           prefHeight="35.0" prefWidth="125.0"
+           style="-fx-background-color: white;" text="Edit Profile"
+           textFill="#013650">
+      <font>
+         <Font name="Arial Bold" size="16.0"/>
+      </font>
+   </Button>
+   <Accordion layoutX="99.0" layoutY="45.0"/>
+   <Button fx:id="submitButton" layoutX="14.0" layoutY="142.0"
+           mnemonicParsing="false" onAction="#handleSubmitPressed"
+           prefHeight="35.0" prefWidth="125.0"
+           style="-fx-background-color: white;" text="Submit Report"
+           textFill="#013650">
+      <font>
+         <Font name="Arial Bold" size="15.0"/>
+      </font>
+   </Button>
+   <Button fx:id="viewButton" layoutX="14.0" layoutY="189.0"
+           mnemonicParsing="false" onAction="#handleViewPressed"
+           prefHeight="35.0" prefWidth="125.0"
+           style="-fx-background-color: white;" text="View Reports"
+           textFill="#013650">
+      <font>
+         <Font name="Arial Bold" size="15.0"/>
+      </font>
+   </Button>
+   <GoogleMapView fx:id="mapView" layoutX="150.0" layoutY="60.0"
+                  prefHeight="540.0" prefWidth="750.0"/>
+   <Button fx:id="submitQualityButton" layoutX="13.0" layoutY="412.0"
+           mnemonicParsing="false" onAction="#handleSubmitQualityPressed"
+           prefHeight="35.0" prefWidth="125.0"
+           style="-fx-background-color: white;" text="Submit Report"
+           textFill="#013650">
+      <font>
+         <Font name="Arial Bold" size="15.0"/>
+      </font>
+   </Button>
+   <Button fx:id="viewQualityButton" layoutX="13.0" layoutY="459.0"
+           mnemonicParsing="false" onAction="#handleViewQualityPressed"
+           prefHeight="35.0" prefWidth="125.0"
+           style="-fx-background-color: white;" text="View Reports"
+           textFill="#013650">
+      <font>
+         <Font name="Arial Bold" size="15.0"/>
+      </font>
+   </Button>
+   <Button fx:id="historyButton" layoutX="14.0" layoutY="504.0"
+           mnemonicParsing="false" onAction="#handleHistoryPressed"
+           prefHeight="35.0" prefWidth="125.0"
+           style="-fx-background-color: white;" text="View Trends"
+           textFill="#013650">
+      <font>
+         <Font name="Arial Bold" size="16.0"/>
+      </font>
+   </Button>
+   <Text fx:id="qualityText" fill="#013046" layoutX="6.0" layoutY="393.0"
+         strokeType="OUTSIDE" strokeWidth="0.0" text="WATER QUALITY">
+      <font>
+         <Font name="Calibri" size="20.0"/>
+      </font>
+   </Text>
+   <Text fx:id="sourceText" fill="WHITE" layoutX="9.0" layoutY="123.0"
+         strokeType="OUTSIDE" strokeWidth="0.0" text="WATER SOURCE">
+      <font>
+         <Font name="Calibri" size="20.0"/>
+      </font>
+   </Text>
 </AnchorPane>

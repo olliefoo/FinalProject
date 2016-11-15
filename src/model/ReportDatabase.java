@@ -8,7 +8,7 @@ import java.util.List;
  * Created by Kijana on 10/11/2016.
  */
 public class ReportDatabase{
-    private static ReportDatabase instance = new ReportDatabase();
+    private static final ReportDatabase instance = new ReportDatabase();
     private ArrayList<SourceReport> sourceReports = new ArrayList<>();
     private ArrayList<QualityReport> qualityReports = new ArrayList<>();
 
@@ -64,8 +64,7 @@ public class ReportDatabase{
     public void loadSource()  {
         try {
             try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("source.bin"))) {
-                ArrayList<SourceReport> srl = (ArrayList<SourceReport>) in.readObject();
-                sourceReports = srl;
+                sourceReports = (ArrayList<SourceReport>) in.readObject();
                 SourceReport.setTotal(getSourceReport(numSource()).getNumber());
             }
         } catch (IOException ex) {
@@ -82,8 +81,7 @@ public class ReportDatabase{
     public void loadQuality()  {
         try {
             try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("quality.bin"))) {
-                ArrayList<QualityReport> qrl = (ArrayList<QualityReport>) in.readObject();
-                qualityReports = qrl;
+                qualityReports = (ArrayList<QualityReport>) in.readObject();
                 QualityReport.setTotal((getQualityReport(numQuality()).getNumber()));
             }
         } catch (IOException ex) {

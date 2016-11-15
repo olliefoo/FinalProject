@@ -1,7 +1,5 @@
 package model;
 
-import javafx.beans.property.SimpleStringProperty;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -17,8 +15,8 @@ public class SourceReport implements Serializable {
     private SimpleStringProperty location = new SimpleStringProperty();
     private SimpleStringProperty username = new SimpleStringProperty();*/
 
-    private int number;
-    private Date fullDate;
+    private final int number;
+    private final Date fullDate;
     private User reporter;
     private String name;
     private String type;
@@ -44,9 +42,8 @@ public class SourceReport implements Serializable {
      * @return the string representing the report
      */
     public String toString() {
-        String string = "<h1>" + location + "<h2><br>Type of Water: " + type +
-                "<br>Condition of Water: " + condition;
-        return string;
+        return("<h1>" + location + "<h2><br>Type of Water: " + type +
+                "<br>Condition of Water: " + condition);
     }
 
     /**

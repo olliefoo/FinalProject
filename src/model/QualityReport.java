@@ -10,12 +10,13 @@ import java.util.Date;
 public class QualityReport implements Serializable {
 
     private static int total = 0;
-    private int number;
+    private final int number;
+    private final Date fullDate;
+
     private User worker;
     private String name;
     private String location;
     private String condition;
-    private Date fullDate;
     private String date;
     private String time;
     private double latitude;
@@ -36,9 +37,8 @@ public class QualityReport implements Serializable {
      * @return the string representing the report
      */
     public String toString() {
-        String string = "<h1>" + location + "<h2><br>Virus PPM Level: " + virus +
-                "<br>Contamination Level: " + contaminant;
-        return string;
+        return("<h1>" + location + "<h2><br>Virus PPM Level: " + virus +
+                "<br>Contamination Level: " + contaminant);
     }
 
     /**

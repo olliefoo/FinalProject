@@ -27,18 +27,23 @@ public class QualityReportListController {
     private Button chooseButton;
 
     @FXML
+    private
     TableView table;
 
     @FXML
+    private
     TableColumn numberCol;
 
     @FXML
+    private
     TableColumn locationCol;
 
     @FXML
+    private
     TableColumn dateCol;
 
     @FXML
+    private
     TableColumn userCol;
 
     @FXML

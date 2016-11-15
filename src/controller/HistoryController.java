@@ -66,7 +66,7 @@ public class HistoryController {
     }
 
     /**
-     * Initializes the graph axes and combobox values.
+     * Initializes the graph axes and combo box values.
      */
     @FXML
     private void initialize() {
@@ -102,10 +102,9 @@ public class HistoryController {
 
     /**
      * When view is pressed, generates the information on the graph
-     * @throws IOException
      */
     @FXML
-    private void handleViewPressed() throws IOException {
+    private void handleViewPressed() {
         if(isInputValid()) {
             // Can only view one line at a time. Every time press view button,
             // delete old line.
@@ -161,7 +160,7 @@ public class HistoryController {
     }
 
     /**
-     * Checks whether the combobox values are selected
+     * Checks whether the combo box values are selected
      */
     private boolean isInputValid() {
 

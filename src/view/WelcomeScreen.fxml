@@ -10,39 +10,55 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.WelcomeController">
-   <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#008fff" height="300.0" stroke="#008fff" strokeType="INSIDE" width="500.0" />
-      <Button fx:id="loginButton" layoutX="142.0" layoutY="314.0" mnemonicParsing="false" onAction="#handleLoginPressed" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #008fff;" text="Login" textFill="WHITE">
-         <font>
-            <Font name="Arial Bold" size="16.0" />
-         </font>
-      </Button>
-      <Button fx:id="registerButton" layoutX="258.0" layoutY="314.0" mnemonicParsing="false" onAction="#handleRegistrationPressed" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #008fff;" text="Register" textFill="WHITE">
-         <font>
-            <Font name="Arial Bold" size="16.0" />
-         </font>
-      </Button>
-      <Circle layoutX="138.0" layoutY="124.0" radius="110.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0">
-         <fill>
-            <LinearGradient endX="0.9077669902912622" endY="0.4854368932038835" startX="0.10194174757281553" startY="0.12135922330097088">
-               <stops>
-                  <Stop color="WHITE" />
-                  <Stop color="WHITE" offset="0.007246376811594203" />
-                  <Stop color="#008fff" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </fill>
-      </Circle>
-      <Text fill="WHITE" layoutX="150.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clean Water" textAlignment="CENTER">
-         <font>
-            <Font name="Calibri Light" size="50.0" />
-         </font>
-      </Text>
-      <Text fill="WHITE" layoutX="235.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Crowdsourcing">
-         <font>
-            <Font name="Calibri Light" size="40.0" />
-         </font>
-      </Text>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0"
+            style="-fx-background-color: white;"
+            xmlns="http://javafx.com/javafx/8.0.60"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.WelcomeController">
+   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#008fff" height="300.0"
+              stroke="#008fff" strokeType="INSIDE" width="500.0"/>
+   <Button fx:id="loginButton" layoutX="142.0" layoutY="314.0"
+           mnemonicParsing="false" onAction="#handleLoginPressed"
+           prefHeight="35.0" prefWidth="100.0"
+           style="-fx-background-color: #008fff;" text="Login" textFill="WHITE">
+      <font>
+         <Font name="Arial Bold" size="16.0"/>
+      </font>
+   </Button>
+   <Button fx:id="registerButton" layoutX="258.0" layoutY="314.0"
+           mnemonicParsing="false" onAction="#handleRegistrationPressed"
+           prefHeight="35.0" prefWidth="100.0"
+           style="-fx-background-color: #008fff;" text="Register"
+           textFill="WHITE">
+      <font>
+         <Font name="Arial Bold" size="16.0"/>
+      </font>
+   </Button>
+   <Circle layoutX="138.0" layoutY="124.0" radius="110.0" stroke="WHITE"
+           strokeType="INSIDE" strokeWidth="0.0">
+      <fill>
+         <LinearGradient endX="0.9077669902912622" endY="0.4854368932038835"
+                         startX="0.10194174757281553"
+                         startY="0.12135922330097088">
+            <stops>
+               <Stop color="WHITE"/>
+               <Stop color="WHITE" offset="0.007246376811594203"/>
+               <Stop color="#008fff" offset="1.0"/>
+            </stops>
+         </LinearGradient>
+      </fill>
+   </Circle>
+   <Text fill="WHITE" layoutX="150.0" layoutY="172.0" strokeType="OUTSIDE"
+         strokeWidth="0.0" text="Clean Water" textAlignment="CENTER">
+      <font>
+         <Font name="Calibri Light" size="50.0"/>
+      </font>
+   </Text>
+   <Text fill="WHITE" layoutX="235.0" layoutY="210.0" strokeType="OUTSIDE"
+         strokeWidth="0.0" text="Crowdsourcing">
+      <font>
+         <Font name="Calibri Light" size="40.0"/>
+      </font>
+   </Text>
 </AnchorPane>

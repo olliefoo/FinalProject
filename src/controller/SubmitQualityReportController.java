@@ -72,7 +72,7 @@ public class SubmitQualityReportController {
 
     private User user;
     private Profile profile;
-    private QualityReport r = new QualityReport();
+    private final QualityReport r = new QualityReport();
 
     /**
      * sets the current user of this source report

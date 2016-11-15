@@ -1,15 +1,14 @@
 package fxapp;
 
 import model.Database;
-import controller.WelcomeController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.ReportDatabase;
 
-import java.io.*;
+import java.io.IOException;
+
 
 public class MainFXApplication extends Application {
 
@@ -17,7 +16,7 @@ public class MainFXApplication extends Application {
     public static Database database = new Database();
     //public static ReportDatabase reportDatabase = new ReportDatabase();
     private Stage mainStage;
-    private Parent rootLayout;
+    //private Parent rootLayout;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -31,10 +30,10 @@ public class MainFXApplication extends Application {
     private void showWelcomeScreen(Stage mainStage) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../view/WelcomeScreen.fxml"));
-        rootLayout = loader.load();
+        Parent rootLayout = loader.load();
 
         // Give the controller access to the main app.
-        WelcomeController controller = loader.getController();
+        //WelcomeController controller = loader.getController();
         //controller.setMainApp(this);
 
         mainStage.setTitle("Clean Water Crowdsourcing");

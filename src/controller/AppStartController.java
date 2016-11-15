@@ -225,7 +225,7 @@ public class AppStartController implements Initializable,
      *
      * @return whether or not the user entered both their first and last name
      */
-    public boolean isProfileCreated() {
+    private boolean isProfileCreated() {
         return (user.getProfile().getFirstname() != null &&
                 user.getProfile().getLastname() != null);
     }

@@ -141,11 +141,7 @@ public class ProfileController {
         String day = dayField.getValue();
         String year = yearField.getValue();
         boolean gender;
-        if (femaleRadioButton.isSelected()) {
-            gender = true;
-        } else {
-            gender = false;
-        }
+        gender = femaleRadioButton.isSelected();
 
         profile.setName(fName,lName);
         profile.setPhone(pNumber);

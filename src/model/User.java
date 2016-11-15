@@ -6,10 +6,10 @@ import java.io.Serializable;
  * Created by Ollie Foo on 9/20/2016.
  */
 public class User implements Serializable {
-    private String username;
+    private final String username;
     private String password;
     private String email;
-    private Profile profile;
+    private final Profile profile;
 
     public User(String username, String password, String email) {
         this.username = username;

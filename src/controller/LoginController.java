@@ -33,7 +33,7 @@ public class LoginController {
 
     /**
      * Initialize method called when controller is loaded. Used to set values
-     * for the account type combobox. Sets the default choice as USER.
+     * for the account type combo box. Sets the default choice as USER.
      *
      */
     @FXML
