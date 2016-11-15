@@ -1,7 +1,6 @@
 package controller;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,7 +9,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import model.ReportDatabase;
 import model.User;
 import model.QualityReport;
@@ -74,29 +72,13 @@ public class QualityReportListController {
                 list.add(temp);
             }
 
-            numberCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<QualityReport, String>, ObservableValue<String>>() {
-                public ObservableValue<String> call(TableColumn.CellDataFeatures<QualityReport, String> r) {
-                    return new SimpleStringProperty(Integer.toString(r.getValue().getNumber()));
-                }
-            });
+            numberCol.setCellValueFactory(r -> new SimpleStringProperty(Integer.toString(r.getValue().getNumber())));
 
-            locationCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<QualityReport, String>, ObservableValue<String>>() {
-                public ObservableValue<String> call(TableColumn.CellDataFeatures<QualityReport, String> r) {
-                    return new SimpleStringProperty(r.getValue().getLocation());
-                }
-            });
+            locationCol.setCellValueFactory(r -> new SimpleStringProperty(r.getValue().getLocation()));
 
-            dateCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<QualityReport, String>, ObservableValue<String>>() {
-                public ObservableValue<String> call(TableColumn.CellDataFeatures<QualityReport, String> r) {
-                    return new SimpleStringProperty(r.getValue().getDate());
-                }
-            });
+            dateCol.setCellValueFactory(r -> new SimpleStringProperty(r.getValue().getDate()));
 
-            userCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<QualityReport, String>, ObservableValue<String>>() {
-                public ObservableValue<String> call(TableColumn.CellDataFeatures<QualityReport, String> r) {
-                    return new SimpleStringProperty(r.getValue().getName());
-                }
-            });
+            userCol.setCellValueFactory(r -> new SimpleStringProperty(r.getValue().getName()));
             table.setItems(list);
         }
     }

@@ -1,12 +1,10 @@
 package controller;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -40,12 +38,7 @@ public class LoginController {
     private void initialize() {
         accountBox.getItems().addAll("USER", "WORKER", "MANAGER", "ADMIN");
         accountBox.setValue("USER");
-        accountBox.setOnMousePressed(new EventHandler<MouseEvent>(){
-            @Override
-            public void handle(MouseEvent event) {
-                accountBox.requestFocus();
-            }
-        });
+        accountBox.setOnMousePressed(event -> accountBox.requestFocus());
     }
 
     /**

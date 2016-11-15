@@ -1,7 +1,6 @@
 package controller;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,8 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
-import javafx.util.Callback;
-import model.QualityReport;
 import model.ReportDatabase;
 import model.SourceReport;
 import model.User;
@@ -76,35 +73,27 @@ public class SourceReportListController{
             dateCol.setCellValueFactory(new PropertyValueFactory<SourceReport, String>("date"));
             userCol.setCellValueFactory(new PropertyValueFactory<SourceReport, String>("username"));*/
 
-            numberCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<SourceReport, String>, ObservableValue<String>>() {
-                public ObservableValue<String> call(TableColumn.CellDataFeatures<SourceReport, String> r) {
-                    // p.getValue() returns the Person instance for a particular TableView row
-                    return new SimpleStringProperty(Integer.toString(r.getValue().getNumber()));
-                }
+            numberCol.setCellValueFactory(r -> {
+                // p.getValue() returns the Person instance for a particular TableView row
+                return new SimpleStringProperty(Integer.toString(r.getValue().getNumber()));
             });
             //table.getColumns().add(numberCol);
 
-            locationCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<SourceReport, String>, ObservableValue<String>>() {
-                public ObservableValue<String> call(TableColumn.CellDataFeatures<SourceReport, String> r) {
-                    // p.getValue() returns the Person instance for a particular TableView row
-                    return new SimpleStringProperty(r.getValue().getLocation());
-                }
+            locationCol.setCellValueFactory(r -> {
+                // p.getValue() returns the Person instance for a particular TableView row
+                return new SimpleStringProperty(r.getValue().getLocation());
             });
             //table.getColumns().add(locationCol);
 
-            dateCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<SourceReport, String>, ObservableValue<String>>() {
-                public ObservableValue<String> call(TableColumn.CellDataFeatures<SourceReport, String> r) {
-                    // p.getValue() returns the Person instance for a particular TableView row
-                    return new SimpleStringProperty(r.getValue().getDate());
-                }
+            dateCol.setCellValueFactory(r -> {
+                // p.getValue() returns the Person instance for a particular TableView row
+                return new SimpleStringProperty(r.getValue().getDate());
             });
             //table.getColumns().add(dateCol);
 
-            userCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<SourceReport, String>, ObservableValue<String>>() {
-                public ObservableValue<String> call(TableColumn.CellDataFeatures<SourceReport, String> r) {
-                    // p.getValue() returns the Person instance for a particular TableView row
-                    return new SimpleStringProperty(r.getValue().getUsername());
-                }
+            userCol.setCellValueFactory(r -> {
+                // p.getValue() returns the Person instance for a particular TableView row
+                return new SimpleStringProperty(r.getValue().getUsername());
             });
             //table.getColumns().add(userCol);
 

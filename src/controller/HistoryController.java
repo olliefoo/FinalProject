@@ -127,7 +127,7 @@ public class HistoryController {
                 }
             }
 
-            XYChart.Series<String, Double> series = new XYChart.Series<String, Double>();
+            XYChart.Series<String, Double> series = new XYChart.Series<>();
             if (ppmBox.getValue().equals("Virus")) {
                 for (QualityReport r : yearList) {
                     XYChart.Data<String, Double> new_chart = new XYChart.Data<>(r.getMonth(), r.getVirus());
