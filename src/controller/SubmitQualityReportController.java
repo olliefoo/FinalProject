@@ -140,7 +140,7 @@ public class SubmitQualityReportController {
         r.setLatitude(latitude);
         r.setLongitude(longitude);
         r.setVirus(Double.parseDouble(virus));
-        r.setContaminent(Double.parseDouble(cont));
+        r.setContaminant(Double.parseDouble(cont));
     }
 
     /**
@@ -152,14 +152,14 @@ public class SubmitQualityReportController {
 
         String location = waterLocationField.getText();
         String virus = virusField.getText();
-        String contamin = contaminantField.getText();
+        String contaminant = contaminantField.getText();
         if (location.length() == 0) {
             errorMessage += "Please enter a location.\n";
         }
         if (virus.length() == 0 || !virus.matches("[0-9]+")) {
             errorMessage += "Please enter a numeric value for Virus PPM\n";
         }
-        if (contamin.length() == 0 || !contamin.matches("[0-9]+")) {
+        if (contaminant.length() == 0 || !contaminant.matches("[0-9]+")) {
             errorMessage += "Please enter a numeric value for Contaminant PPM\n";
         }
         //no error message means success / good input

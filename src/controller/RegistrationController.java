@@ -99,7 +99,7 @@ public class RegistrationController {
     /**
      * The method that handles when the register button is pressed.
      * It will add the user to the main database arraylist and lead the user
-     * to the appstart page.
+     * to the app start page.
      * @throws IOException When something goes wrong.
      */
     @FXML

@@ -103,8 +103,8 @@ public class QualityReport implements Serializable {
         return longitude;
     }
     public void setVirus(double virus) {this.virus = virus;}
-    public void setContaminent(double contaminent) {this.contaminant =
-            contaminent; }
+    public void setContaminant(double contaminant) {this.contaminant =
+            contaminant; }
     public double getVirus() {return virus; }
     public double getContaminant() {return contaminant; }
 
