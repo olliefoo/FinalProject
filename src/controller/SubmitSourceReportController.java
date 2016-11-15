@@ -184,6 +184,7 @@ public class SubmitSourceReportController {
         if (isInputValid()) {
             setReportValues();
             ReportDatabase.getInstance().add(r);
+            ReportDatabase.getInstance().setSourceUpdated(true);
             ReportDatabase.getInstance().saveSource();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             //alert.setTitle("Invalid Fields");

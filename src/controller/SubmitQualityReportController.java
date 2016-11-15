@@ -190,6 +190,7 @@ public class SubmitQualityReportController {
         if (isInputValid()) {
             setReportValues();
             ReportDatabase.getInstance().add(r);
+            ReportDatabase.getInstance().setQualityUpdated(true);
             ReportDatabase.getInstance().saveQuality();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             //alert.setTitle("Invalid Fields");

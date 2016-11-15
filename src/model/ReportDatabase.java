@@ -11,6 +11,8 @@ public class ReportDatabase{
     private static final ReportDatabase instance = new ReportDatabase();
     private ArrayList<SourceReport> sourceReports = new ArrayList<>();
     private ArrayList<QualityReport> qualityReports = new ArrayList<>();
+    private boolean sourceUpdated;
+    private boolean qualityUpdated;
 
     /**
      * Constructor to create a list of all source reports.
@@ -134,5 +136,22 @@ public class ReportDatabase{
      */
     public List<QualityReport> getQualityReports() {
         return qualityReports;
+    }
+
+
+    public boolean getSourceUpdated() {
+        return sourceUpdated;
+    }
+
+    public boolean getQualityUpdated() {
+        return qualityUpdated;
+    }
+
+    public void setSourceUpdated(boolean flag) {
+        sourceUpdated = flag;
+    }
+
+    public void setQualityUpdated(boolean flag) {
+        qualityUpdated = flag;
     }
 }
