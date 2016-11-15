@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 public class OllieTest {
     @Test
     public void testGetUser() {
-        String username = "Ollie";
+        String username = "olliefoo";
         String password = "password";
         String email = "ofoo3@gatech.edu";
         User user = new User(username, password, email);
@@ -19,5 +19,18 @@ public class OllieTest {
         Database database = new Database();
         Database.add(user);
         assertEquals(user, Database.getUser(username));
+    }
+
+    @Test
+    public void testGetNull() {
+        String username = "olliefoo";
+        String password = "password";
+        String email = "ofoo3@gatech.edu";
+        User user = new User(username, password, email);
+
+        String usernameNotExist = "notolliefoo";
+        Database database = new Database();
+        Database.add(user);
+        assertNull(Database.getUser(usernameNotExist));
     }
 }
