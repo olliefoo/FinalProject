@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Kijana on 10/11/2016.
  */
-public class ReportDatabase{
+/*public class ReportDatabase{
     private static final ReportDatabase instance = new ReportDatabase();
     private ArrayList<SourceReport> sourceReports = new ArrayList<>();
     private ArrayList<QualityReport> qualityReports = new ArrayList<>();
@@ -17,7 +17,7 @@ public class ReportDatabase{
     /**
      * Constructor to create a list of all source reports.
      */
-    private ReportDatabase() { }
+    /*private ReportDatabase() { }
 
 
     public static ReportDatabase getInstance() {return instance; }
@@ -25,7 +25,7 @@ public class ReportDatabase{
      * Method to add a new report to the database
      * @param r source report to be added to the list
      */
-    public void add(Object r) { //report class in future?
+    /*public void add(Object r) { //report class in future?
         if (r instanceof SourceReport) {
             sourceReports.add((SourceReport) r);
         } else if (r instanceof QualityReport) {
@@ -36,7 +36,7 @@ public class ReportDatabase{
     /**
      * saves the submitted source report to the report database
      */
-    public void saveSource()  {
+   /* public void saveSource()  {
         try {
             try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("source.bin"))) {
                 out.writeObject(sourceReports);
@@ -49,7 +49,7 @@ public class ReportDatabase{
     /**
      * saves the submitted quality report to the report database
      */
-    public void saveQuality()  {
+    /*public void saveQuality()  {
         try {
             try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("quality.bin"))) {
                 out.writeObject(qualityReports);
@@ -63,7 +63,7 @@ public class ReportDatabase{
      * loads the source reports from the report database and puts them into
      * the app
      */
-    public void loadSource()  {
+    /*public void loadSource()  {
         try {
             try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("source.bin"))) {
                 sourceReports = (ArrayList<SourceReport>) in.readObject();
@@ -78,7 +78,7 @@ public class ReportDatabase{
      * loads the quality reports from the report database and puts them into
      * the app
      */
-    public void loadQuality()  {
+    /*public void loadQuality()  {
         try {
             try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("quality.bin"))) {
                 qualityReports = (ArrayList<QualityReport>) in.readObject();
@@ -93,7 +93,7 @@ public class ReportDatabase{
      * @param number the source report number to be retrieved
      * @return source report requested
      */
-    public SourceReport getSourceReport(int number) {
+    /*public SourceReport getSourceReport(int number) {
         return sourceReports.get(number - 1);
     }
 
@@ -102,7 +102,7 @@ public class ReportDatabase{
      * @param number the quality report number to be retrieved
      * @return quality report requested
      */
-    public QualityReport getQualityReport(int number) {
+   /* public QualityReport getQualityReport(int number) {
         return qualityReports.get(number - 1);
     }
 
@@ -118,7 +118,7 @@ public class ReportDatabase{
      * Returns the size of the list of source reports
      * @return size of source report
      */
-    public int numSource() {
+    /*public int numSource() {
         return sourceReports.size();
     }
 
@@ -126,7 +126,7 @@ public class ReportDatabase{
      * Returns the size of the list of source reports
      * @return size of source report
      */
-    public int numQuality() {
+   /* public int numQuality() {
         return qualityReports.size();
     }
 
@@ -134,12 +134,12 @@ public class ReportDatabase{
      * Gets the list of quality reports
      * @return a list of quality reports
      */
-    public List<QualityReport> getQualityReports() {
+   /* public List<QualityReport> getQualityReports() {
         return qualityReports;
     }
+*/
 
-
-    public boolean getSourceUpdated() {
+    /*public boolean getSourceUpdated() {
         return sourceUpdated;
     }
 
@@ -155,3 +155,4 @@ public class ReportDatabase{
         qualityUpdated = flag;
     }
 }
+*/

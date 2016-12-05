@@ -13,11 +13,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import model.ReportDatabase;
 import model.SourceReport;
 import model.User;
 import java.io.IOException;
-import java.io.SyncFailedException;
 import java.sql.SQLException;
 
 /**

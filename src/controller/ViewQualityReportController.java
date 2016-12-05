@@ -65,14 +65,13 @@ public class ViewQualityReportController {
         reportDateField.setText(qualityReport.getDate());
         reportTimeField.setText(qualityReport.getTime());
         reportNumberField.setText(Integer.toString(qualityReport.getNumber()));
-        workerNameField.setText(qualityReport.getName());
+        workerNameField.setText(qualityReport.getUsername());
         waterLocationField.setText(qualityReport.getLocation());
         conditionField.setText(qualityReport.getCondition());
         latField.setText(Double.toString(qualityReport.getLatitude()));
         longField.setText(Double.toString(qualityReport.getLongitude()));
         virusField.setText(Double.toString(qualityReport.getVirus()));
-        contaminantField.setText(Double.toString(qualityReport.getContaminant
-                ()));
+        contaminantField.setText(Double.toString(qualityReport.getContaminant()));
     }
 
     /**

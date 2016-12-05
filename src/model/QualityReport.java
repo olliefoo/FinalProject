@@ -1,37 +1,81 @@
 package model;
 
-import java.io.Serializable;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Owner on 10/20/2016.
  */
-public class QualityReport implements Serializable {
+public class QualityReport extends Entity {
 
     private static int total = 0;
     private final int number;
     private final Date fullDate;
-
-    private User worker;
-    private String name;
-    private String location;
+    private String username;
     private String condition;
     private String date;
     private String time;
-    private double latitude;
-    private double longitude;
     private double virus;
     private double contaminant;
+    private String location;
+    private double latitude;
+    private double longitude;
+
 
     /**
      * Constructor for a new source report
      */
     public QualityReport() {
-        total++;
+        try {
+            List<QualityReport> list = selectAllReports();
+            total = list.size() + 1;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
         number = total;
         fullDate = new Date();
     }
+
+    public QualityReport(ResultSet rs) throws SQLException {
+        number = rs.getInt(1);
+        fullDate = rs.getDate(2);
+        username = rs.getString(3);
+        condition = rs.getString(4);
+        virus = rs.getDouble(5);
+        contaminant = rs.getDouble(6);
+        location = rs.getString(7);
+        latitude = rs.getDouble(8);
+        longitude = rs.getDouble(9);
+    }
+
+
+    public static List<QualityReport> selectAllReports() throws SQLException{
+        return select("SELECT * FROM QualityReport;", QualityReport::new);
+    }
+
+    public static List<QualityReport> selectVirusReports(String location, String year) throws SQLException {
+        return select(String.format("SELECT * FROM QualityReport WHERE (VirusPPM=TRUE AND Location='%s' AND EXTRACT(YEAR from FullDate)='%s');", location, year), QualityReport::new);
+    }
+
+    public static List<QualityReport> selectContaminantReports(String location, String year) throws SQLException {
+        return select(String.format("SELECT * FROM QualityReport WHERE (ContaminantPPM=TRUE AND Location='%s' AND EXTRACT(YEAR from FullDate)='%s');", location, year), QualityReport::new);
+    }
+
+    public static QualityReport selectReport(int index) throws SQLException {
+        List<QualityReport> list = select(String.format("SELECT * FROM QualityReport WHERE Number=%d", index), QualityReport::new);
+        return list.get(0);
+    }
+
+    public void insert() throws SQLException {
+        java.sql.Date sqlDate = new java.sql.Date(fullDate.getTime());
+        execute(String.format("INSERT INTO QualityReport VALUES (%d, '%s', '%s'," +
+                        " '%s', %f, %f,'%s', %f, %f);", number, sqlDate, username,
+                condition, virus, contaminant, location, latitude, longitude));
+    }
+
     /**
      * Returns the string representation of the quality report
      * @return the string representing the report
@@ -47,27 +91,17 @@ public class QualityReport implements Serializable {
     /**
      * List of getters and setters for source report values.
      */
-    public static int getTotal() {
-        return total;
-    }
     public static void setTotal(int num) {
         total = num;
     }
-    public void setReporter(User u) {
-        this.worker = u;
-    }
-    public void setName(String name) {
-        this.name = name;
+    public void setUserame(String name) {
+        username = name;
     }
     public void setCondition(String condition) {
         this.condition = condition;
     }
-    public void setTime(String time) {
-        this.time = time;
-    }
-    public void setDate(String date) {
-        this.date = date;
-    }
+    public void setContaminant(double contaminant) {this.contaminant =
+            contaminant; }
     public void setLocation(String location) {
         this.location = location;
     }
@@ -77,37 +111,35 @@ public class QualityReport implements Serializable {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
-    public User getReporter() {
-        return worker;
+
+    public static int getTotal() {
+        return total;
     }
-    public String getName() {
-        return name;
+    public int getNumber() {
+        return number;
+    }
+    public String getUsername() {
+        return username;
     }
     public String getCondition() {
         return condition;
     }
     public String getTime() {
-        return time;
+        SimpleDateFormat ft2 = new SimpleDateFormat("h:mm a");
+        return ft2.format(fullDate);
     }
     public String getDate() {
-        return date;
+        SimpleDateFormat ft1 = new SimpleDateFormat("E MM/dd/yyyy");
+        return ft1.format(fullDate);
     }
     public String getLocation() {
         return location;
-    }
-    public int getNumber() {
-        return number;
-    }
-    public Date getFullDate() {
-        return fullDate;
     }
     public double getLatitude() {return latitude;}
     public double getLongitude() {
         return longitude;
     }
     public void setVirus(double virus) {this.virus = virus;}
-    public void setContaminant(double contaminant) {this.contaminant =
-            contaminant; }
     public double getVirus() {return virus; }
     public double getContaminant() {return contaminant; }
 

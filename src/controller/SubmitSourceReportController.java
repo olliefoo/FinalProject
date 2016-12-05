@@ -6,15 +6,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import model.Profile;
-import model.ReportDatabase;
 import model.SourceReport;
 import model.User;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
 
 public class SubmitSourceReportController {
     @FXML
@@ -114,19 +111,16 @@ public class SubmitSourceReportController {
     private void setReportValues(SourceReport r) {
         String date = reportDate.getText();
         String time = reportTime.getText();
-        //String number = reportNumber.getText();
         String name = reporterNameField.getText();
         String location = waterLocationField.getText();
         double latitude = latitudeSlider.getValue();
         double longitude = longitudeSlider.getValue();
-
-
         String type = waterTypeCombo.getValue();
         if (type.equals("Other")) {
             type = otherTypeField.getText();
         }
-
         String condition = waterConditionCombo.getValue();
+
         r.setUsername(user.getUsername());
         r.setLocation(location);
         r.setType(type);

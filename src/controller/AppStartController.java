@@ -19,6 +19,7 @@ import netscape.javascript.JSObject;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 
@@ -102,7 +103,7 @@ public class AppStartController implements Initializable,
         MapOptions options = new MapOptions();
         //set up the center location for the map
         LatLong center = new LatLong(33, -84);
-        if (ReportDatabase.getInstance().getSourceUpdated() && ReportDatabase.getInstance().numSource() != 0) {
+        /*if (ReportDatabase.getInstance().getSourceUpdated() && ReportDatabase.getInstance().numSource() != 0) {
             SourceReport newest = ReportDatabase.getInstance().getSourceReport(ReportDatabase.getInstance().numSource());
             center = new LatLong(newest.getLatitude(), newest.getLongitude());
             ReportDatabase.getInstance().setSourceUpdated(false);
@@ -111,7 +112,7 @@ public class AppStartController implements Initializable,
             QualityReport newest = ReportDatabase.getInstance().getQualityReport(ReportDatabase.getInstance().numQuality());
             center = new LatLong(newest.getLatitude(), newest.getLongitude());
             ReportDatabase.getInstance().setQualityUpdated(false);
-        }
+        }*/
 
         options.center(center)
                 .zoom(9)
@@ -126,24 +127,24 @@ public class AppStartController implements Initializable,
         map = mapView.createMap(options);
 
         //place markers on map
-        if (ReportDatabase.getInstance().numSource() != 0) {
-            SourceReport currentReport;
-            double lat;
-            double lng;
-            LatLong point;
-            for (int i = 1; i <= ReportDatabase.getInstance().numSource(); i++) {
+        //if (ReportDatabase.getInstance().numSource() != 0) {
+        SourceReport currentReport;
+        double lat;
+        double lng;
+        LatLong point;
+        try {
+            for (SourceReport s : SourceReport.selectAllReports()) {
                 MarkerOptions markerOptions = new MarkerOptions();
-                currentReport = ReportDatabase.getInstance().getSourceReport(i);
-                String description = currentReport.toString();
-                lat = currentReport.getLatitude();
-                lng = currentReport.getLongitude();
+                String description = s.toString();
+                lat = s.getLatitude();
+                lng = s.getLongitude();
                 point = new LatLong(lat, lng);
 
-                markerOptions.position( point )
+                markerOptions.position(point)
                         .visible(Boolean.TRUE)
-                        .title(currentReport.getLocation());
+                        .title(s.getLocation());
 
-                Marker marker = new Marker( markerOptions );
+                Marker marker = new Marker(markerOptions);
 
                 map.addUIEventHandler(marker,
                         UIEventType.click,
@@ -151,14 +152,18 @@ public class AppStartController implements Initializable,
                             InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
                             infoWindowOptions.content(description);
                             InfoWindow window = new InfoWindow(infoWindowOptions);
-                            window.open(map, marker);});
+                            window.open(map, marker);
+                        });
 
                 map.addMarker(marker);
 
             }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
+        //}
         //place purity marker
-        if (ReportDatabase.getInstance().numQuality() != 0) {
+        /*if (ReportDatabase.getInstance().numQuality() != 0) {
             QualityReport currentReport;
             double lat;
             double lng;
@@ -188,7 +193,7 @@ public class AppStartController implements Initializable,
                 map.addMarker(marker);
 
             }
-        }
+        }*/
     }
 
     /**

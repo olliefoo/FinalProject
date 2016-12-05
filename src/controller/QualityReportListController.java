@@ -1,6 +1,5 @@
 package controller;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,12 +7,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import model.ReportDatabase;
 import model.User;
 import model.QualityReport;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 /**
  * Created by miles on 10/31/2016.
@@ -30,7 +30,7 @@ public class QualityReportListController {
 
     @FXML
     private
-    TableColumn<QualityReport, String> numberCol;
+    TableColumn<QualityReport, Integer> numberCol;
 
     @FXML
     private
@@ -63,24 +63,22 @@ public class QualityReportListController {
      */
     @FXML
     private void initialize() {
-        if (ReportDatabase.getInstance().numQuality() != 0) {
-            ObservableList<QualityReport> list
-                    = FXCollections.observableArrayList();
-            QualityReport temp;
-            for (int i = 1; i <= ReportDatabase.getInstance().numQuality(); i++) {
-                temp = ReportDatabase.getInstance().getQualityReport(i);
-                list.add(temp);
+        ObservableList<QualityReport> list
+                = FXCollections.observableArrayList();
+        try {
+            for(QualityReport q : QualityReport.selectAllReports()) {
+                list.add(q);
             }
-
-            numberCol.setCellValueFactory(r -> new SimpleStringProperty(Integer.toString(r.getValue().getNumber())));
-
-            locationCol.setCellValueFactory(r -> new SimpleStringProperty(r.getValue().getLocation()));
-
-            dateCol.setCellValueFactory(r -> new SimpleStringProperty(r.getValue().getDate()));
-
-            userCol.setCellValueFactory(r -> new SimpleStringProperty(r.getValue().getName()));
-            table.setItems(list);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
+
+        numberCol.setCellValueFactory(new PropertyValueFactory<QualityReport, Integer>("number"));
+        locationCol.setCellValueFactory(new PropertyValueFactory<QualityReport, String>("location"));
+        dateCol.setCellValueFactory(new PropertyValueFactory<QualityReport, String>("date"));
+        userCol.setCellValueFactory(new PropertyValueFactory<QualityReport,String>("username"));
+
+        table.getItems().setAll(list);
     }
 
     /**
@@ -130,8 +128,12 @@ public class QualityReportListController {
                     .getResource("../view/ViewQualityReportScreen.fxml"));
             Stage stage = (Stage) chooseButton.getScene().getWindow();
             Parent root = loader.load();
-            loader.<ViewQualityReportController>getController()
-                    .setup(user, ReportDatabase.getInstance().getQualityReport(reportIndex));
+            try {
+                loader.<ViewQualityReportController>getController()
+                        .setup(user, QualityReport.selectReport(reportIndex));
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
             stage.setScene(new Scene(root));
             stage.show();
         } else {

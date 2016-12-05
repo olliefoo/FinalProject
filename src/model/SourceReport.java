@@ -1,6 +1,5 @@
 package model;
 
-import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -13,11 +12,8 @@ import java.util.List;
 public class SourceReport extends Entity {
 
     private static int total = 0;
-
-
     private final int number;
     private final Date fullDate;
-    //private User reporter;
     private String username;
     private String type;
     private String condition;
@@ -38,7 +34,6 @@ public class SourceReport extends Entity {
             System.out.println(e.getMessage());
         }
         number = total;
-        //reportNumber = new SimpleStringProperty(Integer.toString(number));
         fullDate = new Date();
     }
 

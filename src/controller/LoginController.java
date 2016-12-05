@@ -8,9 +8,6 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
-
-//import model.Database;
-import model.ReportDatabase;
 import model.User;
 
 public class LoginController {
@@ -108,24 +105,9 @@ public class LoginController {
     @FXML
     private void handleLoginPressed() throws IOException {
         if (isInputValid()) {
-            ReportDatabase.getInstance().loadSource();
-            ReportDatabase.getInstance().loadQuality();
-            //User user = Database.getUser(usernameField.getText());
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass()
                     .getResource("../view/AppStartScreen.fxml"));
-
-            /*if (accountBox.getValue().equals("WORKER")) {
-                user = Database.getWorker(usernameField.getText());
-                //loader.setLocation(getClass().getResource("../view/AppStartScreen2.fxml"));
-            } else if (accountBox.getValue().equals("MANAGER")) {
-                user = Database.getManager(usernameField.getText());
-                //loader.setLocation(getClass().getResource("../view/AppStartScreen3.fxml"));
-            } else if (accountBox.getValue().equals("ADMIN")) {
-                user = Database.getAdmin(usernameField.getText());
-                //loader.setLocation(getClass().getResource("../view/AppStartScreen4.fxml"));
-            }*/
-            //FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppStartScreen.fxml"));
 
             Stage stage = (Stage) login.getScene().getWindow();
             Parent root = loader.load();

@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import model.*;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 
@@ -89,14 +90,10 @@ public class SubmitQualityReportController {
      */
     private void setup() {
         workerNameField.setText(user.getFirstname() + " " + user.getLastname());
+        reportDate.setText(r.getDate());
+        reportTime.setText(r.getTime());
 
         reportNumber.setText("" + r.getNumber());
-
-        SimpleDateFormat ft1 = new SimpleDateFormat("E MM/dd/yyyy");
-        SimpleDateFormat ft2 = new SimpleDateFormat("h:mm a");
-        reportDate.setText(ft1.format(r.getFullDate()));
-        reportTime.setText(ft2.format(r.getFullDate()));
-
 
         conditionCombo.getItems().addAll("Waste", "Treatable-Clear",
                 "Treatable-Muddy", "Potable");
@@ -118,22 +115,15 @@ public class SubmitQualityReportController {
      * Sets the values from the view to the source report
      */
     private void setReportValues() {
-        String date = reportDate.getText();
-        String time = reportTime.getText();
-        //String number = reportNumber.getText();
         String name = workerNameField.getText();
         String location = waterLocationField.getText();
         double latitude = latitudeSlider.getValue();
         double longitude = longitudeSlider.getValue();
         String virus = virusField.getText();
         String cont = contaminantField.getText();
-
-
         String condition = conditionCombo.getValue();
-        r.setReporter(user);
-        r.setTime(time);
-        r.setDate(date);
-        r.setName(name);
+
+        r.setUserame(name);
         r.setLocation(location);
         r.setCondition(condition);
         r.setLatitude(latitude);
@@ -188,9 +178,11 @@ public class SubmitQualityReportController {
     private void handleReportSubmitPressed() throws IOException {
         if (isInputValid()) {
             setReportValues();
-            ReportDatabase.getInstance().add(r);
-            ReportDatabase.getInstance().setQualityUpdated(true);
-            ReportDatabase.getInstance().saveQuality();
+            try {
+                r.insert();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             //alert.setTitle("Invalid Fields");
             alert.setHeaderText("Thank you for submitting a report.");
