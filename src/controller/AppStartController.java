@@ -76,13 +76,13 @@ public class AppStartController implements Initializable,
         workerRect.setVisible(false);
         historyButton.setVisible(false);
 
-        if (user instanceof Worker || user instanceof Manager) {
+        if (user.isWorker() || user.isManager()) {
             workerRect.setVisible(true);
             sourceText.setVisible(true);
             qualityText.setVisible(true);
             submitQualityButton.setVisible(true);
         }
-        if (user instanceof Manager) {
+        if (user.isManager()) {
             viewQualityButton.setVisible(true);
             historyButton.setVisible(true);
         }
@@ -222,17 +222,6 @@ public class AppStartController implements Initializable,
     }
 
     /**
-     * Checks whether the user has edited their profile to include at least
-     * their first and last name.
-     *
-     * @return whether or not the user entered both their first and last name
-     */
-    private boolean isProfileCreated() {
-        return (user.getProfile().getFirstname() != null &&
-                user.getProfile().getLastname() != null);
-    }
-
-    /**
      * Handles the "Submit Report" button press. When pressed, leads the user to
      * the SubmitSourceReportScreen.
      *
@@ -240,21 +229,14 @@ public class AppStartController implements Initializable,
      */
     @FXML
     private void handleSubmitPressed() throws IOException {
-        if (isProfileCreated()) {
-            FXMLLoader loader = new FXMLLoader(getClass()
-                    .getResource("../view/SubmitSourceReportScreen.fxml"));
-            Stage stage = (Stage) submitButton.getScene().getWindow();
-            Parent root = loader.load();
-            loader.<SubmitSourceReportController>getController().setUser(user);
-            stage.setScene(new Scene(root));
-            stage.show();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Access Denied");
-            alert.setHeaderText("Please Edit Profile");
-            alert.setContentText("Please edit your profile first to proceed.");
-            alert.showAndWait();
-        }
+        FXMLLoader loader = new FXMLLoader(getClass()
+                .getResource("../view/SubmitSourceReportScreen.fxml"));
+        Stage stage = (Stage) submitButton.getScene().getWindow();
+        Parent root = loader.load();
+        loader.<SubmitSourceReportController>getController().setUser(user);
+        stage.setScene(new Scene(root));
+        stage.show();
+
     }
 
     /**
@@ -280,22 +262,13 @@ public class AppStartController implements Initializable,
      */
     @FXML
     private void handleSubmitQualityPressed() throws IOException {
-        if (isProfileCreated()) {
-            FXMLLoader loader = new FXMLLoader(getClass()
-                    .getResource("../view/SubmitQualityReportScreen.fxml"));
-            Stage stage = (Stage) submitQualityButton.getScene().getWindow();
-            Parent root = loader.load();
-            loader.<SubmitQualityReportController>getController().setUser(user);
-            stage.setScene(new Scene(root));
-            stage.show();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Access Denied");
-            alert.setHeaderText("Please Edit Profile");
-            alert.setContentText("Please edit your profile first to proceed." +
-                    "Need first name and last name.");
-            alert.showAndWait();
-        }
+        FXMLLoader loader = new FXMLLoader(getClass()
+                .getResource("../view/SubmitQualityReportScreen.fxml"));
+        Stage stage = (Stage) submitQualityButton.getScene().getWindow();
+        Parent root = loader.load();
+        loader.<SubmitQualityReportController>getController().setUser(user);
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     /**

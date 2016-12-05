@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 /**
  * Created by Kijana.
  */
-public class KijanaTest {
+/*public class KijanaTest {
 
     @Test
     public void addAdmin() {
@@ -52,4 +52,4 @@ public class KijanaTest {
         assertEquals(user, db.getUser(username));
     }
 }
-
+*/

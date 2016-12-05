@@ -1,6 +1,6 @@
 package test;
 
-import model.Database;
+//import model.Database;
 import model.User;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 /**
  * Created by Owner on 11/14/2016.
  */
-public class OllieTest {
+/*public class OllieTest {
     @Test
     public void testGetUser() {
         String username = "olliefoo";
@@ -33,4 +33,4 @@ public class OllieTest {
         Database.add(user);
         assertNull(Database.getUser(usernameNotExist));
     }
-}
+}*/

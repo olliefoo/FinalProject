@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
  * Created by Owner on 10/2/2016.
  */
-public class Database implements Serializable {
+/*public class Database implements Serializable {
     private static ArrayList<User> users;
     private static ArrayList<Worker> workers;
     private static ArrayList<Manager> managers;
@@ -29,7 +29,7 @@ public class Database implements Serializable {
      *
      * @param u the user to add
      */
-    public static void add(User u) {
+    /*public static void add(User u) {
         if (u instanceof Admin) {
             admins.add((Admin) u);
         } else if (u instanceof Manager) {
@@ -44,7 +44,7 @@ public class Database implements Serializable {
     /**
      * saves all of the users that have registered an account
      */
-    public static void saveAll()  {
+    /*public static void saveAll()  {
         try {
             try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("all.bin"))) {
                 out.writeObject(users);
@@ -62,7 +62,7 @@ public class Database implements Serializable {
     /**
      * loads all of the users that have registered an account
      */
-    public static void loadAll()  {
+    /*public static void loadAll()  {
         try {
             try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("all.bin"))) {
                 ArrayList<User> uL = (ArrayList<User>) in.readObject();
@@ -87,7 +87,7 @@ public class Database implements Serializable {
      *
      * @param name the username to be added
      */
-    public static void addUsername(String name) {
+    /*public static void addUsername(String name) {
         usernameList.add(name);
     }
 
@@ -96,7 +96,7 @@ public class Database implements Serializable {
      *
      * @param email the email to be added
      */
-    public static void addEmail(String email) {
+    /*public static void addEmail(String email) {
         emailList.add(email);
     }
 
@@ -106,7 +106,7 @@ public class Database implements Serializable {
      * @param name username of a user
      * @return whether or no the database contains the specified user
      */
-    public static boolean containsUsername(String name) {
+    /*public static boolean containsUsername(String name) {
         return usernameList.contains(name);
     }
 
@@ -116,7 +116,7 @@ public class Database implements Serializable {
      * @param email an email to check
      * @return whether the database contains the specified email
      */
-    public static boolean containsEmail(String email) {
+    /*public static boolean containsEmail(String email) {
         return emailList.contains(email);
     }
 
@@ -126,7 +126,7 @@ public class Database implements Serializable {
      * @param name the username of a user
      * @return the user with the specified username. NULL if user is not in the database
      */
-    public static User getUser(String name) {
+    /*public static User getUser(String name) {
         for (User u : users) {
             if (name.equals(u.getUsername())) {
                 return u;
@@ -141,7 +141,7 @@ public class Database implements Serializable {
      * @param name the username of a worker
      * @return the worker with the specified username. NULL if worker is not in the database
      */
-    public static User getWorker(String name) {
+    /*public static User getWorker(String name) {
         for (Worker w : workers) {
             if (name.equals(w.getUsername())) {
                 return w;
@@ -156,7 +156,7 @@ public class Database implements Serializable {
      * @param name the username of a manager
      * @return the manager with the specified username. NULL if manager is not in the database
      */
-    public static User getManager(String name) {
+   /* public static User getManager(String name) {
         for (Manager m : managers) {
             if (name.equals(m.getUsername())) {
                 return m;
@@ -171,7 +171,7 @@ public class Database implements Serializable {
      * @param name the username of a admin
      * @return the admin with the specified username. NULL if admin is not in the database
      */
-    public static User getAdmin(String name) {
+    /*public static User getAdmin(String name) {
         for (Admin a : admins) {
             if (name.equals(a.getUsername())) {
                 return a;
@@ -180,4 +180,4 @@ public class Database implements Serializable {
         return null;
     }
 
-}
+}*/

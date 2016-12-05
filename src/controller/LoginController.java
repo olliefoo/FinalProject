@@ -7,8 +7,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.sql.SQLException;
 
-import model.Database;
+//import model.Database;
 import model.ReportDatabase;
 import model.User;
 
@@ -26,20 +27,8 @@ public class LoginController {
     @FXML
     private Button cancel;
 
-    @FXML
-    private ComboBox<String> accountBox;
+    private User user;
 
-    /**
-     * Initialize method called when controller is loaded. Used to set values
-     * for the account type combo box. Sets the default choice as USER.
-     *
-     */
-    @FXML
-    private void initialize() {
-        accountBox.getItems().addAll("USER", "WORKER", "MANAGER", "ADMIN");
-        accountBox.setValue("USER");
-        accountBox.setOnMousePressed(event -> accountBox.requestFocus());
-    }
 
     /**
      * Checks if the username and password entered are valid. The entered
@@ -53,8 +42,26 @@ public class LoginController {
 
         String username = usernameField.getText();
         String password = passwordField.getText();
+        boolean foundUser = false;
+        boolean passwordMatch = false;
 
-        User user = Database.getUser(username);
+        try {
+            for (User u : User.selectAllUsers()) {
+                if(u.getUsername().equals(usernameField.getText())) {
+                    user = u;
+                }
+            }
+        } catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        if(user == null) {
+            errorMessage += "Username does not exist. Please register first.\n";
+        } else if(!user.getPassword().equals(passwordField.getText())) {
+            errorMessage += "Wrong password. Try again.\n";
+        }
+
+        /*User user = Database.getUser(username);
         if (accountBox.getValue().equals("WORKER")) {
             user = Database.getWorker(username);
         } else if (accountBox.getValue().equals("MANAGER")) {
@@ -73,7 +80,7 @@ public class LoginController {
                     || !(password.equals(user.getPassword()))) {
                 errorMessage += "Wrong password. Try again.\n";
             }
-        }
+        }*/
 
         //no error message means success / good input
         if (errorMessage.length() == 0) {
@@ -103,12 +110,12 @@ public class LoginController {
         if (isInputValid()) {
             ReportDatabase.getInstance().loadSource();
             ReportDatabase.getInstance().loadQuality();
-            User user = Database.getUser(usernameField.getText());
+            //User user = Database.getUser(usernameField.getText());
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass()
                     .getResource("../view/AppStartScreen.fxml"));
 
-            if (accountBox.getValue().equals("WORKER")) {
+            /*if (accountBox.getValue().equals("WORKER")) {
                 user = Database.getWorker(usernameField.getText());
                 //loader.setLocation(getClass().getResource("../view/AppStartScreen2.fxml"));
             } else if (accountBox.getValue().equals("MANAGER")) {
@@ -117,7 +124,7 @@ public class LoginController {
             } else if (accountBox.getValue().equals("ADMIN")) {
                 user = Database.getAdmin(usernameField.getText());
                 //loader.setLocation(getClass().getResource("../view/AppStartScreen4.fxml"));
-            }
+            }*/
             //FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppStartScreen.fxml"));
 
             Stage stage = (Stage) login.getScene().getWindow();

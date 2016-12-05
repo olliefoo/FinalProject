@@ -1,19 +1,19 @@
 package fxapp;
 
-import model.Database;
+//import model.Database;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.Entity;
 
 import java.io.IOException;
 
 
 public class MainFXApplication extends Application {
-
     // Creates a single instance of the database classes
-    public static Database database = new Database();
+    //public static Database database = new Database();
     //public static ReportDatabase reportDatabase = new ReportDatabase();
     private Stage mainStage;
     //private Parent rootLayout;
@@ -43,6 +43,7 @@ public class MainFXApplication extends Application {
         mainStage.show();
     }
     public static void main(String[] args) {
+        Entity.initializeSQL();
         launch(args);
     }
 }

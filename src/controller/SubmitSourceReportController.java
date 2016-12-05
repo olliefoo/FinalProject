@@ -61,7 +61,7 @@ public class SubmitSourceReportController {
     private Stage dialogStage;
 
     private User user;
-    private Profile profile;
+    //private Profile profile;
     private final SourceReport r = new SourceReport();
 
     /**
@@ -70,7 +70,7 @@ public class SubmitSourceReportController {
      */
     public void setUser(User u) {
         user = u;
-        profile = user.getProfile();
+        //profile = user.getProfile();
         setup();
     }
 
@@ -78,8 +78,7 @@ public class SubmitSourceReportController {
      * Inserts the initial inputs for the source report view
      */
     private void setup() {
-        reporterNameField.setText(profile.getFirstname() + " "
-                + profile.getLastname());
+        reporterNameField.setText(user.getFirstname() + " " + user.getLastname());
 
         reportNumber.setText("" + r.getNumber());
 

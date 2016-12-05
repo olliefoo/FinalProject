@@ -6,11 +6,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import model.Database;
+//import model.Database;
 import model.Profile;
 import model.User;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class ProfileController {
 
@@ -61,7 +62,6 @@ public class ProfileController {
     private final ToggleGroup group = new ToggleGroup();
 
     private User user;
-    private Profile profile;
 
     /**
      * Sets the current user in the controller
@@ -69,7 +69,6 @@ public class ProfileController {
      */
     public void setUser(User u) {
         user = u;
-        profile = user.getProfile();
         setup();
     }
 
@@ -80,23 +79,23 @@ public class ProfileController {
     private void setup() {
         maleRadioButton.setToggleGroup(group);
         femaleRadioButton.setToggleGroup(group);
-        if (profile.getGender()) {
+        if (user.getGender()) {
             femaleRadioButton.setSelected(true);
         } else {
             maleRadioButton.setSelected(true);
         }
 
-        firstNameField.setText(profile.getFirstname());
-        lastNameField.setText(profile.getLastname());
-        emailField.setText(profile.getEmail());
-        phoneField.setText(profile.getPhone());
-        streetField.setText(profile.getStreet());
-        cityField.setText(profile.getCity());
-        stateField.setText(profile.getState());
-        zipField.setText(profile.getZip());
-        monthField.setValue(profile.getMonth());
-        dayField.setValue(profile.getDay());
-        yearField.setValue(profile.getYear());
+        firstNameField.setText(user.getFirstname());
+        lastNameField.setText(user.getLastname());
+        emailField.setText(user.getEmail());
+        phoneField.setText(user.getPhone());
+        streetField.setText(user.getAddress());
+        cityField.setText(user.getCity());
+        stateField.setText(user.getState());
+        zipField.setText(user.getZip());
+        monthField.setValue(user.getMonth());
+        dayField.setValue(user.getDay());
+        yearField.setValue(user.getYear());
 
         monthField.getItems().addAll(
                 "January", "February", "March", "April", "May", "June", "July",
@@ -128,29 +127,22 @@ public class ProfileController {
      *
      */
     private void setValues() {
-        //set variables of user to input values
-        String fName = firstNameField.getText();
-        String lName = lastNameField.getText();
-        String mail = emailField.getText();
-        String pNumber = phoneField.getText();
-        String street = streetField.getText();
-        String city = cityField.getText();
-        String state = stateField.getText();
-        String zip = zipField.getText();
-        String month = monthField.getValue();
-        String day = dayField.getValue();
-        String year = yearField.getValue();
-        boolean gender;
-        gender = femaleRadioButton.isSelected();
+        user.setEmail(emailField.getText());
+        user.setAddress(streetField.getText());
+        user.setCity(cityField.getText());
+        user.setState(stateField.getText());
+        user.setZip(zipField.getText());
+        user.setPhone(phoneField.getText());
+        user.setMonth(monthField.getValue());
+        user.setDay(dayField.getValue());
+        user.setYear(yearField.getValue());
+        user.setGender(femaleRadioButton.isSelected());
 
-        profile.setName(fName,lName);
-        profile.setPhone(pNumber);
-        profile.setAddress(street, city, state, zip);
-        profile.setEmail(mail);
-        profile.setMonth(month);
-        profile.setDay(day);
-        profile.setYear(year);
-        profile.setGender(gender);
+        try {
+            user.update();
+        } catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -161,30 +153,26 @@ public class ProfileController {
      */
     @FXML
     private void handleUpdatePressed() throws IOException {
-        String firstName = firstNameField.getText();
-        String lastName = lastNameField.getText();
+        setValues();
+        //Database.saveAll();
+        FXMLLoader loader = new FXMLLoader(getClass()
+                .getResource("../view/AppStartScreen.fxml"));
+        Stage stage = (Stage) updateButton.getScene().getWindow();
+        Parent root = loader.load();
+        loader.<AppStartController>getController().setUser(user);
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 
-        if (firstName == null || firstName.length() == 0 ||
-                lastName == null || lastName.length() == 0) {
-
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Missing Fields");
-            alert.setHeaderText("Please enter required fields");
-            alert.setContentText("Please enter both your first name and last " +
-                    "name to continue.");
-
-            alert.showAndWait();
-        } else {
-            setValues();
-            Database.saveAll();
-            FXMLLoader loader = new FXMLLoader(getClass()
-                    .getResource("../view/AppStartScreen.fxml"));
-            Stage stage = (Stage) updateButton.getScene().getWindow();
-            Parent root = loader.load();
-            loader.<AppStartController>getController().setUser(user);
-            stage.setScene(new Scene(root));
-            stage.show();
-        }
+    @FXML
+    private void handleBackPressed() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass()
+                .getResource("../view/AppStartScreen.fxml"));
+        Stage stage = (Stage) updateButton.getScene().getWindow();
+        Parent root = loader.load();
+        loader.<AppStartController>getController().setUser(user);
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
 }

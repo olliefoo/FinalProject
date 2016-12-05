@@ -71,7 +71,7 @@ public class SubmitQualityReportController {
     private Stage dialogStage;
 
     private User user;
-    private Profile profile;
+    //private Profile profile;
     private final QualityReport r = new QualityReport();
 
     /**
@@ -80,7 +80,7 @@ public class SubmitQualityReportController {
      */
     public void setUser(User u) {
         user = u;
-        profile = user.getProfile();
+        //profile = user.getProfile();
         setup();
     }
 
@@ -88,8 +88,7 @@ public class SubmitQualityReportController {
      * Inserts the initial inputs for the source report view
      */
     private void setup() {
-        workerNameField.setText(profile.getFirstname() + " "
-                + profile.getLastname());
+        workerNameField.setText(user.getFirstname() + " " + user.getLastname());
 
         reportNumber.setText("" + r.getNumber());
 

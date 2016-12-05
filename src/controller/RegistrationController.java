@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.sql.SQLException;
 
 /**
  * Created by Admins on 9/27/2016.
@@ -24,6 +25,9 @@ public class RegistrationController {
 
     @FXML
     private TextField emailField;
+
+    @FXML
+    private TextField firstnameField, lastnameField;
 
     @FXML
     private Button registerButton;
@@ -44,7 +48,7 @@ public class RegistrationController {
      */
     @FXML
     private void initialize() {
-        choiceBox.getItems().addAll("USER", "WORKER", "MANAGER", "ADMIN");
+        choiceBox.getItems().addAll("USER", "WORKER", "MANAGER");
         choiceBox.setValue("USER");
         choiceBox.setOnMousePressed(event -> choiceBox.requestFocus());
     }
@@ -56,7 +60,13 @@ public class RegistrationController {
      */
     private boolean isInputValid() {
         String errorMessage = "";
-        if (usernameField.getText() == null
+        if(firstnameField.getText() == null
+                || firstnameField.getText().length() == 0) {
+            errorMessage += "First name cannot be blank\n";
+        } else if(lastnameField.getText() == null
+                || lastnameField.getText().length() == 0) {
+            errorMessage += "Last name cannot be blank\n";
+        } else if (usernameField.getText() == null
                 || usernameField.getText().length() == 0) {
             errorMessage += "Username cannot be blank\n";
         } else if (password1Field.getText() == null
@@ -68,10 +78,22 @@ public class RegistrationController {
         } else if (!(password2Field.getText()
                 .equals(password1Field.getText()))) {
             errorMessage += "Verification must match the original password\n";
-        } else if (Database.containsEmail(emailField.getText())) {
+        } /*else if (Database.containsEmail(emailField.getText())) {
             errorMessage += "Email is already being used\n";
         } else if (Database.containsUsername(usernameField.getText())) {
             errorMessage += "Username is already being used\n";
+        }*/
+
+        try {
+            for (User u : User.selectAllUsers()) {
+                if (u.getEmail().equals(emailField.getText())) {
+                    errorMessage += "Email is already used\n";
+                } else if (u.getUsername().equals(usernameField.getText())) {
+                    errorMessage += "Username is already used\n";
+                }
+            }
+        } catch(SQLException e) {
+            System.out.println(e.getMessage());
         }
 
         if (errorMessage.length() == 0) {
@@ -98,7 +120,7 @@ public class RegistrationController {
     @FXML
     private void handleRegistrationPressed() throws IOException {
         if (isInputValid()) {
-            if (choiceBox.getValue().equals("USER")) {
+            /*if (choiceBox.getValue().equals("USER")) {
                 Database.add(new User(usernameField.getText(),
                         password1Field.getText(), emailField.getText()));
                 //MainFXApplication.userList.add(newUser);
@@ -120,10 +142,38 @@ public class RegistrationController {
             }
             Database.addEmail(emailField.getText());
             Database.addUsername(usernameField.getText());
-            Database.saveAll();
-            Stage stage = (Stage) registerButton.getScene().getWindow();
+            Database.saveAll();*/
+
+            boolean isWorker = false;
+            boolean isManager = false;
+            if(choiceBox.getValue().equals("WORKER")) {
+                isWorker = true;
+            } else if(choiceBox.getValue().equals("MANAGER")) {
+                isManager = true;
+            }
+
+            User user = new User(usernameField.getText(),
+                    password1Field.getText(), emailField.getText(),
+                    firstnameField.getText(), lastnameField.getText(), isWorker,
+                    isManager);
+            try {
+                user.insert();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+
+            /*Stage stage = (Stage) registerButton.getScene().getWindow();
             Parent root = FXMLLoader.load(getClass()
                     .getResource("../view/WelcomeScreen.fxml"));
+            stage.setScene(new Scene(root));
+            stage.show();*/
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass()
+                    .getResource("../view/AppStartScreen.fxml"));
+            Stage stage = (Stage) registerButton.getScene().getWindow();
+            Parent root = loader.load();
+
+            loader.<AppStartController>getController().setUser(user);
             stage.setScene(new Scene(root));
             stage.show();
         }
