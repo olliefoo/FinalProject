@@ -62,7 +62,7 @@ public class ViewSourceReportController {
         reportDateField.setText(sourceReport.getDate());
         reportTimeField.setText(sourceReport.getTime());
         reportNumberField.setText(Integer.toString(sourceReport.getNumber()));
-        reporterNameField.setText(sourceReport.getName());
+        reporterNameField.setText(sourceReport.getUsername());
         waterLocationField.setText(sourceReport.getLocation());
         waterTypeField.setText(sourceReport.getType());
         waterCondField.setText(sourceReport.getCondition());

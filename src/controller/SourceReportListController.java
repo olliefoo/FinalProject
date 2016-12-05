@@ -11,11 +11,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.ReportDatabase;
 import model.SourceReport;
 import model.User;
 import java.io.IOException;
+import java.io.SyncFailedException;
+import java.sql.SQLException;
 
 /**
  * Created by cbbjs on 10/8/2016.
@@ -31,7 +34,7 @@ public class SourceReportListController{
     TableView<SourceReport> table;
 
     @FXML
-    TableColumn<SourceReport, String> numberCol;
+    TableColumn<SourceReport, Integer> numberCol;
 
     @FXML
     TableColumn<SourceReport, String> locationCol;
@@ -45,9 +48,6 @@ public class SourceReportListController{
     @FXML
     private Button returnButton;
 
-    /*private ObservableList<String> showList
-            = FXCollections.observableArrayList();*/
-
     private User user;
 
     private int reportIndex;
@@ -59,54 +59,23 @@ public class SourceReportListController{
      */
     @FXML
     private void initialize() {
-        if (ReportDatabase.getInstance().numSource() != 0) {
-            ObservableList<SourceReport> list
-                    = FXCollections.observableArrayList();
-            SourceReport report;
-            for (int i = 1; i <= ReportDatabase.getInstance().numSource(); i++) {
-                report = ReportDatabase.getInstance().getSourceReport(i);
-                list.add(report);
+        ObservableList<SourceReport> list
+                = FXCollections.observableArrayList();
+
+        try {
+            for(SourceReport s : SourceReport.selectAllReports()) {
+                list.add(s);
             }
-
-            /*numberCol.setCellValueFactory(new PropertyValueFactory<SourceReport, String>("reportNumber"));
-            locationCol.setCellValueFactory(new PropertyValueFactory<SourceReport, String>("location"));
-            dateCol.setCellValueFactory(new PropertyValueFactory<SourceReport, String>("date"));
-            userCol.setCellValueFactory(new PropertyValueFactory<SourceReport, String>("username"));*/
-
-            numberCol.setCellValueFactory(r -> {
-                // p.getValue() returns the Person instance for a particular TableView row
-                return new SimpleStringProperty(Integer.toString(r.getValue().getNumber()));
-            });
-            //table.getColumns().add(numberCol);
-
-            locationCol.setCellValueFactory(r -> {
-                // p.getValue() returns the Person instance for a particular TableView row
-                return new SimpleStringProperty(r.getValue().getLocation());
-            });
-            //table.getColumns().add(locationCol);
-
-            dateCol.setCellValueFactory(r -> {
-                // p.getValue() returns the Person instance for a particular TableView row
-                return new SimpleStringProperty(r.getValue().getDate());
-            });
-            //table.getColumns().add(dateCol);
-
-            userCol.setCellValueFactory(r -> {
-                // p.getValue() returns the Person instance for a particular TableView row
-                return new SimpleStringProperty(r.getValue().getUsername());
-            });
-            //table.getColumns().add(userCol);
-
-            table.setItems(list);
-            /*SourceReport temp;
-            for (int i = 1; i <= ReportDatabase.numSource(); i++) {
-                temp = ReportDatabase.getSourceReport(i);
-                showList.add(String.format("Report #%d               %s, %s" +
-                        "               %s",
-                        i, temp.getDate(), temp.getTime(), temp.getLocation()));
-            }*/
-            //sourceList.setItems(showList);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
+
+        numberCol.setCellValueFactory(new PropertyValueFactory<SourceReport, Integer>("number"));
+        locationCol.setCellValueFactory(new PropertyValueFactory<SourceReport, String>("location"));
+        dateCol.setCellValueFactory(new PropertyValueFactory<SourceReport, String>("date"));
+        userCol.setCellValueFactory(new PropertyValueFactory<SourceReport,String>("username"));
+
+        table.getItems().setAll(list);
     }
 
     /**
@@ -157,8 +126,12 @@ public class SourceReportListController{
                     .getResource("../view/ViewSourceReportScreen.fxml"));
             Stage stage = (Stage) chooseButton.getScene().getWindow();
             Parent root = loader.load();
-            loader.<ViewSourceReportController>getController()
-                    .setup(user, ReportDatabase.getInstance().getSourceReport(reportIndex));
+            try {
+                loader.<ViewSourceReportController>getController()
+                        .setup(user, SourceReport.selectReport(reportIndex));
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
             stage.setScene(new Scene(root));
             stage.show();
         } else {

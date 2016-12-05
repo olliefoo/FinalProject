@@ -1,24 +1,24 @@
 package model;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Owner on 10/6/2016.
  */
-public class SourceReport implements Serializable {
+public class SourceReport extends Entity {
 
     private static int total = 0;
 
-    /*private final SimpleStringProperty reportNumber;
-    private SimpleStringProperty date = new SimpleStringProperty();
-    private SimpleStringProperty location = new SimpleStringProperty();
-    private SimpleStringProperty username = new SimpleStringProperty();*/
 
     private final int number;
     private final Date fullDate;
-    private User reporter;
-    private String name;
+    //private User reporter;
+    private String username;
     private String type;
     private String condition;
     private String date;
@@ -31,10 +31,42 @@ public class SourceReport implements Serializable {
      * Constructor for a new source report
      */
     public SourceReport() {
-        total++;
+        try {
+            List<SourceReport> list = selectAllReports();
+            total = list.size() + 1;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
         number = total;
         //reportNumber = new SimpleStringProperty(Integer.toString(number));
         fullDate = new Date();
+    }
+
+    public SourceReport(ResultSet rs) throws SQLException {
+        number = rs.getInt(1);
+        fullDate = rs.getDate(2);
+        username = rs.getString(3);
+        type = rs.getString(4);
+        condition = rs.getString(5);
+        location = rs.getString(6);
+        latitude = rs.getDouble(7);
+        longitude = rs.getDouble(8);
+    }
+
+    public static List<SourceReport> selectAllReports() throws SQLException{
+        return select("SELECT * FROM SourceReport;", SourceReport::new);
+    }
+
+    public static SourceReport selectReport(int index) throws SQLException {
+        List<SourceReport> list = select(String.format("SELECT * FROM SourceReport WHERE Number=%d", index), SourceReport::new);
+        return list.get(0);
+    }
+
+    public void insert() throws SQLException {
+        java.sql.Date sqlDate = new java.sql.Date(fullDate.getTime());
+        execute(String.format("INSERT INTO SourceReport VALUES (%d, '%s', '%s'," +
+                " '%s', '%s', '%s', %f, %f);", number, sqlDate, username, type,
+                condition, location, latitude, longitude));
     }
 
     /**
@@ -57,12 +89,9 @@ public class SourceReport implements Serializable {
     public static void setTotal(int num) {
         total = num;
     }
-    public void setReporter(User u) {
-        this.reporter = u;
-        //username = new SimpleStringProperty(reporter.getUsername());
-    }
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String s) {
+        username = s;
+
     }
     public void setType(String type) {
         this.type = type;
@@ -70,13 +99,12 @@ public class SourceReport implements Serializable {
     public void setCondition(String condition) {
         this.condition = condition;
     }
-    public void setTime(String time) {
+    /*public void setTime(String time) {
         this.time = time;
     }
     public void setDate(String date) {
-        //this.date = new SimpleStringProperty(date);
         this.date = date;
-    }
+    }*/
     public void setLocation(String location) {
         //this.location = new SimpleStringProperty(location);
         this.location = location;
@@ -92,10 +120,7 @@ public class SourceReport implements Serializable {
     }
     public String getUsername() {
         //return username.get();
-        return reporter.getUsername();
-    }
-    public String getName() {
-        return name;
+        return username;
     }
     public String getType() {
         return type;
@@ -104,10 +129,12 @@ public class SourceReport implements Serializable {
         return condition;
     }
     public String getTime() {
-        return time;
+        SimpleDateFormat ft2 = new SimpleDateFormat("h:mm a");
+        return ft2.format(fullDate);
     }
     public String getDate() {
-        return date;
+        SimpleDateFormat ft1 = new SimpleDateFormat("E MM/dd/yyyy");
+        return ft1.format(fullDate);
     }
     public String getLocation() {
         return location;

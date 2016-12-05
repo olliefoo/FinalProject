@@ -12,6 +12,7 @@ import model.SourceReport;
 import model.User;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 
@@ -82,10 +83,10 @@ public class SubmitSourceReportController {
 
         reportNumber.setText("" + r.getNumber());
 
-        SimpleDateFormat ft1 = new SimpleDateFormat("E MM/dd/yyyy");
-        SimpleDateFormat ft2 = new SimpleDateFormat("h:mm a");
-        reportDate.setText(ft1.format(r.getFullDate()));
-        reportTime.setText(ft2.format(r.getFullDate()));
+        /*SimpleDateFormat ft1 = new SimpleDateFormat("E MM/dd/yyyy");
+        SimpleDateFormat ft2 = new SimpleDateFormat("h:mm a");*/
+        reportDate.setText(r.getDate());
+        reportTime.setText(r.getTime());
 
         waterTypeCombo.getItems().addAll("Bottled", "Well", "Stream",
                 "Lake", "Spring", "Other");
@@ -110,7 +111,7 @@ public class SubmitSourceReportController {
     /**
      * Sets the values from the view to the source report
      */
-    private void setReportValues() {
+    private void setReportValues(SourceReport r) {
         String date = reportDate.getText();
         String time = reportTime.getText();
         //String number = reportNumber.getText();
@@ -126,10 +127,7 @@ public class SubmitSourceReportController {
         }
 
         String condition = waterConditionCombo.getValue();
-        r.setReporter(user);
-        r.setTime(time);
-        r.setDate(date);
-        r.setName(name);
+        r.setUsername(user.getUsername());
         r.setLocation(location);
         r.setType(type);
         r.setCondition(condition);
@@ -181,10 +179,15 @@ public class SubmitSourceReportController {
     @FXML
     private void handleReportSubmitPressed() throws IOException {
         if (isInputValid()) {
-            setReportValues();
-            ReportDatabase.getInstance().add(r);
+            setReportValues(r);
+            try {
+                r.insert();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            /*ReportDatabase.getInstance().add(r);
             ReportDatabase.getInstance().setSourceUpdated(true);
-            ReportDatabase.getInstance().saveSource();
+            ReportDatabase.getInstance().saveSource();*/
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             //alert.setTitle("Invalid Fields");
             alert.setHeaderText("Thank you for submitting a report.");

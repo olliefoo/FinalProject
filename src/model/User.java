@@ -28,17 +28,26 @@ public class User extends Entity {
     }
 
     public User(ResultSet rs) throws SQLException {
-        this.username = rs.getString(1);
-        this.password = rs.getString(2);
-        this.email = rs.getString(3);
-        this.firstname = rs.getString(4);
-        this.lastname = rs.getString(5);
-        this.isWorker = rs.getBoolean(6);
-        this.isManager = rs.getBoolean(7);
+        username = rs.getString(1);
+        password = rs.getString(2);
+        email = rs.getString(3);
+        firstname = rs.getString(4);
+        lastname = rs.getString(5);
+        isWorker = rs.getBoolean(6);
+        isManager = rs.getBoolean(7);
+        address = rs.getString(8);
+        city = rs.getString(9);
+        state = rs.getString(10);
+        zip = rs.getString(11);
+        phone = rs.getString(12);
+        month = rs.getString(13);
+        day = rs.getString(14);
+        year = rs.getString(15);
+        gender = rs.getBoolean(16);
     }
 
     public static List<User> selectAllUsers() throws SQLException {
-        return Entity.select("SELECT * FROM USER;", User::new);
+        return select("SELECT * FROM USER;", User::new);
     }
 
     /*public static List<User> selectAllWorkers() throws SQLException {
