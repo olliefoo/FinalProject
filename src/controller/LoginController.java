@@ -26,7 +26,6 @@ public class LoginController {
 
     private User user;
 
-
     /**
      * Checks if the username and password entered are valid. The entered
      * username must already exist in the database and the password must
@@ -37,17 +36,8 @@ public class LoginController {
     private boolean isInputValid() {
         String errorMessage = "";
 
-        String username = usernameField.getText();
-        String password = passwordField.getText();
-        boolean foundUser = false;
-        boolean passwordMatch = false;
-
         try {
-            for (User u : User.selectAllUsers()) {
-                if(u.getUsername().equals(usernameField.getText())) {
-                    user = u;
-                }
-            }
+            user = User.selectUser(usernameField.getText());
         } catch(SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -58,27 +48,6 @@ public class LoginController {
             errorMessage += "Wrong password. Try again.\n";
         }
 
-        /*User user = Database.getUser(username);
-        if (accountBox.getValue().equals("WORKER")) {
-            user = Database.getWorker(username);
-        } else if (accountBox.getValue().equals("MANAGER")) {
-            user = Database.getManager(username);
-        } else if (accountBox.getValue().equals("ADMIN")) {
-            user = Database.getAdmin(username);
-        }
-
-        if (username == null || username.length() == 0
-                || !Database.containsUsername(username)) {
-            errorMessage += "Username does not exist. Please register first.\n";
-        } else if (user == null) {
-            errorMessage += "Wrong account type. Try Again.\n";
-        } else {
-            if (password == null || password.length() == 0
-                    || !(password.equals(user.getPassword()))) {
-                errorMessage += "Wrong password. Try again.\n";
-            }
-        }*/
-
         //no error message means success / good input
         if (errorMessage.length() == 0) {
             return true;
@@ -88,9 +57,7 @@ public class LoginController {
             alert.setTitle("Invalid Fields");
             alert.setHeaderText("Please correct invalid fields");
             alert.setContentText(errorMessage);
-
             alert.showAndWait();
-
             return false;
         }
     }

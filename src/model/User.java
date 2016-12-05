@@ -50,13 +50,14 @@ public class User extends Entity {
         return select("SELECT * FROM USER;", User::new);
     }
 
-    /*public static List<User> selectAllWorkers() throws SQLException {
-        return Entity.select("SELECT * FROM USER WHERE isWorker = true;", User::new);
+    public static User selectUser(String username) throws SQLException {
+        List<User> list = select(String.format("SELECT * FROM USER WHERE Username='%s';", username), User::new);
+        if(list.isEmpty()) {
+            return null;
+        } else {
+            return list.get(0);
+        }
     }
-
-    public static List<User> selectAllManagers() throws SQLException {
-        return Entity.select("SELECT * FROM USER WHERE isManager = true;", User::new);
-    }*/
 
     public void insert() throws SQLException {
         execute(String.format("INSERT INTO USER VALUES ('%s', '%s', '%s'," +
@@ -95,7 +96,6 @@ public class User extends Entity {
     public boolean isManager() {
         return isManager;
     }
-
     public String getPhone() {
         return phone;
     }
@@ -145,42 +145,4 @@ public class User extends Entity {
         gender = b;
     }
 
-    /*private final String username;
-    private String password;
-    private String email;
-    private final Profile profile;
-
-    public User(String username, String password, String email) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        profile = new Profile();
-        profile.setEmail(email);
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public Profile getProfile() { return profile; }
-
-    public void setEmail(String s) {
-        email = s;
-    }
-
-    public boolean setPassword(String p) {
-        if (password.equals(p)) {
-            return false;
-        }
-        password = p;
-        return true;
-    }*/
 }
