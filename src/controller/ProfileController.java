@@ -164,29 +164,61 @@ public class ProfileController {
      */
     @FXML
     private void handleUpdatePressed() throws IOException {
-        String firstName = firstNameField.getText();
-        String lastName = lastNameField.getText();
+        if (isEmailValid()) {
+            String firstName = firstNameField.getText();
+            String lastName = lastNameField.getText();
 
-        if (firstName == null || firstName.length() == 0 ||
-                lastName == null || lastName.length() == 0) {
+            if (firstName == null || firstName.length() == 0 ||
+                    lastName == null || lastName.length() == 0) {
 
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Missing Fields");
+                alert.setHeaderText("Please enter required fields");
+                alert.setContentText("Please enter both your first name and last " +
+                        "name to continue.");
+
+                alert.showAndWait();
+            } else {
+                setValues();
+                Database.saveAll();
+                FXMLLoader loader = new FXMLLoader(getClass()
+                        .getResource("../view/AppStartScreen.fxml"));
+                Stage stage = (Stage) updateButton.getScene().getWindow();
+                Parent root = loader.load();
+                loader.<AppStartController>getController().setUser(user);
+                stage.setScene(new Scene(root));
+                stage.show();
+            }
+        }
+    }
+
+    /**
+     * Checks if the email entered is valid
+     * @return true if valid, error message otherwise
+     */
+    private boolean isEmailValid() {
+        String errorMessage = "";
+        if (emailField.getText() == null
+                || emailField.getText().length() == 0
+                || !emailField.getText().contains("@")) {
+            errorMessage += "Please enter a valid email\n";
+        } else if (!(emailField.getText().equals(profile.getEmail()))
+                && Database.containsEmail(emailField.getText())) {
+            errorMessage += "Email is already being used\n";
+        }
+
+        if (errorMessage.length() == 0) {
+            return true;
+        } else {
+            // Show the error message if bad data
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Missing Fields");
-            alert.setHeaderText("Please enter required fields");
-            alert.setContentText("Please enter both your first name and last " +
-                    "name to continue.");
+            alert.setTitle("Invalid Fields");
+            alert.setHeaderText("Please Correct Invalid Fields");
+            alert.setContentText(errorMessage);
 
             alert.showAndWait();
-        } else {
-            setValues();
-            Database.saveAll();
-            FXMLLoader loader = new FXMLLoader(getClass()
-                    .getResource("../view/AppStartScreen.fxml"));
-            Stage stage = (Stage) updateButton.getScene().getWindow();
-            Parent root = loader.load();
-            loader.<AppStartController>getController().setUser(user);
-            stage.setScene(new Scene(root));
-            stage.show();
+
+            return false;
         }
     }
 
@@ -204,4 +236,5 @@ public class ProfileController {
         stage.setScene(new Scene(root));
         stage.show();
     }
+
 }
