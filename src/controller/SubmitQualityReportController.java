@@ -156,11 +156,11 @@ public class SubmitQualityReportController {
         if (location.length() == 0) {
             errorMessage += "Please enter a location.\n";
         }
-        if (virus.length() == 0 || !virus.matches("[0-9]+")) {
-            errorMessage += "Please enter a numeric value for Virus PPM\n";
+        if (virus.length() == 0 || Double.parseDouble(virus) < 0) {
+            errorMessage += "Please enter a valid numeric value for Virus PPM\n";
         }
-        if (contaminant.length() == 0 || !contaminant.matches("[0-9]+")) {
-            errorMessage += "Please enter a numeric value for Contaminant PPM\n";
+        if (contaminant.length() == 0 || Double.parseDouble(contaminant) < 0) {
+            errorMessage += "Please enter a valid numeric value for Contaminant PPM\n";
         }
         //no error message means success / good input
         if (errorMessage.length() == 0) {
