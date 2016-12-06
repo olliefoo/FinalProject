@@ -11,7 +11,6 @@ import model.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
 
 
 /**
@@ -57,10 +56,8 @@ public class SubmitQualityReportController {
     @FXML
     private Button cancelButton;
 
-    private Stage dialogStage;
-
     private User user;
-    //private Profile profile;
+
     private final QualityReport r = new QualityReport();
 
     /**
@@ -69,7 +66,6 @@ public class SubmitQualityReportController {
      */
     public void setUser(User u) {
         user = u;
-        //profile = user.getProfile();
         setup();
     }
 
@@ -124,29 +120,31 @@ public class SubmitQualityReportController {
         String errorMessage = "";
 
         String location = waterLocationField.getText();
-        String virus = virusField.getText();
-        String contaminant = contaminantField.getText();
         if (location.length() == 0) {
             errorMessage += "Please enter a location.\n";
         }
-        if (virus.length() == 0 || !virus.matches("[0-9]+")) {
-            errorMessage += "Please enter a numeric value for Virus PPM\n";
+        if(virusField.getText().length() == 0) {
+            errorMessage += "Please enter a virus ppm.\n";
         }
-        if (contaminant.length() == 0 || !contaminant.matches("[0-9]+")) {
-            errorMessage += "Please enter a numeric value for Contaminant PPM\n";
+        if(contaminantField.getText().length() == 0) {
+            errorMessage += "Please enter a contaminant ppm.\n";
+        }
+
+        try {
+            double virus = Double.parseDouble(virusField.getText());
+            double contaminant = Double.parseDouble(contaminantField.getText());
+        } catch (NumberFormatException e) {
+            errorMessage += "Please enter a numeric value for PPM.\n";
         }
 
         if (errorMessage.length() == 0) {
             return true;
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initOwner(dialogStage);
-            alert.setTitle("Invalid Fields");
+            alert.setHeaderText("Invalid Fields");
             alert.setHeaderText("Please address invalid fields");
             alert.setContentText(errorMessage);
-
             alert.showAndWait();
-
             return false;
         }
     }
@@ -185,8 +183,6 @@ public class SubmitQualityReportController {
      */
     @FXML
     private void handleCancelPressed() throws IOException {
-        // if cancel, then report number does not increment
-        //QualityReport.setTotal(QualityReport.getTotal() - 1);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppStartScreen.fxml"));
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         Parent root = loader.load();

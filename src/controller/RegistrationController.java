@@ -9,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Admins on 9/27/2016.
@@ -40,6 +42,10 @@ public class RegistrationController {
 
     @FXML
     private Hyperlink loginLink;
+
+    private static final Pattern VALID_EMAIL_ADDRESS_REGEX =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
 
     /**
      * Method to initialize the registration page. Mainly used
@@ -78,6 +84,11 @@ public class RegistrationController {
         } else if (!(password2Field.getText()
                 .equals(password1Field.getText()))) {
             errorMessage += "Verification must match the original password\n";
+        }
+
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailField.getText());
+        if(!matcher.find()) {
+            errorMessage += "Please enter a valid email\n";
         }
 
         try {
