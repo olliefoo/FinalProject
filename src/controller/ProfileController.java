@@ -149,6 +149,10 @@ public class ProfileController {
         profile.setName(fName,lName);
         profile.setPhone(pNumber);
         profile.setAddress(street, city, state, zip);
+        if (!profile.getEmail().equals(mail)) {
+            Database.removeEmail(profile.getEmail());
+            profile.setEmail(mail);
+        }
         profile.setEmail(mail);
         profile.setMonth(month);
         profile.setDay(day);

@@ -101,6 +101,14 @@ public class Database implements Serializable {
     }
 
     /**
+     * Removes the email from the email list
+     * @param email the email to be removed
+     */
+    public static void removeEmail(String email) {
+        emailList.remove(email);
+    }
+
+    /**
      * Checks whether the database contains the specified username
      *
      * @param name username of a user
