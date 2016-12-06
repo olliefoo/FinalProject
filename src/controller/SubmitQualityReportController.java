@@ -25,22 +25,10 @@ public class SubmitQualityReportController {
     private TextField reportTime;
 
     @FXML
-    private TextField reportNumber;
-
-    @FXML
     private TextField workerNameField;
 
     @FXML
     private TextField waterLocationField;
-
-    @FXML
-    private TextField latField;
-
-    @FXML
-    private TextField longField;
-
-    @FXML
-    private TextField waterCondField;
 
     @FXML
     private TextField virusField;
@@ -92,13 +80,9 @@ public class SubmitQualityReportController {
         workerNameField.setText(user.getFirstname() + " " + user.getLastname());
         reportDate.setText(r.getDate());
         reportTime.setText(r.getTime());
-
-        reportNumber.setText("" + r.getNumber());
-
         conditionCombo.getItems().addAll("Waste", "Treatable-Clear",
                 "Treatable-Muddy", "Potable");
         conditionCombo.setValue("Waste");
-
         latitudeSlider.setValue(0);
         longitudeSlider.setValue(0);
         latitudeField.setText(Double.toString(0));
@@ -202,7 +186,7 @@ public class SubmitQualityReportController {
     @FXML
     private void handleCancelPressed() throws IOException {
         // if cancel, then report number does not increment
-        QualityReport.setTotal(QualityReport.getTotal() - 1);
+        //QualityReport.setTotal(QualityReport.getTotal() - 1);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppStartScreen.fxml"));
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         Parent root = loader.load();

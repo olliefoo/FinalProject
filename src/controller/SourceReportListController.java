@@ -22,11 +22,9 @@ import java.sql.SQLException;
  * Created by cbbjs on 10/8/2016.
  */
 public class SourceReportListController{
-    @FXML
-    private Button chooseButton;
 
-    //@FXML
-    //private ListView<String> sourceList;
+    @FXML
+    private Button chooseButton, returnButton, deleteButton;
 
     @FXML
     TableView<SourceReport> table;
@@ -43,12 +41,9 @@ public class SourceReportListController{
     @FXML
     TableColumn<SourceReport, String> userCol;
 
-    @FXML
-    private Button returnButton;
-
     private User user;
 
-    private int reportIndex;
+    ObservableList<SourceReport> list = FXCollections.observableArrayList();
 
 
     /**
@@ -57,12 +52,9 @@ public class SourceReportListController{
      */
     @FXML
     private void initialize() {
-        ObservableList<SourceReport> list
-                = FXCollections.observableArrayList();
-
         try {
-            for(SourceReport s : SourceReport.selectAllReports()) {
-                list.add(s);
+            for(SourceReport r : SourceReport.selectAllReports()) {
+                list.add(r);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -72,7 +64,6 @@ public class SourceReportListController{
         locationCol.setCellValueFactory(new PropertyValueFactory<SourceReport, String>("location"));
         dateCol.setCellValueFactory(new PropertyValueFactory<SourceReport, String>("date"));
         userCol.setCellValueFactory(new PropertyValueFactory<SourceReport,String>("username"));
-
         table.getItems().setAll(list);
     }
 
@@ -82,16 +73,11 @@ public class SourceReportListController{
      */
     public void setUser(User u) {
         user = u;
+        if(!user.isManager()) {
+            deleteButton.setVisible(false);
+        }
     }
 
-    /**
-     * Checks to see if a report is selected before the user is taken to the
-     * view source report page.
-     * @return true if a report is selected, false otherwise
-     */
-    private boolean isIndexValid() {
-        return(reportIndex > 0);
-    }
 
     /**
      * Handles the return button pressed. When pressed, user will be returned
@@ -117,28 +103,51 @@ public class SourceReportListController{
      */
     @FXML
     private void handleViewPressed() throws IOException {
-        // adds 1 to reportIndex because no selection is -1
-        reportIndex = table.getSelectionModel().getSelectedIndex() + 1;
-        if (isIndexValid()) {
+        SourceReport report = table.getSelectionModel().getSelectedItem();
+        if (report != null) {
             FXMLLoader loader = new FXMLLoader(getClass()
                     .getResource("../view/ViewSourceReportScreen.fxml"));
             Stage stage = (Stage) chooseButton.getScene().getWindow();
             Parent root = loader.load();
-            try {
-                loader.<ViewSourceReportController>getController()
-                        .setup(user, SourceReport.selectReport(reportIndex));
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
+            loader.<ViewSourceReportController>getController().setup(user, report);
             stage.setScene(new Scene(root));
             stage.show();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Access Denied");
             alert.setHeaderText("No Report Selected");
             alert.setContentText("Please select a report to view.");
             alert.showAndWait();
         }
+    }
+
+    @FXML
+    private void handleDeletePressed() throws IOException {
+        SourceReport report = table.getSelectionModel().getSelectedItem();
+        if (report != null) {
+            try {
+                SourceReport.deleteReport(report.getNumber());
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            updateTable();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("No Report Selected");
+            alert.setContentText("Please select a report to view.");
+            alert.showAndWait();
+        }
+    }
+
+    private void updateTable() {
+        try {
+            list.clear();
+            for(SourceReport r : SourceReport.selectAllReports()) {
+                list.add(r);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        table.getItems().setAll(list);
     }
 
 }

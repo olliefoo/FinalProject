@@ -40,7 +40,7 @@ public class Main {
                 " Locked BOOLEAN NOT NULL,\n" +
                 " PRIMARY KEY (Username) ) ENGINE=InnoDB;");
         Entity.execute("CREATE TABLE SourceReport (\n" +
-                " Number INT NOT NULL,\n" +
+                " Number INT NOT NULL AUTO_INCREMENT,\n" +
                 " FullDate DATE NOT NULL,\n" +
                 " Reporter VARCHAR(100) NOT NULL,\n" +
                 " WaterType VARCHAR(100) NOT NULL,\n" +
@@ -50,7 +50,7 @@ public class Main {
                 " Longitude DOUBLE NOT NULL,\n" +
                 " PRIMARY KEY (Number) ) ENGINE=InnoDB;");
         Entity.execute("CREATE TABLE QualityReport (\n" +
-                "Number INT NOT NULL,\n" +
+                "Number INT NOT NULL AUTO_INCREMENT,\n" +
                 "FullDate DATE NOT NULL,\n" +
                 "Reporter VARCHAR(100) NOT NULL,\n" +
                 "WaterCondition VARCHAR(100) NOT NULL,\n" +

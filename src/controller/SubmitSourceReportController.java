@@ -21,9 +21,6 @@ public class SubmitSourceReportController {
     private TextField reportTime;
 
     @FXML
-    private TextField reportNumber;
-
-    @FXML
     private TextField reporterNameField;
 
     @FXML
@@ -77,14 +74,8 @@ public class SubmitSourceReportController {
      */
     private void setup() {
         reporterNameField.setText(user.getFirstname() + " " + user.getLastname());
-
-        reportNumber.setText("" + r.getNumber());
-
-        /*SimpleDateFormat ft1 = new SimpleDateFormat("E MM/dd/yyyy");
-        SimpleDateFormat ft2 = new SimpleDateFormat("h:mm a");*/
         reportDate.setText(r.getDate());
         reportTime.setText(r.getTime());
-
         waterTypeCombo.getItems().addAll("Bottled", "Well", "Stream",
                 "Lake", "Spring", "Other");
         waterTypeCombo.setValue("Bottled");
@@ -92,7 +83,6 @@ public class SubmitSourceReportController {
         waterConditionCombo.getItems().addAll("Waste", "Treatable-Clear",
                 "Treatable-Muddy", "Potable");
         waterConditionCombo.setValue("Waste");
-
         latitudeSlider.setValue(0);
         longitudeSlider.setValue(0);
         latitudeField.setText(Double.toString(0));
@@ -200,7 +190,7 @@ public class SubmitSourceReportController {
     @FXML
     private void handleCancelPressed() throws IOException {
         // if cancel, then report number does not increment
-        SourceReport.setTotal(SourceReport.getTotal() - 1);
+        //SourceReport.setTotal(SourceReport.getTotal() - 1);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppStartScreen.fxml"));
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         Parent root = loader.load();

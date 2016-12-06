@@ -20,9 +20,8 @@ import java.sql.SQLException;
  */
 public class QualityReportListController {
 
-
     @FXML
-    private Button chooseButton;
+    private Button chooseButton, returnButton, deleteButton;
 
     @FXML
     private
@@ -47,15 +46,9 @@ public class QualityReportListController {
     @FXML
     private ListView<String> qualityList;
 
-    @FXML
-    private Button returnButton;
-
-    /*private ObservableList<String> showList
-            = FXCollections.observableArrayList();*/
-
     private User user;
 
-    private int reportIndex;
+    ObservableList<QualityReport> list = FXCollections.observableArrayList();
 
     /**
      * Generates the list of reports to be shown on the Quality Report List
@@ -63,11 +56,9 @@ public class QualityReportListController {
      */
     @FXML
     private void initialize() {
-        ObservableList<QualityReport> list
-                = FXCollections.observableArrayList();
         try {
-            for(QualityReport q : QualityReport.selectAllReports()) {
-                list.add(q);
+            for(QualityReport r : QualityReport.selectAllReports()) {
+                list.add(r);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -77,8 +68,8 @@ public class QualityReportListController {
         locationCol.setCellValueFactory(new PropertyValueFactory<QualityReport, String>("location"));
         dateCol.setCellValueFactory(new PropertyValueFactory<QualityReport, String>("date"));
         userCol.setCellValueFactory(new PropertyValueFactory<QualityReport,String>("username"));
-
         table.getItems().setAll(list);
+
     }
 
     /**
@@ -87,15 +78,9 @@ public class QualityReportListController {
      */
     public void setUser(User u) {
         user = u;
-    }
-
-    /**
-     * Checks to see if a report is selected before the user is taken to the
-     * view source report page.
-     * @return true if a report is selected, false otherwise
-     */
-    private boolean isIndexValid() {
-        return(reportIndex > 0);
+        if(!user.isManager()) {
+            deleteButton.setVisible(false);
+        }
     }
 
     /**
@@ -122,26 +107,50 @@ public class QualityReportListController {
      */
     @FXML
     private void handleViewPressed() throws IOException {
-        reportIndex = table.getSelectionModel().getSelectedIndex() + 1;
-        if (isIndexValid()) {
+        QualityReport report = table.getSelectionModel().getSelectedItem();
+        if (report != null) {
             FXMLLoader loader = new FXMLLoader(getClass()
                     .getResource("../view/ViewQualityReportScreen.fxml"));
             Stage stage = (Stage) chooseButton.getScene().getWindow();
             Parent root = loader.load();
-            try {
-                loader.<ViewQualityReportController>getController()
-                        .setup(user, QualityReport.selectReport(reportIndex));
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
+            loader.<ViewQualityReportController>getController().setup(user, report);
             stage.setScene(new Scene(root));
             stage.show();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Access Denied");
-            alert.setHeaderText("No Report Selected");
+            alert.setTitle("No Report Selected");
             alert.setContentText("Please select a report to view.");
             alert.showAndWait();
         }
+    }
+
+    @FXML
+    private void handleDeletePressed() throws IOException {
+        QualityReport report = table.getSelectionModel().getSelectedItem();
+        if (report != null) {
+            try {
+                QualityReport.deleteReport(report.getNumber());
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            updateTable();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("No Report Selected");
+            alert.setContentText("Please select a report to view.");
+            alert.showAndWait();
+        }
+    }
+
+    private void updateTable() {
+        try {
+            list.clear();
+            for(QualityReport r : QualityReport.selectAllReports()) {
+                list.add(r);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        table.getItems().setAll(list);
     }
 }

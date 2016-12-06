@@ -11,8 +11,8 @@ import java.util.List;
  */
 public class QualityReport extends Entity {
 
-    private static int total = 0;
-    private final int number;
+    //private static int total = 0;
+    private int number;
     private final Date fullDate;
     private String username;
     private String condition;
@@ -27,13 +27,13 @@ public class QualityReport extends Entity {
      * Constructor for a new source report
      */
     public QualityReport() {
-        try {
+        /*try {
             List<QualityReport> list = selectAllReports();
             total = list.size() + 1;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        number = total;
+        number = total;*/
         fullDate = new Date();
     }
 
@@ -58,14 +58,18 @@ public class QualityReport extends Entity {
         return select(String.format("SELECT * FROM QualityReport WHERE (Location='%s' AND EXTRACT(YEAR from FullDate)='%s');", location, year), QualityReport::new);
     }
 
-    public static QualityReport selectReport(int index) throws SQLException {
+    /*public static QualityReport selectReport(int index) throws SQLException {
         List<QualityReport> list = select(String.format("SELECT * FROM QualityReport WHERE Number=%d", index), QualityReport::new);
         return list.get(0);
+    }*/
+
+    public static void deleteReport(int index) throws SQLException {
+        execute(String.format("DELETE FROM QualityReport WHERE Number=%d;", index));
     }
 
     public static QualityReport selectNewest() throws SQLException {
-        List<QualityReport> list = select(String.format("SELECT * FROM QualityReport WHERE Number=%d", total), QualityReport::new);
-        return list.get(0);
+        List<QualityReport> list = selectAllReports();
+        return list.get(list.size() - 1);
     }
 
     public void insert() throws SQLException {
@@ -90,9 +94,9 @@ public class QualityReport extends Entity {
     /**
      * List of getters and setters for source report values.
      */
-    public static void setTotal(int num) {
+    /*public static void setTotal(int num) {
         total = num;
-    }
+    }*/
     public void setUserame(String name) {
         username = name;
     }
@@ -115,9 +119,9 @@ public class QualityReport extends Entity {
     }
 
 
-    public static int getTotal() {
+    /*public static int getTotal() {
         return total;
-    }
+    }*/
     public int getNumber() {
         return number;
     }

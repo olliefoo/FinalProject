@@ -11,8 +11,8 @@ import java.util.List;
  */
 public class SourceReport extends Entity {
 
-    private static int total = 0;
-    private final int number;
+    //private static int total = 0;
+    private int number;
     private final Date fullDate;
     private String username;
     private String type;
@@ -26,13 +26,13 @@ public class SourceReport extends Entity {
      * Constructor for a new source report
      */
     public SourceReport() {
-        try {
+        /*try {
             List<SourceReport> list = selectAllReports();
             total = list.size() + 1;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        number = total;
+        number = total;*/
         fullDate = new Date();
     }
 
@@ -51,14 +51,18 @@ public class SourceReport extends Entity {
         return select("SELECT * FROM SourceReport;", SourceReport::new);
     }
 
-    public static SourceReport selectReport(int index) throws SQLException {
+    /*public static SourceReport selectReport(int index) throws SQLException {
         List<SourceReport> list = select(String.format("SELECT * FROM SourceReport WHERE Number=%d", index), SourceReport::new);
         return list.get(0);
+    }*/
+
+    public static void deleteReport(int index) throws SQLException {
+        execute(String.format("DELETE FROM SourceReport WHERE Number=%d;", index));
     }
 
     public static SourceReport selectNewest() throws SQLException {
-        List<SourceReport> list = select(String.format("SELECT * FROM SourceReport WHERE Number=%d", total), SourceReport::new);
-        return list.get(0);
+        List<SourceReport> list = selectAllReports();
+        return list.get(list.size() - 1);
     }
 
     public void insert() throws SQLException {
@@ -82,12 +86,12 @@ public class SourceReport extends Entity {
     /**
      * List of getters and setters for source report values.
      */
-    public static int getTotal() {
+    /*public static int getTotal() {
         return total;
     }
     public static void setTotal(int num) {
         total = num;
-    }
+    }*/
     public void setUsername(String s) {
         username = s;
 
