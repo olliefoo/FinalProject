@@ -42,6 +42,9 @@ public class ProfileController {
     private Button updateButton;
 
     @FXML
+    private Button cancelButton;
+
+    @FXML
     private ComboBox<String> dayField;
 
     @FXML
@@ -187,4 +190,18 @@ public class ProfileController {
         }
     }
 
+    /**
+     * The method that is used when the cancel button is pressed.
+     * It will lead the user back to the app start screen screen.
+     * @throws IOException
+     */
+    @FXML
+    private void handleCancelPressed() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppStartScreen.fxml"));
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        Parent root = loader.load();
+        loader.<AppStartController>getController().setUser(user);
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 }
