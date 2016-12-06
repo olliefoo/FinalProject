@@ -63,8 +63,9 @@ public class RegistrationController {
                 || password1Field.getText().length() == 0) {
             errorMessage += "Password cannot be blank\n";
         } else if (emailField.getText() == null
-                || emailField.getText().length() == 0) {
-            errorMessage += "Email cannot be blank\n";
+                || emailField.getText().length() == 0
+                || !emailField.getText().contains("@")) {
+            errorMessage += "Please enter a valid email\n";
         } else if (!(password2Field.getText()
                 .equals(password1Field.getText()))) {
             errorMessage += "Verification must match the original password\n";
