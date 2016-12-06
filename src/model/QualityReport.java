@@ -16,14 +16,12 @@ public class QualityReport extends Entity {
     private final Date fullDate;
     private String username;
     private String condition;
-    private String date;
-    private String time;
     private double virus;
     private double contaminant;
     private String location;
     private double latitude;
     private double longitude;
-
+    private static boolean updated;
 
     /**
      * Constructor for a new source report
@@ -56,16 +54,17 @@ public class QualityReport extends Entity {
         return select("SELECT * FROM QualityReport;", QualityReport::new);
     }
 
-    public static List<QualityReport> selectVirusReports(String location, String year) throws SQLException {
-        return select(String.format("SELECT * FROM QualityReport WHERE (VirusPPM=TRUE AND Location='%s' AND EXTRACT(YEAR from FullDate)='%s');", location, year), QualityReport::new);
-    }
-
-    public static List<QualityReport> selectContaminantReports(String location, String year) throws SQLException {
-        return select(String.format("SELECT * FROM QualityReport WHERE (ContaminantPPM=TRUE AND Location='%s' AND EXTRACT(YEAR from FullDate)='%s');", location, year), QualityReport::new);
+    public static List<QualityReport> selectHistoryReports(String location, String year) throws SQLException {
+        return select(String.format("SELECT * FROM QualityReport WHERE (Location='%s' AND EXTRACT(YEAR from FullDate)='%s');", location, year), QualityReport::new);
     }
 
     public static QualityReport selectReport(int index) throws SQLException {
         List<QualityReport> list = select(String.format("SELECT * FROM QualityReport WHERE Number=%d", index), QualityReport::new);
+        return list.get(0);
+    }
+
+    public static QualityReport selectNewest() throws SQLException {
+        List<QualityReport> list = select(String.format("SELECT * FROM QualityReport WHERE Number=%d", total), QualityReport::new);
         return list.get(0);
     }
 
@@ -111,6 +110,10 @@ public class QualityReport extends Entity {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
+    public static void setUpdated(boolean b) {
+        updated = b;
+    }
+
 
     public static int getTotal() {
         return total;
@@ -142,14 +145,15 @@ public class QualityReport extends Entity {
     public void setVirus(double virus) {this.virus = virus;}
     public double getVirus() {return virus; }
     public double getContaminant() {return contaminant; }
-
     public String getYear() {
         SimpleDateFormat yr = new SimpleDateFormat("yyyy");
         return yr.format(fullDate);
     }
-
     public String getMonth() {
         SimpleDateFormat mn = new SimpleDateFormat("MMM");
         return mn.format(fullDate);
+    }
+    public static boolean getUpdated() {
+        return updated;
     }
 }

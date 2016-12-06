@@ -1,3 +1,5 @@
+package fxapp;
+
 import model.Entity;
 
 import java.io.IOException;

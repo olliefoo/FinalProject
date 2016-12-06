@@ -17,11 +17,10 @@ public class SourceReport extends Entity {
     private String username;
     private String type;
     private String condition;
-    private String date;
-    private String time;
     private String location;
     private double latitude;
     private double longitude;
+    private static boolean updated;
 
     /**
      * Constructor for a new source report
@@ -54,6 +53,11 @@ public class SourceReport extends Entity {
 
     public static SourceReport selectReport(int index) throws SQLException {
         List<SourceReport> list = select(String.format("SELECT * FROM SourceReport WHERE Number=%d", index), SourceReport::new);
+        return list.get(0);
+    }
+
+    public static SourceReport selectNewest() throws SQLException {
+        List<SourceReport> list = select(String.format("SELECT * FROM SourceReport WHERE Number=%d", total), SourceReport::new);
         return list.get(0);
     }
 
@@ -94,14 +98,7 @@ public class SourceReport extends Entity {
     public void setCondition(String condition) {
         this.condition = condition;
     }
-    /*public void setTime(String time) {
-        this.time = time;
-    }
-    public void setDate(String date) {
-        this.date = date;
-    }*/
     public void setLocation(String location) {
-        //this.location = new SimpleStringProperty(location);
         this.location = location;
     }
     public void setLatitude(double latitude) {
@@ -110,11 +107,15 @@ public class SourceReport extends Entity {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
+    public static void setUpdated(boolean b) {
+        updated = b;
+    }
+
+
     public int getNumber() {
         return number;
     }
     public String getUsername() {
-        //return username.get();
         return username;
     }
     public String getType() {
@@ -142,5 +143,8 @@ public class SourceReport extends Entity {
     }
     public double getLongitude() {
         return longitude;
+    }
+    public static boolean getUpdated() {
+        return updated;
     }
 }

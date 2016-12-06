@@ -176,18 +176,14 @@ public class SubmitSourceReportController {
             setReportValues(r);
             try {
                 r.insert();
+                SourceReport.setUpdated(true);
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
-            /*ReportDatabase.getInstance().add(r);
-            ReportDatabase.getInstance().setSourceUpdated(true);
-            ReportDatabase.getInstance().saveSource();*/
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            //alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Thank you for submitting a report.");
-            //alert.setContentText("Thank you for submitting a report.");
-            alert.showAndWait();
 
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("Thank you for submitting a report.");
+            alert.showAndWait();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppStartScreen.fxml"));
             Stage stage = (Stage) submitSourceButton.getScene().getWindow();
             Parent root = loader.load();

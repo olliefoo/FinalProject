@@ -9,20 +9,14 @@ import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
-
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
-
-
 import model.QualityReport;
 import model.User;
-
 import java.io.IOException;
-
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.TreeSet;
 
@@ -100,35 +94,12 @@ public class HistoryController {
     @FXML
     private void handleViewPressed() {
         if(isInputValid()) {
-            // Can only view one line at a time. Every time press view button,
-            // delete old line.
             graph.getData().clear();
-
-            /*ArrayList<QualityReport> locationList = new ArrayList<>(10);
-            ArrayList<QualityReport> yearList = new ArrayList<>(10);*/
-
-            //adds the reports with the specified location to the list
-            /*for (QualityReport r : ReportDatabase.getInstance().getQualityReports()) {
-                if (r.getLocation().equals(locationBox.getValue())) {
-                    locationList.add(r);
-                }
-            }*/
-
-            //adds the reports from the locationList with the specified year
-            /*for (QualityReport r : locationList) {
-                if ((r.getYear().equals(yearBox.getValue()))) {
-                    yearList.add(r);
-                }
-            }*/
 
             XYChart.Series<String, Double> series = new XYChart.Series<>();
             if (ppmBox.getValue().equals("Virus")) {
-                /*for (QualityReport r : yearList) {
-                    XYChart.Data<String, Double> new_chart = new XYChart.Data<>(r.getMonth(), r.getVirus());
-                    series.getData().add(new_chart);
-                }*/
                 try {
-                    for(QualityReport r : QualityReport.selectVirusReports(locationBox.getValue(), yearBox.getValue())) {
+                    for(QualityReport r : QualityReport.selectHistoryReports(locationBox.getValue(), yearBox.getValue())) {
                         XYChart.Data<String, Double> new_chart = new XYChart.Data<>(r.getMonth(), r.getVirus());
                         series.getData().add(new_chart);
                     }
@@ -137,13 +108,9 @@ public class HistoryController {
                 }
                 series.setName(locationBox.getValue() + ", " + yearBox.getValue() + ", Virus PPM");
             } else if (ppmBox.getValue().equals("Contaminant")) {
-                /*for (QualityReport r : yearList) {
-                    XYChart.Data<String, Double> new_chart = new XYChart.Data<>(r.getMonth(), r.getContaminant());
-                    series.getData().add(new_chart);
-                }*/
                 try {
-                    for(QualityReport r : QualityReport.selectContaminantReports(locationBox.getValue(), yearBox.getValue())) {
-                        XYChart.Data<String, Double> new_chart = new XYChart.Data<>(r.getMonth(), r.getVirus());
+                    for(QualityReport r : QualityReport.selectHistoryReports(locationBox.getValue(), yearBox.getValue())) {
+                        XYChart.Data<String, Double> new_chart = new XYChart.Data<>(r.getMonth(), r.getContaminant());
                         series.getData().add(new_chart);
                     }
                 } catch (SQLException e) {
@@ -175,8 +142,6 @@ public class HistoryController {
      * Checks whether the combo box values are selected
      */
     private boolean isInputValid() {
-
-        // not working correctly. choosing just location and ppm works but should not
         return (locationBox.getValue() != null && ppmBox.getValue() != null
                 && yearBox.getItems() != null);
     }

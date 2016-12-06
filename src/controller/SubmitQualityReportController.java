@@ -151,11 +151,10 @@ public class SubmitQualityReportController {
         if (contaminant.length() == 0 || !contaminant.matches("[0-9]+")) {
             errorMessage += "Please enter a numeric value for Contaminant PPM\n";
         }
-        //no error message means success / good input
+
         if (errorMessage.length() == 0) {
             return true;
         } else {
-            // Show the error message if bad data
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initOwner(dialogStage);
             alert.setTitle("Invalid Fields");
@@ -180,13 +179,12 @@ public class SubmitQualityReportController {
             setReportValues();
             try {
                 r.insert();
+                QualityReport.setUpdated(true);
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            //alert.setTitle("Invalid Fields");
             alert.setHeaderText("Thank you for submitting a report.");
-            //alert.setContentText("Thank you for submitting a report.");
             alert.showAndWait();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppStartScreen.fxml"));
             Stage stage = (Stage) submitPurityButton.getScene().getWindow();

@@ -9,7 +9,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -70,7 +69,6 @@ public class AppStartController implements Initializable,
      */
     public void setUser(User u) {
         user = u;
-        //sourceText.setVisible(false);
         qualityText.setVisible(false);
         submitQualityButton.setVisible(false);
         viewQualityButton.setVisible(false);
@@ -101,8 +99,26 @@ public class AppStartController implements Initializable,
     @Override
     public void mapInitialized() {
         MapOptions options = new MapOptions();
-        //set up the center location for the map
-        LatLong center = new LatLong(33, -84);
+
+        LatLong center = new LatLong(33.75, -84.39);
+        if(SourceReport.getUpdated()) {
+            SourceReport.setUpdated(false);
+            try {
+                SourceReport r = SourceReport.selectNewest();
+                center = new LatLong(r.getLatitude(), r.getLongitude());
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        if(QualityReport.getUpdated()) {
+            QualityReport.setUpdated(false);
+            try {
+                QualityReport r = QualityReport.selectNewest();
+                center = new LatLong(r.getLatitude(), r.getLongitude());
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
         /*if (ReportDatabase.getInstance().getSourceUpdated() && ReportDatabase.getInstance().numSource() != 0) {
             SourceReport newest = ReportDatabase.getInstance().getSourceReport(ReportDatabase.getInstance().numSource());
             center = new LatLong(newest.getLatitude(), newest.getLongitude());
@@ -127,22 +143,16 @@ public class AppStartController implements Initializable,
         map = mapView.createMap(options);
 
         //place markers on map
-        //if (ReportDatabase.getInstance().numSource() != 0) {
-        SourceReport currentReport;
-        double lat;
-        double lng;
+        MarkerOptions markerOptions;
         LatLong point;
         try {
-            for (SourceReport s : SourceReport.selectAllReports()) {
-                MarkerOptions markerOptions = new MarkerOptions();
-                String description = s.toString();
-                lat = s.getLatitude();
-                lng = s.getLongitude();
-                point = new LatLong(lat, lng);
+            for (SourceReport r : SourceReport.selectAllReports()) {
+                markerOptions = new MarkerOptions();
+                point = new LatLong(r.getLatitude(), r.getLongitude());
 
                 markerOptions.position(point)
                         .visible(Boolean.TRUE)
-                        .title(s.getLocation());
+                        .title(r.getLocation());
 
                 Marker marker = new Marker(markerOptions);
 
@@ -150,13 +160,33 @@ public class AppStartController implements Initializable,
                         UIEventType.click,
                         (JSObject obj) -> {
                             InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
-                            infoWindowOptions.content(description);
+                            infoWindowOptions.content(r.toString());
                             InfoWindow window = new InfoWindow(infoWindowOptions);
                             window.open(map, marker);
                         });
 
                 map.addMarker(marker);
+            }
+            for (QualityReport r : QualityReport.selectAllReports()) {
+                markerOptions = new MarkerOptions();
+                point = new LatLong(r.getLatitude(), r.getLongitude());
 
+                markerOptions.position(point)
+                        .visible(Boolean.TRUE)
+                        .title(r.getLocation());
+
+                Marker marker = new Marker(markerOptions);
+
+                map.addUIEventHandler(marker,
+                        UIEventType.click,
+                        (JSObject obj) -> {
+                            InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
+                            infoWindowOptions.content(r.toString());
+                            InfoWindow window = new InfoWindow(infoWindowOptions);
+                            window.open(map, marker);
+                        });
+
+                map.addMarker(marker);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
