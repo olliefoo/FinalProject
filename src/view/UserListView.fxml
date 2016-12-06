@@ -6,26 +6,36 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UserListController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UserListController">
    <children>
-      <TableView fx:id="table" layoutX="25.0" layoutY="20.0" prefHeight="400.0" prefWidth="550.0">
+      <TableView fx:id="table" layoutX="25.0" layoutY="20.0" prefHeight="425.0" prefWidth="600.0">
         <columns>
           <TableColumn fx:id="userCol" prefWidth="289.0" text="User" />
           <TableColumn fx:id="typeCol" prefWidth="135.0" text="Type" />
-            <TableColumn fx:id="lockedCol" prefWidth="125.0" text="Status" />
+            <TableColumn fx:id="statusCol" prefWidth="125.0" text="Status" />
         </columns>
       </TableView>
-      <Button fx:id="deleteButton" layoutX="356.0" layoutY="444.0" mnemonicParsing="false" onAction="#handleDeletePressed" prefHeight="35.0" prefWidth="100.0" text="Delete">
+      <Button fx:id="deleteButton" layoutX="413.0" layoutY="501.0" mnemonicParsing="false" onAction="#handleDeletePressed" prefHeight="35.0" prefWidth="100.0" text="Delete">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="unlockButton" layoutX="475.0" layoutY="444.0" mnemonicParsing="false" onAction="#handleUnlockPressed" prefHeight="35.0" prefWidth="100.0" text="Unlock">
+      <Button fx:id="unlockButton" layoutX="525.0" layoutY="501.0" mnemonicParsing="false" onAction="#handleUnlockPressed" prefHeight="35.0" prefWidth="100.0" text="Unlock">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="backButton" layoutX="25.0" layoutY="444.0" mnemonicParsing="false" onAction="#handleBackPressed" prefHeight="35.0" prefWidth="100.0" text="Back">
+      <Button fx:id="backButton" layoutX="25.0" layoutY="495.0" mnemonicParsing="false" onAction="#handleBackPressed" prefHeight="35.0" prefWidth="100.0" text="Back">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="banButton" layoutX="525.0" layoutY="460.0" mnemonicParsing="false" onAction="#handleBanPressed" prefHeight="35.0" prefWidth="100.0" text="Ban">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="unbanButton" layoutX="413.0" layoutY="460.0" mnemonicParsing="false" onAction="#handleUnbanPressed" prefHeight="35.0" prefWidth="100.0" text="Unban">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>

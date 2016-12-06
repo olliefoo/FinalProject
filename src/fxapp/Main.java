@@ -14,7 +14,7 @@ public class Main {
         executeCreate();
         Entity.execute("INSERT INTO USER VALUES('admin', 'p', " +
                 "'admin@example.com', 'Ollie', 'Foo', 0, 0, 1, NULL," +
-                " NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);");
+                " NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0);");
     }
 
     private static void executeCreate() throws SQLException {
@@ -38,6 +38,7 @@ public class Main {
                 " Year VARCHAR(100),\n" +
                 " Gender BOOLEAN,\n" +
                 " Locked BOOLEAN NOT NULL,\n" +
+                " Banned BOOLEAN NOT NULL,\n" +
                 " PRIMARY KEY (Username) ) ENGINE=InnoDB;");
         Entity.execute("CREATE TABLE SourceReport (\n" +
                 " Number INT NOT NULL AUTO_INCREMENT,\n" +

@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -221,14 +222,21 @@ public class AppStartController implements Initializable,
      */
     @FXML
     private void handleSubmitPressed() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass()
-                .getResource("../view/SubmitSourceReportScreen.fxml"));
-        Stage stage = (Stage) submitButton.getScene().getWindow();
-        Parent root = loader.load();
-        loader.<SubmitSourceReportController>getController().setUser(user);
-        stage.setScene(new Scene(root));
-        stage.show();
-
+        if(!user.isBanned()) {
+            FXMLLoader loader = new FXMLLoader(getClass()
+                    .getResource("../view/SubmitSourceReportScreen.fxml"));
+            Stage stage = (Stage) submitButton.getScene().getWindow();
+            Parent root = loader.load();
+            loader.<SubmitSourceReportController>getController().setUser(user);
+            stage.setScene(new Scene(root));
+            stage.show();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Please Wait for Authorization");
+            alert.setContentText("You have been banned from submitting" +
+                    " reports. You can still view reports");
+            alert.showAndWait();
+        }
     }
 
     /**
@@ -254,13 +262,21 @@ public class AppStartController implements Initializable,
      */
     @FXML
     private void handleSubmitQualityPressed() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass()
-                .getResource("../view/SubmitQualityReportScreen.fxml"));
-        Stage stage = (Stage) submitQualityButton.getScene().getWindow();
-        Parent root = loader.load();
-        loader.<SubmitQualityReportController>getController().setUser(user);
-        stage.setScene(new Scene(root));
-        stage.show();
+        if(!user.isBanned()) {
+            FXMLLoader loader = new FXMLLoader(getClass()
+                    .getResource("../view/SubmitQualityReportScreen.fxml"));
+            Stage stage = (Stage) submitQualityButton.getScene().getWindow();
+            Parent root = loader.load();
+            loader.<SubmitQualityReportController>getController().setUser(user);
+            stage.setScene(new Scene(root));
+            stage.show();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Please Wait for Authorization");
+            alert.setContentText("You have been banned from submitting" +
+                    " reports. You can still view reports");
+            alert.showAndWait();
+        }
     }
 
     /**

@@ -12,7 +12,7 @@ public class User extends Entity {
 
     private String username, password, email, firstname, lastname, address,
             city, state, zip, phone, month, day, year;
-    private boolean isWorker, isManager, gender, isAdmin, locked;
+    private boolean isWorker, isManager, gender, isAdmin, locked, banned;
 
 
     public User(String username, String password, String email,
@@ -46,6 +46,7 @@ public class User extends Entity {
         year = rs.getString(16);
         gender = rs.getBoolean(17);
         locked = rs.getBoolean(18);
+        banned = rs.getBoolean(19);
     }
 
     public static List<User> selectAllUsers() throws SQLException {
@@ -68,17 +69,17 @@ public class User extends Entity {
     public void insert() throws SQLException {
         execute(String.format("INSERT INTO USER VALUES ('%s', '%s', '%s'," +
                 " '%s', '%s', %d, %d, %d, '%s', '%s', '%s', '%s', '%s', '%s', " +
-                "'%s', '%s', %d, %d);", username, password, email, firstname,
+                "'%s', '%s', %d, %d, %d);", username, password, email, firstname,
                 lastname, isWorker ? 1 : 0, isManager ? 1 : 0, 0, null, null,
-                null, null, null, null, null, null, 0, 0));
+                null, null, null, null, null, null, 0, 0, 0));
     }
 
     public void update() throws SQLException {
         execute((String.format("UPDATE USER SET Email='%s', Address='%s', " +
                 "City='%s', State='%s', Zip='%s', PhoneNumber='%s', Month='%s', " +
-                "Day='%s', Year='%s', Gender=%d, Locked=%d WHERE Username='%s';", email,
+                "Day='%s', Year='%s', Gender=%d, Locked=%d, Banned=%d WHERE Username='%s';", email,
                 address, city, state, zip, phone, month, day, year,
-                gender ? 1 : 0, locked ? 1 : 0, username)));
+                gender ? 1 : 0, locked ? 1 : 0, banned ? 1 : 0, username)));
     }
 
 
@@ -126,6 +127,7 @@ public class User extends Entity {
     public boolean isAdmin() {
         return isAdmin;
     }
+    public boolean isBanned() { return banned; }
     public String getType() {
         if(isManager) {
             return "Manager";
@@ -134,9 +136,11 @@ public class User extends Entity {
         } else
             return "User";
     }
-    public String getLocked() {
+    public String getStatus() {
         if(locked) {
             return "Locked";
+        } else if(banned) {
+            return "Banned";
         } else {
             return "OK";
         }
@@ -174,5 +178,6 @@ public class User extends Entity {
         gender = b;
     }
     public void setLocked(boolean b) { locked = b;}
+    public void setBanned(boolean b) { banned = b;}
 
 }

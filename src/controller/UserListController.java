@@ -23,13 +23,13 @@ import java.sql.SQLException;
 public class UserListController {
 
     @FXML
-    private Button backButton, deleteButton, unlockButton;
+    private Button backButton, deleteButton, unlockButton, banButton, unbanButton;
 
     @FXML
     private TableView<User> table;
 
     @FXML
-    private TableColumn<User, String> userCol, typeCol, lockedCol;
+    private TableColumn<User, String> userCol, typeCol, statusCol;
 
     ObservableList<User> list = FXCollections.observableArrayList();
 
@@ -47,7 +47,7 @@ public class UserListController {
 
         userCol.setCellValueFactory(new PropertyValueFactory<User, String>("username"));
         typeCol.setCellValueFactory(new PropertyValueFactory<User, String>("type"));
-        lockedCol.setCellValueFactory(new PropertyValueFactory<User, String>("locked"));
+        statusCol.setCellValueFactory(new PropertyValueFactory<User, String>("status"));
 
         table.getItems().setAll(list);
     }
@@ -72,10 +72,7 @@ public class UserListController {
             }
             updateTable();
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("No User Selected");
-            alert.setContentText("Please select a user to delete");
-            alert.showAndWait();
+            showAlert();
         }
     }
 
@@ -93,10 +90,43 @@ public class UserListController {
             }
             updateTable();
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("No User Selected");
-            alert.setContentText("Please select a user to unlock");
-            alert.showAndWait();
+            showAlert();
+        }
+    }
+
+    @FXML
+    private void handleBanPressed() {
+        User user = table.getSelectionModel().getSelectedItem();
+        if(user != null) {
+            if (!user.isBanned()) {
+                user.setBanned(true);
+                try {
+                    user.update();
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+            updateTable();
+        } else {
+            showAlert();
+        }
+    }
+
+    @FXML
+    private void handleUnbanPressed() {
+        User user = table.getSelectionModel().getSelectedItem();
+        if(user != null) {
+            if (user.isBanned()) {
+                user.setBanned(false);
+                try {
+                    user.update();
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+            updateTable();
+        } else {
+           showAlert();
         }
     }
 
@@ -114,4 +144,10 @@ public class UserListController {
         table.getItems().setAll(list);
     }
 
+    private void showAlert() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("No User Selected");
+        alert.setContentText("Please select a user to unlock");
+        alert.showAndWait();
+    }
 }

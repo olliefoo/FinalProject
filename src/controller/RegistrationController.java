@@ -78,11 +78,7 @@ public class RegistrationController {
         } else if (!(password2Field.getText()
                 .equals(password1Field.getText()))) {
             errorMessage += "Verification must match the original password\n";
-        } /*else if (Database.containsEmail(emailField.getText())) {
-            errorMessage += "Email is already being used\n";
-        } else if (Database.containsUsername(usernameField.getText())) {
-            errorMessage += "Username is already being used\n";
-        }*/
+        }
 
         try {
             for (User u : User.selectAllUsers()) {
@@ -120,30 +116,6 @@ public class RegistrationController {
     @FXML
     private void handleRegistrationPressed() throws IOException {
         if (isInputValid()) {
-            /*if (choiceBox.getValue().equals("USER")) {
-                Database.add(new User(usernameField.getText(),
-                        password1Field.getText(), emailField.getText()));
-                //MainFXApplication.userList.add(newUser);
-                //Database.add(newUser);
-            } else if (choiceBox.getValue().equals("WORKER")) {
-                Database.add(new Worker(usernameField.getText(),
-                        password1Field.getText(), emailField.getText()));
-                //MainFXApplication.userList.add(newWorker);
-                //Database.add(newWorker);
-            } else if (choiceBox.getValue().equals("MANAGER")) {
-                Database.add(new Manager(usernameField.getText(),
-                        password1Field.getText(), emailField.getText()));
-                //MainFXApplication.userList.add(newManager);
-                //Database.add(newManager);
-            } else if (choiceBox.getValue().equals("ADMIN")) {
-                Database.add(new Admin(usernameField.getText(),
-                        password1Field.getText(), emailField.getText()));
-                //MainFXApplication.userList.add(newAdmin);
-            }
-            Database.addEmail(emailField.getText());
-            Database.addUsername(usernameField.getText());
-            Database.saveAll();*/
-
             boolean isWorker = false;
             boolean isManager = false;
             if(choiceBox.getValue().equals("WORKER")) {
@@ -162,11 +134,6 @@ public class RegistrationController {
                 System.out.println(e.getMessage());
             }
 
-            /*Stage stage = (Stage) registerButton.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass()
-                    .getResource("../view/WelcomeScreen.fxml"));
-            stage.setScene(new Scene(root));
-            stage.show();*/
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass()
                     .getResource("../view/AppStartScreen.fxml"));
