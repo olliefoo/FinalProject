@@ -26,6 +26,8 @@ public class LoginController {
 
     private User user;
 
+    private int count = 0;
+
     /**
      * Checks if the username and password entered are valid. The entered
      * username must already exist in the database and the password must
@@ -42,10 +44,26 @@ public class LoginController {
             System.out.println(e.getMessage());
         }
 
-        if(user == null) {
+        if(user != null && count >= 5) {
+            user.setLocked(true);
+            try {
+                user.update();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            count = 0;
+        } else if(user == null) {
             errorMessage += "Username does not exist. Please register first.\n";
-        } else if(!user.getPassword().equals(passwordField.getText())) {
-            errorMessage += "Wrong password. Try again.\n";
+            if(count >= 5) {
+                count = 0;
+            }
+        } else {
+            if (!user.getPassword().equals(passwordField.getText())) {
+                errorMessage += "Wrong password. Try again.\n";
+                if(!user.isAdmin()) {
+                    count++;
+                }
+            }
         }
 
         //no error message means success / good input
@@ -71,7 +89,8 @@ public class LoginController {
      */
     @FXML
     private void handleLoginPressed() throws IOException {
-        if (isInputValid()) {
+        boolean valid = isInputValid();
+        if (valid && !user.isAdmin() && !user.isLocked()) {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass()
                     .getResource("../view/AppStartScreen.fxml"));
@@ -82,6 +101,18 @@ public class LoginController {
             loader.<AppStartController>getController().setUser(user);
             stage.setScene(new Scene(root));
             stage.show();
+        } else if (valid && user.isAdmin()) {
+            Stage stage = (Stage) login.getScene().getWindow();
+            Parent root = FXMLLoader.load(getClass()
+                    .getResource("../view/AdminStartScreen.fxml"));
+            stage.setScene(new Scene(root));
+            stage.show();
+        } else if (user != null && user.isLocked()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Wait for Authorization");
+            alert.setHeaderText("Locked Account");
+            alert.setContentText("Too many failed attempts. Your account has been locked");
+            alert.showAndWait();
         }
     }
 

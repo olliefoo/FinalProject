@@ -12,7 +12,7 @@ public class User extends Entity {
 
     private String username, password, email, firstname, lastname, address,
             city, state, zip, phone, month, day, year;
-    private boolean isWorker, isManager, gender;
+    private boolean isWorker, isManager, gender, isAdmin, locked;
 
 
     public User(String username, String password, String email,
@@ -35,15 +35,17 @@ public class User extends Entity {
         lastname = rs.getString(5);
         isWorker = rs.getBoolean(6);
         isManager = rs.getBoolean(7);
-        address = rs.getString(8);
-        city = rs.getString(9);
-        state = rs.getString(10);
-        zip = rs.getString(11);
-        phone = rs.getString(12);
-        month = rs.getString(13);
-        day = rs.getString(14);
-        year = rs.getString(15);
-        gender = rs.getBoolean(16);
+        isAdmin = rs.getBoolean(8);
+        address = rs.getString(9);
+        city = rs.getString(10);
+        state = rs.getString(11);
+        zip = rs.getString(12);
+        phone = rs.getString(13);
+        month = rs.getString(14);
+        day = rs.getString(15);
+        year = rs.getString(16);
+        gender = rs.getBoolean(17);
+        locked = rs.getBoolean(18);
     }
 
     public static List<User> selectAllUsers() throws SQLException {
@@ -59,21 +61,26 @@ public class User extends Entity {
         }
     }
 
+    public static void delete(String username) throws SQLException {
+        execute((String.format("DELETE FROM USER WHERE Username='%s';", username)));
+    }
+
     public void insert() throws SQLException {
         execute(String.format("INSERT INTO USER VALUES ('%s', '%s', '%s'," +
-                " '%s', '%s', %d, %d, '%s', '%s', '%s', '%s', '%s', '%s', " +
-                "'%s', '%s', %d);", username, password, email, firstname,
-                lastname, isWorker ? 1 : 0, isManager ? 1 : 0, null, null,
-                null, null, null, null, null, null, 0));
+                " '%s', '%s', %d, %d, %d, '%s', '%s', '%s', '%s', '%s', '%s', " +
+                "'%s', '%s', %d, %d);", username, password, email, firstname,
+                lastname, isWorker ? 1 : 0, isManager ? 1 : 0, 0, null, null,
+                null, null, null, null, null, null, 0, 0));
     }
 
     public void update() throws SQLException {
         execute((String.format("UPDATE USER SET Email='%s', Address='%s', " +
                 "City='%s', State='%s', Zip='%s', PhoneNumber='%s', Month='%s', " +
-                "Day='%s', Year='%s', Gender=%d WHERE Username='%s';", email,
+                "Day='%s', Year='%s', Gender=%d, Locked=%d WHERE Username='%s';", email,
                 address, city, state, zip, phone, month, day, year,
-                gender ? 1 : 0, username)));
+                gender ? 1 : 0, locked ? 1 : 0, username)));
     }
+
 
     public String getUsername() {
         return username;
@@ -113,6 +120,28 @@ public class User extends Entity {
     public String getYear() { return year; }
     public String getDay() { return day; }
     public boolean getGender() { return gender; }
+    public boolean isLocked() {
+        return locked;
+    }
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+    public String getType() {
+        if(isManager) {
+            return "Manager";
+        } else if (isWorker) {
+            return "Worker";
+        } else
+            return "User";
+    }
+    public String getLocked() {
+        if(locked) {
+            return "Locked";
+        } else {
+            return "OK";
+        }
+    }
+
 
     public void setEmail(String s) {
         email = s;
@@ -144,5 +173,6 @@ public class User extends Entity {
     public void setGender(boolean b) {
         gender = b;
     }
+    public void setLocked(boolean b) { locked = b;}
 
 }

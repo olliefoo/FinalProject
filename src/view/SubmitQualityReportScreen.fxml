@@ -204,12 +204,12 @@
          <Font name="Calibri Light" size="40.0" />
       </font>
    </Label>
-   <Button fx:id="submitPurityButton" layoutX="422.0" layoutY="501.0" mnemonicParsing="false" onAction="#handleReportSubmitPressed" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #008fff;" text="Submit" textFill="WHITE">
+   <Button fx:id="submitPurityButton" layoutX="431.0" layoutY="501.0" mnemonicParsing="false" onAction="#handleReportSubmitPressed" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #008fff;" text="Submit" textFill="WHITE">
       <font>
          <Font name="Arial Bold" size="16.0" />
       </font>
    </Button>
-   <Button fx:id="cancelButton" layoutX="46.0" layoutY="501.0" mnemonicParsing="false" onAction="#handleCancelPressed" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: RED;" text="Cancel" textFill="WHITE">
+   <Button fx:id="cancelButton" layoutX="25.0" layoutY="501.0" mnemonicParsing="false" onAction="#handleCancelPressed" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: RED;" text="Cancel" textFill="WHITE">
       <font>
          <Font name="Arial Bold" size="16.0" />
       </font>

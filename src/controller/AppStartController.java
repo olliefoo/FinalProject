@@ -119,16 +119,6 @@ public class AppStartController implements Initializable,
                 System.out.println(e.getMessage());
             }
         }
-        /*if (ReportDatabase.getInstance().getSourceUpdated() && ReportDatabase.getInstance().numSource() != 0) {
-            SourceReport newest = ReportDatabase.getInstance().getSourceReport(ReportDatabase.getInstance().numSource());
-            center = new LatLong(newest.getLatitude(), newest.getLongitude());
-            ReportDatabase.getInstance().setSourceUpdated(false);
-        }
-        if (ReportDatabase.getInstance().getQualityUpdated() && ReportDatabase.getInstance().numQuality() != 0) {
-            QualityReport newest = ReportDatabase.getInstance().getQualityReport(ReportDatabase.getInstance().numQuality());
-            center = new LatLong(newest.getLatitude(), newest.getLongitude());
-            ReportDatabase.getInstance().setQualityUpdated(false);
-        }*/
 
         options.center(center)
                 .zoom(9)
@@ -191,39 +181,6 @@ public class AppStartController implements Initializable,
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        //}
-        //place purity marker
-        /*if (ReportDatabase.getInstance().numQuality() != 0) {
-            QualityReport currentReport;
-            double lat;
-            double lng;
-            LatLong point;
-            for (int i = 1; i <= ReportDatabase.getInstance().numQuality(); i++) {
-                MarkerOptions markerOptions = new MarkerOptions();
-                currentReport = ReportDatabase.getInstance().getQualityReport(i);
-                String description = currentReport.toString();
-                lat = currentReport.getLatitude();
-                lng = currentReport.getLongitude();
-                point = new LatLong(lat, lng);
-
-                markerOptions.position( point )
-                        .visible(Boolean.TRUE)
-                        .title(currentReport.getLocation());
-
-                Marker marker = new Marker( markerOptions );
-
-                map.addUIEventHandler(marker,
-                        UIEventType.click,
-                        (JSObject obj) -> {
-                            InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
-                            infoWindowOptions.content(description);
-                            InfoWindow window = new InfoWindow(infoWindowOptions);
-                            window.open(map, marker);});
-
-                map.addMarker(marker);
-
-            }
-        }*/
     }
 
     /**

@@ -12,6 +12,9 @@ public class Main {
         Entity.initializeSQL();
         executeDrop();
         executeCreate();
+        Entity.execute("INSERT INTO USER VALUES('admin', 'p', " +
+                "'admin@example.com', 'Ollie', 'Foo', 0, 0, 1, NULL," +
+                " NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);");
     }
 
     private static void executeCreate() throws SQLException {
@@ -24,6 +27,7 @@ public class Main {
                 " LastName VARCHAR(100) NOT NULL,\n" +
                 " IsWorker BOOLEAN NOT NULL,\n" +
                 " isManager BOOLEAN NOT NULL,\n" +
+                " isAdmin BOOLEAN NOT NULL,\n" +
                 " Address VARCHAR(100),\n" +
                 " City VARCHAR(100),\n" +
                 " State VARCHAR(100),\n" +
@@ -33,6 +37,7 @@ public class Main {
                 " Day VARCHAR(100),\n" +
                 " Year VARCHAR(100),\n" +
                 " Gender BOOLEAN,\n" +
+                " Locked BOOLEAN NOT NULL,\n" +
                 " PRIMARY KEY (Username) ) ENGINE=InnoDB;");
         Entity.execute("CREATE TABLE SourceReport (\n" +
                 " Number INT NOT NULL,\n" +
